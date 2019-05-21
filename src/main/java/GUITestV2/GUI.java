@@ -13,7 +13,7 @@ public class GUI {
     private JPanel root;
     private JDateChooser JDateChooser1;
     private JMonthChooser Jmonth;
-
+//    private JMenuBar JMenuBar;
 
     /*
         Jezeli cos z Jcalendar jest jako
@@ -23,6 +23,7 @@ public class GUI {
     public void createUIComponents()
     {
         JDateChooser1 = new JDateChooser();
+//        JMenuBar = new JMenuBar();
 
     }
 
@@ -32,6 +33,11 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        JMenuBar JMenuBar = new JMenuBar();
+        frame.setJMenuBar(JMenuBar);
+
+        JMenu mnOptions = new JMenu("Menu");
+        JMenuBar.add(mnOptions);
 
     }
 }
