@@ -10,3 +10,15 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+target/test-classes/META-INF/Calendar\.kotlin_module
+
+\.idea/dataSources\.local\.xml
+
+\.idea/dataSources/e69b164a-9b4a-4aa9-aefb-af139726723e\.xml
+
+\.idea/dataSources/e69b164a-9b4a-4aa9-aefb-af139726723e/storage_v2/_src_/database/calendardb\.PDCNGQ\.meta
+
+\.idea/dataSources/e69b164a-9b4a-4aa9-aefb-af139726723e/storage_v2/_src_/database/calendardb\.PDCNGQ/schema/dbo\.sYMBAA\.meta
+
+\.idea/workspace\.xml
