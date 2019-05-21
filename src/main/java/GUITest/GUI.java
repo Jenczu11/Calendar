@@ -5,10 +5,23 @@ import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
     private JPanel rootPanel;
     private JCalendar JCalendar1;
+    private JButton aboutUSButton;
+
+    public GUI() {
+        aboutUSButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                AboutUs aboutUs = new AboutUs();
+                aboutUs.main(null);
+            }
+        });
+    }
 
     public void createUIComponents() {
         JCalendar1 = new JCalendar();

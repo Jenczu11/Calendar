@@ -27,7 +27,7 @@ public class AboutUs {
     public static void main(String[] args) {
         JFrame frame = new JFrame("AboutUs");
         frame.setContentPane(new AboutUs().root);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
