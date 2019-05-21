@@ -19,7 +19,7 @@ public class AboutUs {
         bartłomiejJenczButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(root, "NR INDEKSU: 216783\nADRES EMAIL: 216783@edu.p.lodz.pl");
+                JOptionPane.showMessageDialog(root, "NR INDEKSU: 216783\nADRES EMAIL: 216921@edu.p.lodz.pl");
             }
         });
     }
