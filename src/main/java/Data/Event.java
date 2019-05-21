@@ -27,6 +27,18 @@ public class Event {
      */
     public boolean alarmed;
 
+    public Event(int id, String title, String description, Date startDate, Date endDate) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        alarmed=false;
+    }
+
+    /**
+    Gettery i settery
+     */
     public int getId() {
         return id;
     }
