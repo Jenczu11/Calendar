@@ -1,6 +1,8 @@
 package Data;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Event {
     /**
      * Id wydarzenia
@@ -17,17 +19,17 @@ public class Event {
     /**
      * Data rozpoczecia wydarzenia
      */
-    private Date startDate;
+    private GregorianCalendar startDate;
     /**
      * Data zakonczenia wydarzenia
      */
-    private Date endDate;
+    private GregorianCalendar endDate;
     /**
      * Zmienna informujaca, czy wystapi� ju� alarm przypisany do danego wydarzenia
      */
     public boolean alarmed;
 
-    public Event(int id, String title, String description, Date startDate, Date endDate) {
+    public Event(int id, String title, String description, GregorianCalendar startDate, GregorianCalendar endDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -63,19 +65,19 @@ public class Event {
         this.description = description;
     }
 
-    public Date getStartDate() {
+    public GregorianCalendar getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(GregorianCalendar startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public GregorianCalendar getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(GregorianCalendar endDate) {
         this.endDate = endDate;
     }
 }
