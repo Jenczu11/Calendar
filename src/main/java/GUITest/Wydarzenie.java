@@ -16,7 +16,7 @@ public class Wydarzenie {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Wydarzenie");
         frame.setContentPane(new Wydarzenie().root);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
