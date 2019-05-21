@@ -1,19 +1,20 @@
 package GUITest;
 
 import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 public class GUI extends JFrame {
     private JPanel rootPanel;
-    private JCalendar JCalendar1;
+    private JCalendar calendar;
     private JButton aboutUSButton;
 
     public GUI() {
+        initAction();
         aboutUSButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -24,9 +25,8 @@ public class GUI extends JFrame {
     }
 
     public void createUIComponents() {
-        JCalendar1 = new JCalendar();
+        calendar = new JCalendar();
     }
-
     public static void main(String[] args) {
         JFrame frame = new JFrame("GUI");
         frame.setContentPane(new GUI().rootPanel);
@@ -35,6 +35,16 @@ public class GUI extends JFrame {
         frame.setVisible(true);
 
 
+    }
+
+    private void initAction()
+    {
+        calendar.getDayChooser().setAlwaysFireDayProperty(true);
+        calendar.getDayChooser().addPropertyChangeListener("day",new PropertyChangeListener() {
+                    public void propertyChange(PropertyChangeEvent evt) {
+                                Wydarzenie window = new Wydarzenie();
+                                window.main(null);
+                    };});
     }
 
     //    public GUI()

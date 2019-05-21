@@ -21,7 +21,7 @@
           <grid row="2" column="5" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="1febe" class="com.toedter.calendar.JCalendar" binding="JCalendar1" custom-create="true" default-binding="true">
+      <component id="1febe" class="com.toedter.calendar.JCalendar" binding="calendar" custom-create="true" default-binding="true">
         <constraints>
           <grid row="2" column="1" row-span="2" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
