@@ -36,6 +36,10 @@ public class DataRepository {
     public ArrayList<Event> getAllEvents(){
         return events;
     }
+    public int size()
+    {
+        return events.size();
+    }
 
     @Override
     public String toString() {
