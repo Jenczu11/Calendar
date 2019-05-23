@@ -6,17 +6,17 @@ import java.awt.event.ActionListener;
 
 public class AboutUs {
     private JPanel root;
-    private JButton julitaWłodarczykButton;
-    private JButton bartłomiejJenczButton;
+    private JButton julitaWlodarczykButton;
+    private JButton bartlomiejJenczButton;
 
     public AboutUs() {
-        julitaWłodarczykButton.addActionListener(new ActionListener() {
+    	julitaWlodarczykButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(root, "NR INDEKSU: 216921 \nADRES EMAIL: 216921@edu.p.lodz.pl");
             }
         });
-        bartłomiejJenczButton.addActionListener(new ActionListener() {
+        bartlomiejJenczButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(root, "NR INDEKSU: 216783\nADRES EMAIL: 216921@edu.p.lodz.pl");
