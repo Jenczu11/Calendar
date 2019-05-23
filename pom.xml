@@ -20,6 +20,12 @@
             <version>5.4.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+<dependency>
+    <groupId>com.toedter</groupId>
+    <artifactId>jcalendar</artifactId>
+    <version>1.4</version>
+</dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

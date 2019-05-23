@@ -3,11 +3,10 @@ package GUIv2;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import com.toedter.calendar.JYearChooser;
-import java.awt.BorderLayout;
 import com.toedter.calendar.JCalendar;
+import java.awt.BorderLayout;
 
-public class gui {
+public class guitest {
 
 	private JFrame frame;
 
@@ -18,7 +17,7 @@ public class gui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gui window = new gui();
+					guitest window = new guitest();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +29,7 @@ public class gui {
 	/**
 	 * Create the application.
 	 */
-	public gui() {
+	public guitest() {
 		initialize();
 	}
 
@@ -39,7 +38,7 @@ public class gui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 931, 611);
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JCalendar calendar = new JCalendar();
