@@ -1,7 +1,6 @@
-package Data;
+package data;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.sql.Timestamp;
 
 public class Event {
     /**
@@ -17,19 +16,19 @@ public class Event {
      */
     private String description;
     /**
-     * Data rozpoczecia wydarzenia
+     * data rozpoczecia wydarzenia
      */
-    private GregorianCalendar startDate;
+    private Timestamp startDate;
     /**
-     * Data zakonczenia wydarzenia
+     * data zakonczenia wydarzenia
      */
-    private GregorianCalendar endDate;
+    private Timestamp endDate;
     /**
      * Zmienna informujaca, czy wystapi� ju� alarm przypisany do danego wydarzenia
      */
     public boolean alarmed;
 
-    public Event(int id, String title, String description, GregorianCalendar startDate, GregorianCalendar endDate) {
+    public Event(int id, String title, String description, Timestamp startDate, Timestamp endDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -65,19 +64,31 @@ public class Event {
         this.description = description;
     }
 
-    public GregorianCalendar getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(GregorianCalendar startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public GregorianCalendar getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(GregorianCalendar endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", alarmed=" + alarmed +
+                '}';
     }
 }
