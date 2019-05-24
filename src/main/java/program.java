@@ -32,6 +32,7 @@ public class program {
                 switch (choice) {
                     case 'a':
                         System.out.println("Podaj id");
+                        scanner.nextLine();
                         String id = scanner.nextLine();
                         System.out.println("Podaj tytul wydarzenia");
                         String title = scanner.nextLine();
@@ -48,9 +49,12 @@ public class program {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        System.out.println("Pomyslnie dodano wydarzenie");
                         break;
                     case 's':
                         System.out.println("Ilosc wydarzen w bazie"+dataService.size());
+                        System.out.println(dataService.toString());
+                        break;
                     case 'q':
                         return;
                     case 'm':
