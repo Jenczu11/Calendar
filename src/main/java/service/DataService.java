@@ -2,6 +2,7 @@ package service;
 
 import data.DataRepository;
 import data.Event;
+import exceptions.idException;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -10,9 +11,12 @@ import java.util.List;
 import java.util.Calendar;
 
 public class DataService {
-    private static DataService ourInstance = new DataService();
+    private static DataService ourInstance;
 
     public static DataService getInstance() {
+        if (ourInstance == null) {
+            ourInstance = new DataService();
+        }
         return ourInstance;
     }
     private DataRepository repository;
@@ -34,7 +38,7 @@ public class DataService {
     public void addEvent(String id,String title, String description, Timestamp startDate, Timestamp endDate) throws Exception {
         for (Event event : repository.getAllEvents()) {
             if(event.getId()==Integer.parseInt(id))
-                throw new Exception("Zdarzenie o takim id juz istnieje");
+                throw new idException("Zdarzenie o takim id juz istnieje");
             if(startDate.getTime()>endDate.getTime())
                 throw new Exception("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
         }
@@ -73,7 +77,7 @@ public class DataService {
                 return;
             }
         }
-        throw new Exception("Zdarzenie nie istnieje");
+        throw new idException("Zdarzenie nie istnieje");
     }
         /**
          * Usuwa wydarzenie o podanym id z repozytorium
@@ -87,7 +91,7 @@ public class DataService {
                     return;
                 }
             }
-            throw new Exception("Zdarzenie nie istnieje");
+            throw new idException("Zdarzenie nie istnieje");
         }
     /**
      * Zwraca wszystkie eventy dla danej daty
@@ -95,7 +99,7 @@ public class DataService {
      * @return Lista zdarzen dla danej daty
      */
      public List<Event> GetAllEventsForDate(Timestamp stamp){
-        List<Event> Todays = new ArrayList<Event>();
+        List<Event> Todays = new ArrayList<>();
         for(int i=0;i<repository.size();i++) {
             long timestamp = repository.getAllEvents().get(i).getStartDate().getTime();
             Calendar oneFromAll = Calendar.getInstance();

@@ -1,10 +1,14 @@
 package service;
 
 import data.Event;
+import exceptions.idException;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.sql.Time;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,6 +16,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DataServiceTest {
 
+    @BeforeEach
+    public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+        Field instance = DataService.class.getDeclaredField("ourInstance");
+        instance.setAccessible(true);
+        instance.set(null, null);
+    }
+
+
+
+    void createTestData(DataService dataService)
+    {
+        try {
+            dataService.addEvent("1","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
+            dataService.addEvent("2","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
+            dataService.addEvent("3","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
+            dataService.addEvent("4","Title1","Title2", Timestamp.valueOf("2019-05-13 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @Test
     void addEvent() {
         DataService dataService = DataService.getInstance();
@@ -51,24 +75,15 @@ class DataServiceTest {
     {
         DataService dataService = DataService.getInstance();
         createTestData(dataService);
-        assertThrows(Exception.class,()->dataService.removeEvent(5));
+
+        assertThrows(idException.class,()->dataService.removeEvent(5));
 
     }
-    void createTestData(DataService dataService)
-    {
-        try {
-            dataService.addEvent("1","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
-            dataService.addEvent("2","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
-            dataService.addEvent("3","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
-            dataService.addEvent("4","Title1","Title2", Timestamp.valueOf("2019-05-13 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-    }
 
 
     @Test
+    @DisplayName("Dodaj 4 eventy i zwroc liste na date 2019-05-15")
     void getAllEventsForDate() {
         DataService dataService = DataService.getInstance();
         createTestData(dataService);
