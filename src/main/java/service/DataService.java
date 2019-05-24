@@ -36,6 +36,7 @@ public class DataService {
      *  lub jezli data zakonczenia zdarzenia jest wczesniejsza od daty rozpoczecia zdarzenia
      */
     public void addEvent(String id,String title, String description, Timestamp startDate, Timestamp endDate) throws Exception {
+        //TODO: Autonumeracja elementow czyli bez id
         for (Event event : repository.getAllEvents()) {
             if(event.getId()==Integer.parseInt(id))
                 throw new idException("Zdarzenie o takim id juz istnieje");
