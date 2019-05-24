@@ -2,6 +2,7 @@ package service;
 
 import data.DataRepository;
 import data.Event;
+import data.EventBuilder;
 import exceptions.idException;
 
 import java.sql.Timestamp;
@@ -45,8 +46,21 @@ public class DataService {
             if(startDate.getTime()>endDate.getTime())
                 throw new Exception("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
         }
-        repository.addEvent(new Event(Integer.parseInt(id), title, description, startDate, endDate));
+        repository.addEvent(new Event(Integer.parseInt(id),title,description,startDate,endDate));
+//        repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setDescription(description).setStartDate(startDate).setEndDate(endDate).createEvent());
     }
+    public void addEvent(Event e) throws Exception
+    {
+        for(Event event: repository.getAllEvents())
+        {
+            if(event.getId()==e.getId())
+                throw new idException("Zdarzenie o takim id juz istnieje");
+            if(e.getStartDate().getTime()>e.getEndDate().getTime())
+                throw new Exception("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
+        }
+        repository.addEvent(e);
+    }
+
     /**
      * Edytuje wydarzenie o podanych parametrach
      * @param id Id wydarzenia
@@ -61,7 +75,7 @@ public class DataService {
         ArrayList<Event> events= repository.getAllEvents();
         for (int i=0;i<events.size();i++) {
             if(events.get(i).getId()==idInt) {
-                repository.editEvent(i, new Event(idInt, title, description, startDate, endDate));
+                repository.editEvent(i, new EventBuilder().setId(idInt).setTitle(title).setDescription(description).setStartDate(startDate).setEndDate(endDate).createEvent());
                 return;
             }
         }
@@ -125,6 +139,8 @@ public class DataService {
      * @return Zparsowany string na timestamp
      */
      public Timestamp StringToTimestamp(String ddMMyyyy) {
+         if (ddMMyyyy.isBlank())
+             ddMMyyyy="24/05/2019";
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date parsedDate = null;
         try {
