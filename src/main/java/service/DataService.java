@@ -139,17 +139,8 @@ public class DataService {
      * @return Zparsowany string na timestamp
      */
      public Timestamp StringToTimestamp(String ddMMyyyy) {
-         if (ddMMyyyy.isBlank())
-             ddMMyyyy="24/05/2019";
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date parsedDate = null;
-        try {
-            parsedDate = dateFormat.parse(ddMMyyyy);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return new Timestamp(parsedDate.getTime());
-    }
+         return Event.StringToTimestamp(ddMMyyyy);
+     }
 
     /**
      * Funkcja pomocnicza, parsuje string w formacie dd/MM/yyyy HH:mm na Timestamp
@@ -157,19 +148,25 @@ public class DataService {
      * @return Zparsowany string na timestamp
      */
      public Timestamp StringToTimestampWithTime(String time) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date parsedDate = null;
-        try {
-            parsedDate = dateFormat.parse(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return new Timestamp(parsedDate.getTime());
-    }
+         return Event.StringToTimestampWithTime(time);
+     }
     public int size()
     {
         return repository.size();
     }
+
+    public List<Event> getRepositoryEvents() {
+        return repository.getAllEvents();
+    }
+
+    public DataRepository getRepository() {
+        return repository;
+    }
+
+    public void setRepository(DataRepository repository) {
+        this.repository = repository;
+    }
+
     @Override
     //TODO: naprawic to String zeby jakos lepiej wyswietlal co nie ? albo jakies inne formaty toString
     public String toString() {

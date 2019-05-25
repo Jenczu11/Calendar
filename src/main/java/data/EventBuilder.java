@@ -15,6 +15,7 @@ public class EventBuilder {
 
 
     public EventBuilder setId(int id) {
+
         this.id = id;
         return this;
     }

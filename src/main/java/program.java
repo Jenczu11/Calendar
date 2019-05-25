@@ -1,5 +1,7 @@
 import data.EventBuilder;
 import service.DataService;
+import service.XMLHandler;
+import service.XMLHandlerv2;
 
 import java.sql.Timestamp;
 import java.util.Scanner;
@@ -11,8 +13,9 @@ public class program {
         System.out.println("-                              -");
         System.out.println("-     Calendar                 -");
         System.out.println("-    a - dodaj event           -");
-        System.out.println("-    s - wyswietl wydarzenia   -");
-        System.out.println("-                              -");
+        System.out.println("-    p - wyswietl wydarzenia   -");
+        System.out.println("-    s - zapisz wydarzenia     -");
+        System.out.println("-    d - dodaj wydarzenia z xml-");
         System.out.println("-    m - pokaz menu            -");
         System.out.println("-    q - zakoncz program       -");
         System.out.println("--------------------------------");
@@ -61,9 +64,39 @@ public class program {
                             }
 
                         break;
-                    case 's':
+                    case 'p':
                         System.out.println("Ilosc wydarzen w bazie"+dataService.size());
                         System.out.println(dataService.toString());
+                        break;
+                    case 's':
+                        System.out.println("Zapisuje dane do XML");
+//                        XMLHandler xmlHandler = new XMLHandler();
+//                        try {
+//                            xmlHandler.SaveData(dataService.getRepository().getAllEvents());
+//                        } catch (Exception e) {
+//
+//                        }
+                        XMLHandlerv2 xmlHandlerv2 = new XMLHandlerv2();
+                        try {
+                            xmlHandlerv2.SaveDataContext(dataService.getRepository());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case 'd':
+                        System.out.println("Wczytuje dane z XML");
+//                        XMLHandler xmlHandler1 = new XMLHandler();
+//                        try {
+//                           dataService.getRepository().setEvents(xmlHandler1.LoadData());
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+                        XMLHandlerv2 xmlHandlerv21 = new XMLHandlerv2();
+                        try {
+                            dataService.setRepository(xmlHandlerv21.LoadDataContext());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case 'q':
                         return;
