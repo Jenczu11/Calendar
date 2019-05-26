@@ -34,6 +34,9 @@ public class XMLHandler implements IOHandler {
         this.filename = filename;
     }
 
+    /**
+     * Laduje dane zapisane w formacie XML do programu
+     */
     @Override
     public DataRepository LoadData() throws Exception {
         File file = new File(filename);
@@ -41,9 +44,7 @@ public class XMLHandler implements IOHandler {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         return  (DataRepository) jaxbUnmarshaller.unmarshal(file);
     }
-    /**
-     * Laduje dane zapisane w formacie XML do programu
-     */
+
     /**
      * Zapisuje dane do formatu XML
      */

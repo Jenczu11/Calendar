@@ -4,7 +4,10 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * Klasa pomocnicza do formatowania TimeStampow
+ *
+ */
 public class TimestampUtil {
     /**
      * Funkcja pomocnicza, parsuje string w formacie dd/MM/yyyy na Timestamp

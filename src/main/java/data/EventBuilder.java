@@ -14,7 +14,7 @@ import javax.xml.crypto.Data;
 
 public class EventBuilder {
     //TODO: zmienić to po testach na private
-    public int id;
+    private int id;
     private String title;
     private String description;
     private Timestamp startDate;
@@ -27,6 +27,10 @@ public class EventBuilder {
         return this;
     }
     public EventBuilder setId(String idValue) {
+        //TODO: nad tym trzeba popracowac bo funkcja zle zadziala kiedy posortujemy dane i bedziemy chcieli wziac ostatnie ID
+        //
+        //Bezpieczniej moze byc poprostu branie tablicy ale to do zmiany po konsultacjach
+
         if(idValue.isBlank()) {
            int idIntValue=DataRepository.getLastEventID()+1;
 //            idValue=Integer.toString((int)Math.random()*100);
