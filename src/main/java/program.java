@@ -1,9 +1,7 @@
 import data.EventBuilder;
 import service.DataService;
 import service.XMLHandler;
-import service.XMLHandlerv2;
 
-import java.sql.Timestamp;
 import java.util.Scanner;
 
 public class program {
@@ -37,10 +35,12 @@ public class program {
                 switch (choice) {
                     case 'a':
                             EventBuilder builder = new EventBuilder();
+                            dataService.refreshLastEventID();
                             System.out.println("Podaj id");
                             scanner.nextLine();
-//                        String id = scanner.nextLine();
+
                             builder.setId(scanner.nextLine());
+                        System.out.println(builder.id);
                             System.out.println("Podaj tytul wydarzenia");
 //                        String title = scanner.nextLine();
                             builder.setTitle(scanner.nextLine());
@@ -70,28 +70,28 @@ public class program {
                         break;
                     case 's':
                         System.out.println("Zapisuje dane do XML");
-//                        XMLHandler xmlHandler = new XMLHandler();
+//                        XMLHandlerNotWorking xmlHandler = new XMLHandlerNotWorking();
 //                        try {
 //                            xmlHandler.SaveData(dataService.getRepository().getAllEvents());
 //                        } catch (Exception e) {
 //
 //                        }
-                        XMLHandlerv2 xmlHandlerv2 = new XMLHandlerv2("");
+                        XMLHandler xmlHandler = new XMLHandler("");
                         try {
-                          dataService.saveRepository(xmlHandlerv2);
+                          dataService.saveRepository(xmlHandler);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         break;
                     case 'd':
                         System.out.println("Wczytuje dane z XML");
-//                        XMLHandler xmlHandler1 = new XMLHandler();
+//                        XMLHandlerNotWorking xmlHandler1 = new XMLHandlerNotWorking();
 //                        try {
 //                           dataService.getRepository().setEvents(xmlHandler1.LoadData());
 //                        } catch (Exception e) {
 //                            e.printStackTrace();
 //                        }
-                        XMLHandlerv2 xmlHandlerv21 = new XMLHandlerv2("");
+                        XMLHandler xmlHandlerv21 = new XMLHandler("");
                         try {
                             dataService.loadRepository(xmlHandlerv21);
                         } catch (Exception e) {

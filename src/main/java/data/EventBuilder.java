@@ -1,13 +1,20 @@
 package data;
 
+import service.DataService;
+
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import data.DataRepository;
+
+import javax.xml.crypto.Data;
 
 public class EventBuilder {
-    private int id;
+    //TODO: zmienić to po testach na private
+    public int id;
     private String title;
     private String description;
     private Timestamp startDate;
@@ -20,9 +27,12 @@ public class EventBuilder {
         return this;
     }
     public EventBuilder setId(String idValue) {
-        if(idValue.isBlank())
-            idValue=Integer.toString((int)Math.random()*100);
-        this.id = Integer.parseInt(idValue);
+        if(idValue.isBlank()) {
+           int idIntValue=DataRepository.getLastEventID()+1;
+//            idValue=Integer.toString((int)Math.random()*100);
+             this.id=idIntValue;
+        }
+        else this.id = Integer.parseInt(idValue);
         return this;
     }
 

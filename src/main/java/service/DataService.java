@@ -159,6 +159,18 @@ public class DataService {
         return repository.getAllEvents();
     }
 
+    /**
+     * Odswieza pole LastEventID w dataRepository
+     * Razem z EventBuilder setId powoduje inkrementacje od ostatniego Event ID+1
+     */
+    public void refreshLastEventID()
+    {
+        if (repository.getAllEvents().isEmpty()) repository.setLastEventID(0);
+        else {
+            Event lastEvent = repository.getAllEvents().get(repository.getAllEvents().size() - 1);
+            repository.setLastEventID(lastEvent.getId());
+        }
+    }
     public DataRepository getRepository() {
         return repository;
     }
@@ -172,11 +184,11 @@ public class DataService {
      */
     public void loadRepository(IOHandler handler) throws Exception
     {
-        repository.setData(handler);
+        setRepository(handler.LoadData());
     }
     public void saveRepository(IOHandler handler) throws Exception
     {
-        repository.saveData(handler);
+       handler.SaveData(getRepository());
     }
     @Override
     //TODO: naprawic to String zeby jakos lepiej wyswietlal co nie ? albo jakies inne formaty toString

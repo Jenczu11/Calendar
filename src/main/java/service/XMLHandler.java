@@ -1,49 +1,61 @@
 package service;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.crypto.Data;
+
 import data.DataRepository;
 import data.Event;
 
-import javax.xml.crypto.Data;
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-/*
-Class not in use
+/**
+ * Klasa odpowiedzialna za zapis i odczyt z XML
+ *
  */
-@Deprecated
-public class XMLHandler   {
+public class XMLHandler implements IOHandler {
+    /**
+     * Nazwa pliku, do ktorego zostaja zapisane dane
+     */
+    private String filename;
+    /**
+     * Ustawia nazwe pliku, do ktorego zostana zapisane dane
+     * @param filename Nazwa pliku
+     */
+    public void setFilename(String filename) {
+        this.filename=filename;
+    }
 
-    public ArrayList<Event> LoadData() throws Exception {
-        ArrayList<Event> base = new ArrayList<Event>();
-//        DataRepository base = new DataRepository();
-        FileInputStream fis2 = null;
-        try {
-            fis2 = new FileInputStream("base.xml");
-            XMLDecoder decoder = new XMLDecoder(fis2);
-            base = (ArrayList<Event>) decoder.readObject();
-            decoder.close();
-            fis2.close();
-            System.out.println("Import zakonczony");
-            return base;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public XMLHandler(String filename) {
+        if(filename.isBlank())
+            filename="XMLtest.xml";
+        this.filename = filename;
+    }
+
+    @Override
+    public DataRepository LoadData() throws Exception {
+        File file = new File(filename);
+        JAXBContext jaxbContext = JAXBContext.newInstance(DataRepository.class);
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        return  (DataRepository) jaxbUnmarshaller.unmarshal(file);
+    }
+    /**
+     * Laduje dane zapisane w formacie XML do programu
+     */
+    /**
+     * Zapisuje dane do formatu XML
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public void SaveData(DataRepository data) throws Exception {
+        JAXBContext jaxbContext = JAXBContext.newInstance(DataRepository.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        jaxbMarshaller.marshal(data, new File(filename));
     }
 
 
-    public void SaveData(ArrayList<Event> data) throws Exception {
-        FileOutputStream fos2 = new FileOutputStream("base.xml");
-        XMLEncoder encoder = new XMLEncoder(fos2);
-        encoder.writeObject(data);
-        encoder.flush();
-        encoder.close();
-        fos2.close();
 
-    }
 }
