@@ -76,9 +76,9 @@ public class program {
 //                        } catch (Exception e) {
 //
 //                        }
-                        XMLHandlerv2 xmlHandlerv2 = new XMLHandlerv2();
+                        XMLHandlerv2 xmlHandlerv2 = new XMLHandlerv2("");
                         try {
-                            xmlHandlerv2.SaveDataContext(dataService.getRepository());
+                          dataService.saveRepository(xmlHandlerv2);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -91,9 +91,9 @@ public class program {
 //                        } catch (Exception e) {
 //                            e.printStackTrace();
 //                        }
-                        XMLHandlerv2 xmlHandlerv21 = new XMLHandlerv2();
+                        XMLHandlerv2 xmlHandlerv21 = new XMLHandlerv2("");
                         try {
-                            dataService.setRepository(xmlHandlerv21.LoadDataContext());
+                            dataService.loadRepository(xmlHandlerv21);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

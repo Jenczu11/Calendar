@@ -12,9 +12,12 @@ import java.io.FileOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+/*
+Class not in use
+ */
+@Deprecated
+public class XMLHandler   {
 
-public class XMLHandler implements IOHandler {
-    @Override
     public ArrayList<Event> LoadData() throws Exception {
         ArrayList<Event> base = new ArrayList<Event>();
 //        DataRepository base = new DataRepository();
@@ -33,7 +36,7 @@ public class XMLHandler implements IOHandler {
         }
     }
 
-    @Override
+
     public void SaveData(ArrayList<Event> data) throws Exception {
         FileOutputStream fos2 = new FileOutputStream("base.xml");
         XMLEncoder encoder = new XMLEncoder(fos2);

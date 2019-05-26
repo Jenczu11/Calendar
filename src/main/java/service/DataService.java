@@ -139,7 +139,7 @@ public class DataService {
      * @return Zparsowany string na timestamp
      */
      public Timestamp StringToTimestamp(String ddMMyyyy) {
-         return Event.StringToTimestamp(ddMMyyyy);
+         return TimestampUtil.StringToTimestamp(ddMMyyyy);
      }
 
     /**
@@ -148,7 +148,7 @@ public class DataService {
      * @return Zparsowany string na timestamp
      */
      public Timestamp StringToTimestampWithTime(String time) {
-         return Event.StringToTimestampWithTime(time);
+         return TimestampUtil.StringToTimestampWithTime(time);
      }
     public int size()
     {
@@ -167,6 +167,17 @@ public class DataService {
         this.repository = repository;
     }
 
+    /**
+    Ładuje repozytorium za pomocą napisanego handlera (XML,SQL)
+     */
+    public void loadRepository(IOHandler handler) throws Exception
+    {
+        repository.setData(handler);
+    }
+    public void saveRepository(IOHandler handler) throws Exception
+    {
+        repository.saveData(handler);
+    }
     @Override
     //TODO: naprawic to String zeby jakos lepiej wyswietlal co nie ? albo jakies inne formaty toString
     public String toString() {

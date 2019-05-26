@@ -15,35 +15,47 @@ import data.Event;
  * Klasa odpowiedzialna za zapis i odczyt z XML
  *
  */
-public class XMLHandlerv2 {
+public class XMLHandlerv2 implements IOHandler {
     /**
-     * Nazwa pliku, do kt�rego zostaja zapisane dane
+     * Nazwa pliku, do ktorego zostaja zapisane dane
      */
     private String filename;
     /**
-     * Ustawia nazw� pliku, do kt�rego zostana zapisane dane
+     * Ustawia nazwe pliku, do ktorego zostana zapisane dane
      * @param filename Nazwa pliku
      */
     public void setFilename(String filename) {
         this.filename=filename;
     }
-    /**
-     * �aduje dane zapisane w formacie XML do programu
-     */
-    public DataRepository LoadDataContext() throws Exception{
-        File file = new File("XMLtest.xml");
+
+    public XMLHandlerv2(String filename) {
+        if(filename.isBlank())
+            filename="XMLtest.xml";
+        this.filename = filename;
+    }
+
+    @Override
+    public DataRepository LoadData() throws Exception {
+        File file = new File(filename);
         JAXBContext jaxbContext = JAXBContext.newInstance(DataRepository.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         return  (DataRepository) jaxbUnmarshaller.unmarshal(file);
     }
     /**
+     * Laduje dane zapisane w formacie XML do programu
+     */
+    /**
      * Zapisuje dane do formatu XML
      */
     @SuppressWarnings("unchecked")
-    public void SaveDataContext(DataRepository context) throws Exception {
+    @Override
+    public void SaveData(DataRepository data) throws Exception {
         JAXBContext jaxbContext = JAXBContext.newInstance(DataRepository.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        jaxbMarshaller.marshal(context, new File("XMLtest.xml"));
+        jaxbMarshaller.marshal(data, new File(filename));
     }
+
+
+
 }
