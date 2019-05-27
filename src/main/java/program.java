@@ -1,5 +1,6 @@
 import data.EventBuilder;
 import service.DataService;
+import service.SQLHandler;
 import service.XMLHandler;
 
 import java.util.Scanner;
@@ -40,7 +41,6 @@ public class program {
                             scanner.nextLine();
 
                             builder.setId(scanner.nextLine());
-                        System.out.println(builder.id);
                             System.out.println("Podaj tytul wydarzenia");
 //                        String title = scanner.nextLine();
                             builder.setTitle(scanner.nextLine());
@@ -92,8 +92,9 @@ public class program {
 //                            e.printStackTrace();
 //                        }
                         XMLHandler xmlHandlerv21 = new XMLHandler("");
+                        SQLHandler sqlHandler = new SQLHandler();
                         try {
-                            dataService.loadRepository(xmlHandlerv21);
+                            dataService.loadRepository(sqlHandler);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
