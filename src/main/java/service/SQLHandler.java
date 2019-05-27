@@ -6,6 +6,7 @@ import data.Event;
 import javax.xml.crypto.Data;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class SQLHandler implements IOHandler{
 
@@ -42,6 +43,24 @@ public class SQLHandler implements IOHandler{
 
     @Override
     public void SaveData(DataRepository data) throws Exception {
-
+        ArrayList<Event> events = data.getAllEvents();
+        Class.forName(SQLHandler.DRIVER);
+        conn = DriverManager.getConnection(DB_URL);
+        PreparedStatement delStat = conn.prepareStatement("DELETE FROM Events");
+        delStat.executeUpdate();
+        for (Event event : events)
+        {
+            PreparedStatement insert = conn.prepareStatement("Insert INTO Events VALUES "+
+                    "(?,?,?,?,?,?)");
+            insert.setInt(1,event.getId());
+            insert.setString(2,event.getTitle());
+            insert.setString(3,event.getDescription());
+            insert.setString(4,event.getStartDate().toString());
+            insert.setString(5,event.getEndDate().toString());
+            insert.setBoolean(6,event.isAlarmed());
+            System.out.println(event.getEndDate().toString());
+            insert.executeUpdate();
+        }
+        conn.close();
     }
 }

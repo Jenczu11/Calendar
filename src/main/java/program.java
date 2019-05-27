@@ -77,8 +77,9 @@ public class program {
 //
 //                        }
                         XMLHandler xmlHandler = new XMLHandler("");
+                        SQLHandler sqlHandler1 = new SQLHandler();
                         try {
-                          dataService.saveRepository(xmlHandler);
+                          dataService.saveRepository(sqlHandler1);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
