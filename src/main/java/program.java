@@ -1,3 +1,5 @@
+//TODO: Nalezy zrobic wszelkie zabezpieczenia przed wpisaniem null, do eventu tak samo jak i glupich danych
+
 import data.EventBuilder;
 import service.DataService;
 import service.SQLHandler;
