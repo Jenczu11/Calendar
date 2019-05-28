@@ -343,6 +343,8 @@ public class Events {
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
+				DayView.showEvents();
+				frame.dispose();
 
 			}
 		});

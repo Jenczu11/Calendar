@@ -16,8 +16,8 @@ public class DayView {
 	private Timer timer;
 	private static final int TIMER_DELAY = 1000;
 	private JFrame frame;
-	private JTable table;
-	private DataService dService;
+	private static JTable table;
+	private static DataService dService;
 	private static int day;
 	private static int month;
 	private static int year;
@@ -61,6 +61,7 @@ public class DayView {
 		DayView.date=dService.StringToTimestamp(query);
 		initialize();
 		showEvents();
+		//Aktualnie timer mozna wylaczyc
 		timer = new Timer(TIMER_DELAY, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showEvents();
@@ -116,7 +117,7 @@ public class DayView {
 		springLayout.putConstraint(SpringLayout.EAST, table, 537, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().add(table);
 	}
-	private void showEvents() {
+	public static void showEvents() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 //		String SDay = Integer.toString(DayView.day);
@@ -138,4 +139,5 @@ public class DayView {
 			model.addRow(row);
 		}
 	}
+
 }
