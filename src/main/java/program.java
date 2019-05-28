@@ -38,7 +38,7 @@ public class program {
                 switch (choice) {
                     case 'a':
                             EventBuilder builder = new EventBuilder();
-                            dataService.refreshLastEventID();
+                            dataService.refreshID();
                             System.out.println("Podaj id");
                             scanner.nextLine();
 

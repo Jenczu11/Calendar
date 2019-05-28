@@ -46,8 +46,8 @@ public class DataService {
             if(startDate.getTime()>endDate.getTime())
                 throw new Exception("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
         }
-        repository.addEvent(new Event(Integer.parseInt(id),title,description,startDate,endDate));
-//        repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setDescription(description).setStartDate(startDate).setEndDate(endDate).createEvent());
+        //repository.addEvent(new Event(Integer.parseInt(id),title,description,startDate,endDate));
+        repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setDescription(description).setStartDate(startDate).setEndDate(endDate).createEvent());
     }
     public void addEvent(Event e) throws Exception
     {
@@ -171,6 +171,23 @@ public class DataService {
             repository.setLastEventID(lastEvent.getId());
         }
     }
+
+    /**
+     * Odswieza pole LastEventID w dataRepository
+     * Metoda szuka maksymalnej wartości ID w bazie danych i zwiększa go o 1
+     */
+    public void refreshID()
+    {
+        if (repository.getAllEvents().isEmpty()) repository.setLastEventID(0);
+        if (repository.getAllEvents().size()==1) repository.setLastEventID(1);
+        else {
+
+            for (int i = 0 ;i<repository.getAllEvents().size()-1;i++)
+                repository.setLastEventID(Math.max(repository.getEvent(i).getId(),repository.getEvent(i+1).getId()));
+
+        }
+    }
+
     public DataRepository getRepository() {
         return repository;
     }

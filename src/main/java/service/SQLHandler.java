@@ -2,6 +2,7 @@ package service;
 
 import data.DataRepository;
 import data.Event;
+import data.EventBuilder;
 
 import javax.xml.crypto.Data;
 import java.sql.*;
@@ -17,6 +18,7 @@ public class SQLHandler implements IOHandler{
 
     @Override
     public DataRepository LoadData() throws Exception {
+        EventBuilder builder = new EventBuilder();
         DataRepository dataRepository = new DataRepository();
         Class.forName(SQLHandler.DRIVER);
         conn = DriverManager.getConnection(DB_URL);
@@ -26,15 +28,21 @@ public class SQLHandler implements IOHandler{
         while (rs.next()) {
 //            SimpleDateFormat formatter;
 //            formatter = new SimpleDateFormat("MMM dd yyyy hh:mma",Locale.ENGLISH);
-            dataRepository.addEvent(
-                    new Event(
-                    rs.getInt(1),
-                    rs.getString(2),
-                    rs.getString(3),
-                    Timestamp.valueOf(rs.getString(4)),
-                   Timestamp.valueOf(rs.getString(5))
-                    )
-            );
+//            dataRepository.addEvent(
+//                    new Event(
+//                    rs.getInt(1),
+//                    rs.getString(2),
+//                    rs.getString(3),
+//                    Timestamp.valueOf(rs.getString(4)),
+//                   Timestamp.valueOf(rs.getString(5))
+//                    )
+//            );
+            builder.setId(rs.getInt(1));
+            builder.setTitle(rs.getString(2));
+            builder.setDescription(rs.getString(3));
+            builder.setStartDate(Timestamp.valueOf(rs.getString(4)));
+            builder.setEndDate(Timestamp.valueOf(rs.getString(5)));
+            dataRepository.addEvent(builder.createEvent());
         }
         System.out.println(dataRepository.toString());
         conn.close();
