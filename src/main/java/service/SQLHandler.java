@@ -66,7 +66,7 @@ public class SQLHandler implements IOHandler{
             insert.setString(3,event.getDescription());
             insert.setString(4,event.getStartDate().toString());
             insert.setString(5,event.getEndDate().toString());
-            insert.setBoolean(6,event.isAlarmed());
+            insert.setBoolean(6,event.isAlarm());
             System.out.println(event.getEndDate().toString());
             insert.executeUpdate();
         }

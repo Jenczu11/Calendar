@@ -15,7 +15,7 @@ class TimestampUtil {
      * @return Zparsowany string na timestamp
      */
     static Timestamp StringToTimestamp(String ddMMyyyy) {
-        if (ddMMyyyy.isBlank())
+        if (ddMMyyyy.isEmpty())
             ddMMyyyy="24/05/2019";
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date parsedDate = null;

@@ -26,7 +26,7 @@ public class XMLHandler implements IOHandler {
     }
 
     public XMLHandler(String filename) {
-        if(filename.isBlank())
+        if(filename.isEmpty())
             filename="XMLtest.xml";
         this.filename = filename;
     }

@@ -13,6 +13,10 @@ public class EventBuilder {
     private Timestamp endDate;
 
 
+
+    private Timestamp alarm;
+
+
     public EventBuilder setId(int id) {
 
         this.id = id;
@@ -23,7 +27,7 @@ public class EventBuilder {
         //
         //Bezpieczniej moze byc poprostu branie tablicy ale to do zmiany po konsultacjach
 
-        if(idValue.isBlank()) {
+        if(idValue.isEmpty()) {
             //            idValue=Integer.toString((int)Math.random()*100);
              this.id= DataRepository.getLastEventID()+1;
         }
@@ -32,14 +36,14 @@ public class EventBuilder {
     }
 
     public EventBuilder setTitle(String title) {
-        if(title.isBlank())
+        if(title.isEmpty())
             title="Default Title";
         this.title = title;
         return this;
     }
 
     public EventBuilder setDescription(String description) {
-        if(description.isBlank())
+        if(description.isEmpty())
             description="Default Description";
         this.description = description;
         return this;
@@ -56,6 +60,10 @@ public class EventBuilder {
         this.endDate = endDate;
         return this;
     }
+    public EventBuilder setAlarm(Timestamp alarm) {
+        this.alarm = alarm;
+        return this;
+    }
 
     public Event createEvent() {
         return new Event(id, title, description, startDate, endDate);
@@ -69,6 +77,7 @@ public class EventBuilder {
                 ", Des='" + description + '\'' +
                 ", start=" + startDate +
                 ", end=" + endDate +
+                ", alarm=" + alarm +
                 '}';
     }
 }

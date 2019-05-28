@@ -30,7 +30,11 @@ public class Event {
     /**
      * Zmienna informujaca, czy wystapi� ju� alarm przypisany do danego wydarzenia
      */
-    private boolean alarmed;
+    private boolean alarm;
+
+    public void setAlarm(boolean alarm) {
+        this.alarm = alarm;
+    }
 
     public Event() {
     }
@@ -41,7 +45,7 @@ public class Event {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        alarmed=false;
+        alarm = false;
     }
 
     /**
@@ -97,9 +101,9 @@ public class Event {
         this.endDate = endDate;
     }
 
-    @XmlAttribute(name="alarmed")
-    public boolean isAlarmed() {
-        return alarmed;
+    @XmlAttribute(name="alarm")
+    public boolean isAlarm() {
+        return alarm;
     }
 
 
@@ -111,7 +115,7 @@ public class Event {
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", alarmed=" + alarmed +
+                ", alarm=" + alarm +
                 '}';
     }
 

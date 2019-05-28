@@ -1,31 +1,32 @@
 //TODO: Nalezy zrobic wszelkie zabezpieczenia przed wpisaniem null, do eventu tak samo jak i glupich danych
 
+import data.DataRepository;
 import data.EventBuilder;
 import service.DataService;
 import service.SQLHandler;
 import service.XMLHandler;
 
+import javax.xml.crypto.Data;
+import java.sql.Timestamp;
 import java.util.Scanner;
 
 class program {
     private static void showMenu() {
-        System.out.println("--------------------------------");
-        System.out.println("-                              -");
-        System.out.println("-     Calendar                 -");
-        System.out.println("-    a - dodaj event           -");
-        System.out.println("-    p - wyswietl wydarzenia   -");
-        System.out.println("-    s - zapisz wydarzenia     -");
-        System.out.println("-    d - dodaj wydarzenia z xml-");
-        System.out.println("-    m - pokaz menu            -");
-        System.out.println("-    q - zakoncz program       -");
-        System.out.println("--------------------------------");
+        System.out.println("----------------------------------");
+        System.out.println("-                                -");
+        System.out.println("-     Calendar                   -");
+        System.out.println("-    a - dodaj event             -");
+        System.out.println("-    p - wyswietl wydarzenia     -");
+        System.out.println("-    s - zapisz wydarzenia       -");
+        System.out.println("-    l - dodaj wydarzenia z xml  -");
+        System.out.println("-    d - pokaz wydarzenia z dnia -");
+        System.out.println("-    m - pokaz menu              -");
+        System.out.println("-    q - zakoncz program         -");
+        System.out.println("----------------------------------");
     }
 
     //TODO: dodac wyswietlanie z daneago dnia mozliwosc
     public static void main(String[] args) {
-        System.out.println("s");
-        System.out.println("test");
-        System.out.println("Julson");
         System.out.println("Tworze dataService");
         DataService dataService = DataService.getInstance();
         char choice;
@@ -56,11 +57,11 @@ class program {
                     builder.setDescription(scanner.nextLine());
                     System.out.println("Podaj date poczatkowa w formacie dd/MM/yyyy");
 //                        String startDateString = scanner.nextLine();
-                    builder.setStartDate(dataService.StringToTimestamp(scanner.nextLine()));
+                    builder.setStartDate(dataService.StringToTimestampWithTime(scanner.nextLine()));
 //                        Timestamp startDate = dataService.StringToTimestamp(startDateString);
                     System.out.println("Podaj date koncowa w formacie dd/MM/yyyy");
 //                        String EndDateString = scanner.nextLine();
-                    builder.setEndDate(dataService.StringToTimestamp(scanner.nextLine()));
+                    builder.setEndDate(dataService.StringToTimestampWithTime(scanner.nextLine()));
 //                        Timestamp endDate = dataService.StringToTimestamp(EndDateString);
 
                     try {
@@ -92,7 +93,7 @@ class program {
                         e.printStackTrace();
                     }
                     break;
-                case 'd':
+                case 'l':
                     System.out.println("Wczytuje dane z XML");
 //                        XMLHandlerNotWorking xmlHandler1 = new XMLHandlerNotWorking();
 //                        try {
@@ -107,6 +108,11 @@ class program {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    break;
+                case 'd':
+                    scanner.nextLine();
+                    System.out.println("Podaj dzien w ktorym chcesz szukac w formacie dd/MM/yyyy");
+                    System.out.println(dataService.GetAllEventsForDate(dataService.StringToTimestamp(scanner.nextLine())).toString());
                     break;
                 case 'q':
                     return;

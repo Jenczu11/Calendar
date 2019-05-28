@@ -5,9 +5,11 @@ import data.Event;
 import data.EventBuilder;
 import exceptions.idException;
 
+import javax.swing.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class DataService {
@@ -117,7 +119,7 @@ public class DataService {
      * @param stamp Data dla ktorej sa szukane Zdarzenia
      * @return Lista zdarzen dla danej daty
      */
-    List<Event> GetAllEventsForDate(Timestamp stamp){
+    public List<Event> GetAllEventsForDate(Timestamp stamp){
         List<Event> Todays = new ArrayList<>();
         for(int i=0;i<repository.size();i++) {
             long timestamp = repository.getAllEvents().get(i).getStartDate().getTime();
@@ -127,7 +129,9 @@ public class DataService {
             Calendar selected= Calendar.getInstance();
             selected.setTime(stamp);
 
-            if(oneFromAll.get(Calendar.MONTH)==selected.get(Calendar.MONTH) && oneFromAll.get(Calendar.YEAR)==selected.get(Calendar.YEAR) && oneFromAll.get(Calendar.DAY_OF_MONTH)==selected.get(Calendar.DAY_OF_MONTH))
+            if(oneFromAll.get(Calendar.MONTH)==selected.get(Calendar.MONTH) && 
+            		oneFromAll.get(Calendar.YEAR)==selected.get(Calendar.YEAR) && 
+            		oneFromAll.get(Calendar.DAY_OF_MONTH)==selected.get(Calendar.DAY_OF_MONTH))
             {
                 Todays.add(repository.getAllEvents().get(i));
             }
@@ -178,7 +182,7 @@ public class DataService {
      * Odswieza pole LastEventID w dataRepository
      * Metoda szuka maksymalnej wartości ID w bazie danych i zwiększa go o 1
      */
-    private void refreshID()
+    public void refreshID()
     {
         if (repository.getAllEvents().isEmpty()) DataRepository.setLastEventID(0);
         if (repository.getAllEvents().size()==1) DataRepository.setLastEventID(1);
@@ -190,11 +194,15 @@ public class DataService {
         }
     }
 
-    private DataRepository getRepository() {
+    public ArrayList<Event> getAllEvents()
+    {
+        return repository.getAllEvents();
+    }
+    public DataRepository getRepository() {
         return repository;
     }
 
-    private void setRepository(DataRepository repository) {
+    public void setRepository(DataRepository repository) {
         this.repository = repository;
         refreshID();
     }
@@ -211,6 +219,7 @@ public class DataService {
     {
        handler.SaveData(getRepository());
     }
+
     @Override
     //TODO: naprawic to String zeby jakos lepiej wyswietlal co nie ? albo jakies inne formaty toString
     public String toString() {
