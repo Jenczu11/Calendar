@@ -6,10 +6,7 @@ import data.EventBuilder;
 import exceptions.idException;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Calendar;
 
@@ -170,10 +167,10 @@ public class DataService {
      */
     public void refreshLastEventID()
     {
-        if (repository.getAllEvents().isEmpty()) repository.setLastEventID(0);
+        if (repository.getAllEvents().isEmpty()) DataRepository.setLastEventID(0);
         else {
             Event lastEvent = repository.getAllEvents().get(repository.getAllEvents().size() - 1);
-            repository.setLastEventID(lastEvent.getId());
+            DataRepository.setLastEventID(lastEvent.getId());
         }
     }
 
@@ -183,12 +180,12 @@ public class DataService {
      */
     public void refreshID()
     {
-        if (repository.getAllEvents().isEmpty()) repository.setLastEventID(0);
-        if (repository.getAllEvents().size()==1) repository.setLastEventID(1);
+        if (repository.getAllEvents().isEmpty()) DataRepository.setLastEventID(0);
+        if (repository.getAllEvents().size()==1) DataRepository.setLastEventID(1);
         else {
 
             for (int i = 0 ;i<repository.getAllEvents().size()-1;i++)
-                repository.setLastEventID(Math.max(repository.getEvent(i).getId(),repository.getEvent(i+1).getId()));
+                DataRepository.setLastEventID(Math.max(repository.getEvent(i).getId(),repository.getEvent(i+1).getId()));
 
         }
     }

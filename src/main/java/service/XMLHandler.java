@@ -1,15 +1,12 @@
 package service;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.crypto.Data;
 
 import data.DataRepository;
-import data.Event;
 
 /**
  * Klasa odpowiedzialna za zapis i odczyt z XML

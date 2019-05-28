@@ -19,7 +19,7 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 AboutUs aboutUs = new AboutUs();
-                aboutUs.main(null);
+                AboutUs.main(null);
             }
         });
     }
@@ -43,8 +43,9 @@ public class GUI extends JFrame {
         calendar.getDayChooser().addPropertyChangeListener("day",new PropertyChangeListener() {
                     public void propertyChange(PropertyChangeEvent evt) {
                                 Wydarzenie window = new Wydarzenie();
-                                window.main(null);
-                    };});
+                                Wydarzenie.main(null);
+                    }
+        });
     }
 
     //    public GUI()

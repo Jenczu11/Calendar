@@ -7,20 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class XMLHandlerTest {
+class SQLHandlerTest {
     @BeforeEach
     public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Field instance = DataService.class.getDeclaredField("ourInstance");
         instance.setAccessible(true);
         instance.set(null, null);
     }
-
-
-    @ParameterizedTest(name = "For all empty strings it should dataRepo must have 10 events, and must save to XML")
+    @ParameterizedTest(name = "For all empty strings it should dataRepo must have 10 events, and must save to SQL")
     @CsvSource({
             "'', '', '','','','',''",
     })
@@ -42,23 +41,22 @@ class XMLHandlerTest {
             }
         }
         assertEquals(expected,dataService.getRepositoryEvents().size());
-        XMLHandler xmlHandler = new XMLHandler("XMLHandlerTest.xml");
-        assertDoesNotThrow(() -> dataService.saveRepository(xmlHandler));
-//
-
-
-
+        SQLHandler sqlHandler = new SQLHandler();
+        sqlHandler.setDbUrl("SQLTesting");
+        assertDoesNotThrow(() -> dataService.saveRepository(sqlHandler));
     }
 
     @Test
-    @DisplayName("Should load new instance of DataService and load database for XML file, expected 10 events if run with previous Test")
+    @DisplayName("Should load new instance of DataService and load database from SQL dataBase, expected 10 events if run with previous Test")
     void loadData() {
         DataService dataService = DataService.getInstance();
         int expected=10;
-        XMLHandler xmlHandler = new XMLHandler("XMLHandlerTest.xml");
-        assertDoesNotThrow(()->dataService.loadRepository(xmlHandler));
+        SQLHandler sqlHandler = new SQLHandler();
+        sqlHandler.setDbUrl("SQLTesting");
+        assertDoesNotThrow(()->dataService.loadRepository(sqlHandler));
         assertEquals(expected,dataService.getRepositoryEvents().size());
         System.out.println(dataService.toString());
 
     }
+
 }

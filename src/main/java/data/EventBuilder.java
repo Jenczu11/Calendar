@@ -1,16 +1,8 @@
 package data;
 
-import service.DataService;
-
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import data.DataRepository;
 
-import javax.xml.crypto.Data;
+import data.DataRepository;
 
 public class EventBuilder {
     //TODO: zmienić to po testach na private
@@ -32,9 +24,8 @@ public class EventBuilder {
         //Bezpieczniej moze byc poprostu branie tablicy ale to do zmiany po konsultacjach
 
         if(idValue.isBlank()) {
-           int idIntValue=DataRepository.getLastEventID()+1;
-//            idValue=Integer.toString((int)Math.random()*100);
-             this.id=idIntValue;
+            //            idValue=Integer.toString((int)Math.random()*100);
+             this.id= DataRepository.getLastEventID()+1;
         }
         else this.id = Integer.parseInt(idValue);
         return this;

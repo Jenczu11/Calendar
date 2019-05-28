@@ -2,12 +2,8 @@ package GUITestV2;
 
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JMonthChooser;
-import com.toedter.calendar.JYearChooser;
-import com.toedter.components.JSpinField;
 
 import javax.swing.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class GUI {
     private JPanel root;

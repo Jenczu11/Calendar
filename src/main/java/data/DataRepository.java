@@ -14,7 +14,7 @@ public class DataRepository {
     private static int lastEventID=0;
     public DataRepository()
     {
-        setEvents(new ArrayList<Event>());
+        setEvents(new ArrayList<>());
     }
     public void addEvent(Event e)
     {

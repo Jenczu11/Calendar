@@ -3,8 +3,6 @@ package GUIv2;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import com.toedter.calendar.JCalendar;
-import java.awt.BorderLayout;
 
 public class aboutUs {
 

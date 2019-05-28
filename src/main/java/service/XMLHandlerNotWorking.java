@@ -1,17 +1,14 @@
 package service;
 
-import data.DataRepository;
 import data.Event;
 
-import javax.xml.crypto.Data;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+
 /*
 Class not in use
  */
@@ -19,7 +16,7 @@ Class not in use
 public class XMLHandlerNotWorking {
 
     public ArrayList<Event> LoadData() throws Exception {
-        ArrayList<Event> base = new ArrayList<Event>();
+        ArrayList<Event> base = new ArrayList<>();
 //        DataRepository base = new DataRepository();
         FileInputStream fis2 = null;
         try {

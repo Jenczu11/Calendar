@@ -24,6 +24,7 @@ public class TimestampUtil {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        assert parsedDate != null :"Parsed date is null";
         return new Timestamp(parsedDate.getTime());
     }
     /**
@@ -40,6 +41,7 @@ public class TimestampUtil {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        assert parsedDate != null: "Parsed date is null";
         return new Timestamp(parsedDate.getTime());
     }
 }

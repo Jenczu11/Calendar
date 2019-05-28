@@ -4,17 +4,18 @@ import data.DataRepository;
 import data.Event;
 import data.EventBuilder;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class SQLHandler implements IOHandler{
 
     private static final String DRIVER = "org.sqlite.JDBC";
-    private static final String DB_URL = "jdbc:sqlite:test.db";
+    private static String DB_URL = "jdbc:sqlite:test.db";
     private Connection conn;
-    private Statement stat;
+
+    public static void setDbUrl(String dbUrl) {
+        DB_URL = "jdbc:sqlite:"+dbUrl;
+    }
 
     @Override
     public DataRepository LoadData() throws Exception {
@@ -22,7 +23,7 @@ public class SQLHandler implements IOHandler{
         DataRepository dataRepository = new DataRepository();
         Class.forName(SQLHandler.DRIVER);
         conn = DriverManager.getConnection(DB_URL);
-        stat = conn.createStatement();
+        Statement stat = conn.createStatement();
         String queryString = "select id, title, description, startDate, endDate from Events";
         ResultSet rs = stat.executeQuery(queryString);
         while (rs.next()) {

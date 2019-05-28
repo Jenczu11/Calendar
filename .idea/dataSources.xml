@@ -31,5 +31,14 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="SQLTesting" uuid="97287bcc-e466-477b-9c70-80d806d00452">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/SQLTesting</jdbc-url>
+      <driver-properties>
+        <property name="enable_load_extension" value="true" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>
