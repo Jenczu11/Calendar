@@ -1,29 +1,9 @@
 package gui;
 
-import java.awt.EventQueue;
+import javax.swing.*;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JSplitPane;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.Checkbox;
-import java.awt.Label;
-import java.awt.List;
-import java.awt.Choice;
-import java.awt.Button;
-import java.awt.Color;
-import javax.swing.JTextArea;
-import java.awt.Font;
-import com.toedter.components.JSpinField;
+//import net.miginfocom.swing.MigLayout;
 
 public class Events {
 

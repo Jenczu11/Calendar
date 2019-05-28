@@ -91,4 +91,19 @@ class DataServiceTest {
         assertEquals(3,today.size());
 
     }
+
+    @Test
+    @DisplayName("Dodaj 4 eventy i usun wszystkie do daty 2019-05-15")
+    void removeEventsToDate() {
+        DataService dataService = DataService.getInstance();
+        createTestData(dataService);
+        try {
+            dataService.removeEventsToDate(Timestamp.valueOf("2019-05-15 00:00:00"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(dataService.toString());
+        assertEquals(3,dataService.getRepository().size());
+
+    }
 }

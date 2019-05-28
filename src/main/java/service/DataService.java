@@ -5,11 +5,9 @@ import data.Event;
 import data.EventBuilder;
 import exceptions.idException;
 
-import javax.swing.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class DataService {
@@ -113,6 +111,28 @@ public class DataService {
                 }
             }
             throw new idException("Zdarzenie nie istnieje");
+        }
+
+    /**
+     * Usuwa wsystkie wydarzenia do podanej daty w formacie dd/mm/yyyy HH:MM
+     * Liczy diff pomiedzy czasem podanym a czasem eventu, jezeli jest ujemny to mozemy
+     * dodac event do chwilowej bazy ktory potem przypisujemy
+     * Troche za bardzo mem-hungry ale cóż
+     * @param deleteTo data w formacie dd/mm/yyyy HH: (Timestamp.valueOf(""))
+     * @throws Exception
+     */
+        void removeEventsToDate(Timestamp deleteTo) throws Exception{
+            int startSize=repository.getAllEvents().size();
+            if(startSize==0) throw new Exception("Pusta baza eventow");
+            DataRepository temp = new DataRepository();
+            for(int i=0; i<startSize;i++) {
+               long diff=deleteTo.getTime()-repository.getEvent(i).getStartDate().getTime();
+               if(diff<0)
+               {
+                   temp.getAllEvents().add(repository.getEvent(i));
+               }
+            }
+           setRepository(temp);
         }
     /**
      * Zwraca wszystkie eventy dla danej daty
