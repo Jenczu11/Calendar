@@ -69,4 +69,15 @@ public class EventBuilder {
     public Event createEvent() {
         return new Event(id, title, description, startDate, endDate);
     }
+
+    @Override
+    public String toString() {
+        return "Wydarzenie{" +
+                "id=" + id +
+                ", Tyt='" + title + '\'' +
+                ", Des='" + description + '\'' +
+                ", start=" + startDate +
+                ", end=" + endDate +
+                '}';
+    }
 }

@@ -38,11 +38,16 @@ public class program {
                 switch (choice) {
                     case 'a':
                             EventBuilder builder = new EventBuilder();
-                            dataService.refreshID();
-                            System.out.println("Podaj id");
-                            scanner.nextLine();
-
-                            builder.setId(scanner.nextLine());
+//                            dataService.refreshID();
+                          /*
+                          Wyłączony podajID zamiast tego defaultowe z autonumeracją
+                           */
+//                            System.out.println("Podaj id");
+//                            scanner.nextLine();
+//                            builder.setId(scanner.nextLine());
+                        builder.setId("");
+                        scanner.nextLine();
+//
                             System.out.println("Podaj tytul wydarzenia");
 //                        String title = scanner.nextLine();
                             builder.setTitle(scanner.nextLine());
@@ -61,6 +66,7 @@ public class program {
                             try {
                                 dataService.addEvent(builder.createEvent());
                                 System.out.println("Pomyslnie dodano wydarzenie");
+                                System.out.println(builder.toString());
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

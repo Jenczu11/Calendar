@@ -48,6 +48,7 @@ public class DataService {
         }
         //repository.addEvent(new Event(Integer.parseInt(id),title,description,startDate,endDate));
         repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setDescription(description).setStartDate(startDate).setEndDate(endDate).createEvent());
+        refreshID();
     }
     public void addEvent(Event e) throws Exception
     {
@@ -59,6 +60,7 @@ public class DataService {
                 throw new Exception("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
         }
         repository.addEvent(e);
+        refreshID();
     }
 
     /**
@@ -76,6 +78,7 @@ public class DataService {
         for (int i=0;i<events.size();i++) {
             if(events.get(i).getId()==idInt) {
                 repository.editEvent(i, new EventBuilder().setId(idInt).setTitle(title).setDescription(description).setStartDate(startDate).setEndDate(endDate).createEvent());
+                refreshID();
                 return;
             }
         }
@@ -91,6 +94,7 @@ public class DataService {
         for (Event event : repository.getAllEvents()) {
             if (event.getId() == idInt) {
                 repository.removeEvent(event);
+                refreshID();
                 return;
             }
         }
@@ -105,6 +109,7 @@ public class DataService {
             for (Event event : repository.getAllEvents()) {
                 if (event.getId() == id) {
                     repository.removeEvent(event);
+                    refreshID();
                     return;
                 }
             }
@@ -194,6 +199,7 @@ public class DataService {
 
     public void setRepository(DataRepository repository) {
         this.repository = repository;
+        refreshID();
     }
 
     /**
@@ -202,6 +208,7 @@ public class DataService {
     public void loadRepository(IOHandler handler) throws Exception
     {
         setRepository(handler.LoadData());
+        refreshID();
     }
     public void saveRepository(IOHandler handler) throws Exception
     {
