@@ -10,12 +10,13 @@ import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DataServiceTest {
 
     @BeforeEach
-    public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Field instance = DataService.class.getDeclaredField("ourInstance");
         instance.setAccessible(true);
         instance.set(null, null);

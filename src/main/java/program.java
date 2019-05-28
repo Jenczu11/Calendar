@@ -7,7 +7,7 @@ import service.XMLHandler;
 
 import java.util.Scanner;
 
-public class program {
+class program {
     private static void showMenu() {
         System.out.println("--------------------------------");
         System.out.println("-                              -");

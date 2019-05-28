@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.io.File;
 import java.lang.reflect.Field;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SQLHandlerTest {
     @BeforeEach
-    public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Field instance = DataService.class.getDeclaredField("ourInstance");
         instance.setAccessible(true);
         instance.set(null, null);
@@ -42,7 +42,7 @@ class SQLHandlerTest {
         }
         assertEquals(expected,dataService.getRepositoryEvents().size());
         SQLHandler sqlHandler = new SQLHandler();
-        sqlHandler.setDbUrl("SQLTesting");
+        SQLHandler.setDbUrl("SQLTesting");
         assertDoesNotThrow(() -> dataService.saveRepository(sqlHandler));
     }
 
@@ -52,7 +52,7 @@ class SQLHandlerTest {
         DataService dataService = DataService.getInstance();
         int expected=10;
         SQLHandler sqlHandler = new SQLHandler();
-        sqlHandler.setDbUrl("SQLTesting");
+        SQLHandler.setDbUrl("SQLTesting");
         assertDoesNotThrow(()->dataService.loadRepository(sqlHandler));
         assertEquals(expected,dataService.getRepositoryEvents().size());
         System.out.println(dataService.toString());

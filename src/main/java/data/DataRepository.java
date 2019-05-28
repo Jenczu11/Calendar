@@ -47,7 +47,7 @@ public class DataRepository {
         }
     }
 
-    public static int getLastEventID() {
+    static int getLastEventID() {
         return lastEventID;
     }
 
@@ -62,7 +62,7 @@ public class DataRepository {
     {
         return getAllEvents().size();
     }
-    public void setEvents(ArrayList<Event> events) {
+    private void setEvents(ArrayList<Event> events) {
         this.events = events;
     }
 //    /**

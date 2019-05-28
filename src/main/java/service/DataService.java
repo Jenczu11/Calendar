@@ -7,8 +7,8 @@ import exceptions.idException;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Calendar;
+import java.util.List;
 
 public class DataService {
     private static DataService ourInstance;
@@ -35,7 +35,7 @@ public class DataService {
      * @throws Exception Jezeli juz istnieje zdarzenie o podanym id,
      *  lub jezli data zakonczenia zdarzenia jest wczesniejsza od daty rozpoczecia zdarzenia
      */
-    public void addEvent(String id,String title, String description, Timestamp startDate, Timestamp endDate) throws Exception {
+    void addEvent(String id, String title, String description, Timestamp startDate, Timestamp endDate) throws Exception {
         //TODO: Autonumeracja elementow czyli bez id
         for (Event event : repository.getAllEvents()) {
             if(event.getId()==Integer.parseInt(id))
@@ -86,7 +86,7 @@ public class DataService {
      * @param id Id wydarzenia
      * @throws Exception Kiedy nie istnieje wydarzenie o podanym id
      */
-    public void removeEvent(String id) throws Exception {
+    void removeEvent(String id) throws Exception {
         int idInt = Integer.parseInt(id);
         for (Event event : repository.getAllEvents()) {
             if (event.getId() == idInt) {
@@ -102,7 +102,7 @@ public class DataService {
          * @param id Id wydarzenia
          * @throws Exception Kiedy nie istnieje wydarzenie o podanym id
          */
-        public void removeEvent(int id) throws Exception {
+        void removeEvent(int id) throws Exception {
             for (Event event : repository.getAllEvents()) {
                 if (event.getId() == id) {
                     repository.removeEvent(event);
@@ -117,7 +117,7 @@ public class DataService {
      * @param stamp Data dla ktorej sa szukane Zdarzenia
      * @return Lista zdarzen dla danej daty
      */
-     public List<Event> GetAllEventsForDate(Timestamp stamp){
+    List<Event> GetAllEventsForDate(Timestamp stamp){
         List<Event> Todays = new ArrayList<>();
         for(int i=0;i<repository.size();i++) {
             long timestamp = repository.getAllEvents().get(i).getStartDate().getTime();
@@ -157,7 +157,7 @@ public class DataService {
         return repository.size();
     }
 
-    public List<Event> getRepositoryEvents() {
+    List<Event> getRepositoryEvents() {
         return repository.getAllEvents();
     }
 
@@ -165,7 +165,7 @@ public class DataService {
      * Odswieza pole LastEventID w dataRepository
      * Razem z EventBuilder setId powoduje inkrementacje od ostatniego Event ID+1
      */
-    public void refreshLastEventID()
+    void refreshLastEventID()
     {
         if (repository.getAllEvents().isEmpty()) DataRepository.setLastEventID(0);
         else {
@@ -178,7 +178,7 @@ public class DataService {
      * Odswieza pole LastEventID w dataRepository
      * Metoda szuka maksymalnej wartości ID w bazie danych i zwiększa go o 1
      */
-    public void refreshID()
+    private void refreshID()
     {
         if (repository.getAllEvents().isEmpty()) DataRepository.setLastEventID(0);
         if (repository.getAllEvents().size()==1) DataRepository.setLastEventID(1);
@@ -190,11 +190,11 @@ public class DataService {
         }
     }
 
-    public DataRepository getRepository() {
+    private DataRepository getRepository() {
         return repository;
     }
 
-    public void setRepository(DataRepository repository) {
+    private void setRepository(DataRepository repository) {
         this.repository = repository;
         refreshID();
     }

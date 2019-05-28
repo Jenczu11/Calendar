@@ -9,11 +9,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.lang.reflect.Field;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class XMLHandlerTest {
     @BeforeEach
-    public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Field instance = DataService.class.getDeclaredField("ourInstance");
         instance.setAccessible(true);
         instance.set(null, null);

@@ -2,7 +2,7 @@ package GUITest;
 
 import javax.swing.*;
 
-public class Wydarzenie {
+class Wydarzenie {
     private JPanel root;
     private JTextField textField1;
     private JTextField textField2;

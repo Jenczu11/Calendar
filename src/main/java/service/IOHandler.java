@@ -2,7 +2,7 @@ package service;
 
 import data.DataRepository;
 
-public interface IOHandler {
+interface IOHandler {
     /**
      * Laduje dane do programu w wybrany sposob (XML)
      * @return data, zawierajace liste wydarzen (object type DataRepository)

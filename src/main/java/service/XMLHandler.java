@@ -1,17 +1,17 @@
 package service;
 
-import java.io.File;
+import data.DataRepository;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
-import data.DataRepository;
+import java.io.File;
 
 /**
  * Klasa odpowiedzialna za zapis i odczyt z XML
  *
  */
+@SuppressWarnings("RedundantSuppression")
 public class XMLHandler implements IOHandler {
     /**
      * Nazwa pliku, do ktorego zostaja zapisane dane
@@ -45,7 +45,6 @@ public class XMLHandler implements IOHandler {
     /**
      * Zapisuje dane do formatu XML
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void SaveData(DataRepository data) throws Exception {
         JAXBContext jaxbContext = JAXBContext.newInstance(DataRepository.class);

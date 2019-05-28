@@ -8,13 +8,13 @@ import java.util.Date;
  * Klasa pomocnicza do formatowania TimeStampow
  *
  */
-public class TimestampUtil {
+class TimestampUtil {
     /**
      * Funkcja pomocnicza, parsuje string w formacie dd/MM/yyyy na Timestamp
      * @param ddMMyyyy String do parsownia
      * @return Zparsowany string na timestamp
      */
-    public static Timestamp StringToTimestamp(String ddMMyyyy) {
+    static Timestamp StringToTimestamp(String ddMMyyyy) {
         if (ddMMyyyy.isBlank())
             ddMMyyyy="24/05/2019";
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -33,7 +33,7 @@ public class TimestampUtil {
      * @return Zparsowany string na timestamp
      */
 
-    public static Timestamp StringToTimestampWithTime(String time) {
+    static Timestamp StringToTimestampWithTime(String time) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date parsedDate = null;
         try {
