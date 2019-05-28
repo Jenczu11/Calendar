@@ -1,17 +1,21 @@
 package gui;
 
 import data.EventBuilder;
+import service.DataService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 
 //import net.miginfocom.swing.MigLayout;
 
 public class Events {
 
+	private DataService dService;
 	private JFrame frame;
+	private static Timestamp date;
 
 	/**
 	 * Launch the application.
@@ -33,7 +37,12 @@ public class Events {
 	 * Create the application.
 	 */
 	public Events() {
+		dService= DataService.getInstance();
 		initialize();
+	}
+	public Events(Timestamp date) {
+
+		Events.date = date;
 	}
 
 	/**
@@ -83,16 +92,7 @@ public class Events {
 		frame.getContentPane().add(label);
 		
 		Button button = new Button("DODAJ");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventBuilder builder = new EventBuilder();
-				builder.setId(" ");
-				builder.setTitle(lblNazwa.getText());
-				builder.setDescription(lblMiejsce.getText());
 
-				
-			}
-		});
 		button.setFont(new Font("Dialog", Font.BOLD, 14));
 		button.setActionCommand("DODAJ");
 		button.setBackground(new Color(178, 34, 34));
@@ -291,5 +291,30 @@ public class Events {
 		endDateMinutes.add("58");
 		endDateMinutes.add("59");
 		frame.getContentPane().add(endDateMinutes);
+
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventBuilder builder = new EventBuilder();
+				builder.setId("");
+				builder.setTitle(Title.getText());
+				builder.setDescription(Place.getText());
+				//builder.setStartDate(dService.StringToTimestampWithTime(scanner.nextLine()));
+				//builder.setEndDate(dService.StringToTimestampWithTime(scanner.nextLine()));
+//				System.out.println(startDateHours.getSelectedItem());
+//				System.out.println(startDateMinutes.getSelectedItem());
+//				System.out.println(endDateHours.getSelectedItem());
+//				System.out.println(endDateMinutes.getSelectedItem());
+				String time = startDateHours.getSelectedItem()+":"+startDateMinutes.getSelectedItem()+":00";
+				builder.setStartDate(Timestamp.valueOf(date.toString().substring(0,10)+" "+time));
+				time = endDateHours.getSelectedItem()+":"+endDateMinutes.getSelectedItem()+":00";
+				builder.setEndDate(Timestamp.valueOf(date.toString().substring(0,10)+" "+time));
+				try {
+					dService.addEvent(builder.createEvent());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+
+			}
+		});
 	}
 }

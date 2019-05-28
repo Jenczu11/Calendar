@@ -44,4 +44,5 @@ class TimestampUtil {
         assert parsedDate != null: "Parsed date is null";
         return new Timestamp(parsedDate.getTime());
     }
+
 }

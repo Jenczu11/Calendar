@@ -8,16 +8,20 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 public class DayView {
 
+	private Timer timer;
+	private static final int TIMER_DELAY = 1000;
 	private JFrame frame;
 	private JTable table;
 	private DataService dService;
 	private static int day;
 	private static int month;
 	private static int year;
+	private static Timestamp date;
 	/**
 	 * Launch the application.
 	 */
@@ -44,12 +48,25 @@ public class DayView {
 		this.day=day;
 		this.month=month;
 		this.year=year;
+
 	}
 	public DayView()
 	{
 		dService=DataService.getInstance();
+		String SDay = Integer.toString(DayView.day);
+		if (DayView.day>=1 && DayView.day<=9) SDay = "0"+SDay;
+		String SMonth = Integer.toString(DayView.month);
+		if (DayView.month>=1 && DayView.month<=9) SMonth = "0"+SMonth;
+		String query = SDay+"/"+SMonth+"/"+DayView.year;
+		DayView.date=dService.StringToTimestamp(query);
 		initialize();
 		showEvents();
+		timer = new Timer(TIMER_DELAY, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showEvents();
+			}
+		});
+		timer.start();
 	}
 
 	/**
@@ -70,7 +87,7 @@ public class DayView {
 		JButton btnAddEvent = new JButton("Dodaj Wydarzenie");
 		btnAddEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Events events = new Events();
+				Events events = new Events(date);
 				Events.main(null);
 			}
 		});
@@ -102,15 +119,15 @@ public class DayView {
 	private void showEvents() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
-		String SDay = Integer.toString(DayView.day);
-		if (DayView.day>=1 && DayView.day<=9) SDay = "0"+SDay;
-		String SMonth = Integer.toString(DayView.month);
-		if (DayView.month>=1 && DayView.month<=9) SMonth = "0"+SMonth;
-		String query = SDay+"/"+SMonth+"/"+DayView.year;
-		System.out.println(query);
-//		dService.GetAllEventsForDate(Timestamp.valueOf(query));
-//		System.out.println(dService.toString());
-		for (Event event : dService.GetAllEventsForDate(dService.StringToTimestamp(query))) {
+//		String SDay = Integer.toString(DayView.day);
+//		if (DayView.day>=1 && DayView.day<=9) SDay = "0"+SDay;
+//		String SMonth = Integer.toString(DayView.month);
+//		if (DayView.month>=1 && DayView.month<=9) SMonth = "0"+SMonth;
+//		String query = SDay+"/"+SMonth+"/"+DayView.year;
+//		System.out.println(query);
+////		dService.GetAllEventsForDate(Timestamp.valueOf(query));
+////		System.out.println(dService.toString());
+		for (Event event : dService.GetAllEventsForDate(date)) {
 			String data0 = String.valueOf(event.getId());
 			String data1 = new SimpleDateFormat("dd-MM-yyyy").format(event.getStartDate());
 			String data2 = new SimpleDateFormat("HH:mm").format(event.getStartDate());
