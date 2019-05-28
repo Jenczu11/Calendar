@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class SQLHandler implements IOHandler{
 
-    public static final String DRIVER = "org.sqlite.JDBC";
-    public static final String DB_URL = "jdbc:sqlite:test.db";
+    private static final String DRIVER = "org.sqlite.JDBC";
+    private static final String DB_URL = "jdbc:sqlite:test.db";
     private Connection conn;
     private Statement stat;
 
