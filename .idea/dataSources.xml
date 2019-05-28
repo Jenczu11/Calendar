@@ -14,7 +14,7 @@
         <property name="applicationName" value="DataGrip" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="SQLite - test.db" uuid="9b231578-20c4-4f90-8247-be003181bafc">
+    <data-source source="LOCAL" name="test.db" uuid="3ac23563-abb2-410c-91d9-6921e766978d">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

@@ -77,7 +77,7 @@ public class CloseEvent extends JDialog {
         contentPanel.add(lblStartTime);
 
         JLabel lblEndTime = new JLabel("Godzina zako\u0144czenia:");
-        sl_contentPanel.putConstraint(SpringLayout.NORTH, lblEndTime, 133, SpringLayout.NORTH, contentPanel);
+        sl_contentPanel.putConstraint(SpringLayout.WEST, lblEndTime, 0, SpringLayout.WEST, lblTitle);
         contentPanel.add(lblEndTime);
 
         titleField = new JTextField();
@@ -107,9 +107,9 @@ public class CloseEvent extends JDialog {
         startTimeField.setColumns(10);
 
         endTimeField = new JTextField();
+        sl_contentPanel.putConstraint(SpringLayout.NORTH, endTimeField, 13, SpringLayout.SOUTH, startTimeField);
+        sl_contentPanel.putConstraint(SpringLayout.NORTH, lblEndTime, 3, SpringLayout.NORTH, endTimeField);
         endTimeField.setEditable(false);
-        sl_contentPanel.putConstraint(SpringLayout.EAST, lblEndTime, -31, SpringLayout.WEST, endTimeField);
-        sl_contentPanel.putConstraint(SpringLayout.NORTH, endTimeField, -3, SpringLayout.NORTH, lblEndTime);
         sl_contentPanel.putConstraint(SpringLayout.WEST, endTimeField, 0, SpringLayout.WEST, titleField);
         endTimeField.setText(new SimpleDateFormat("HH:mm").format(event.getEndDate()));
         contentPanel.add(endTimeField);
