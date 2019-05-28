@@ -1,17 +1,12 @@
 package gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.*;
-
 import com.toedter.calendar.JCalendar;
-
 import data.Event;
-import gui.CloseEvent;
 import service.DataService;
 import service.SQLHandler;
 
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -31,7 +26,7 @@ public class GUI {
 	 * Liczba milisekund, po ktorych nastepuje sprawdzanie czy jakies zdarzenia wymagaja zaalarmowania
 	 */
 	private static final int TIMER_DELAY = 60000;
-	private DataService dataService;
+	public DataService dataService;
 	public static void main(String[] args) {
 
 		EventQueue.invokeLater(new Runnable() {
@@ -75,12 +70,18 @@ public class GUI {
 		
 		JCalendar calendar = new JCalendar();
 		frame.getContentPane().add(calendar, BorderLayout.CENTER);
-		
+
 		        calendar.getDayChooser().setAlwaysFireDayProperty(true);
 		        calendar.getDayChooser().addPropertyChangeListener("day",new PropertyChangeListener() {
 		                    public void propertyChange(PropertyChangeEvent evt) {
-		                                DayView window = new DayView();
+								int day = (int) evt.getNewValue();
+								int month =calendar.getMonthChooser().getMonth()+1;
+								int year = calendar.getYearChooser().getYear();
+		                                DayView window = new DayView(day,month,year);
 		                                DayView.main(null);
+//								System.out.println(calendar.getMonthChooser().getMonth()+1);
+//								System.out.println(day);
+//								System.out.println(year);
 		                    }
 		        });
 		    

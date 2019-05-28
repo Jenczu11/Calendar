@@ -1,70 +1,124 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import data.Event;
+import service.DataService;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.SpringLayout;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
-public class DayView extends JDialog {
+public class DayView {
 
-	private final JPanel contentPanel = new JPanel();
-
+	private JFrame frame;
+	private JTable table;
+	private DataService dService;
+	private static int day;
+	private static int month;
+	private static int year;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			DayView dialog = new DayView();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DayView window = new DayView();
+					System.out.println("DayView:"+day+" "+month+" "+year);
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * Create the dialog.
+	 * Create the application.
 	 */
-	public DayView() {
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		SpringLayout sl_contentPanel = new SpringLayout();
-		contentPanel.setLayout(sl_contentPanel);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton btnNewButton = new JButton("Dodaj Wydarzenie");
-				btnNewButton.setActionCommand("Dodaj Wydarzenie");
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Events events = new Events();
-						events.main(null);
-					}
-				});
-				buttonPane.add(btnNewButton);
-			}
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+	public DayView(int day, int month, int year) {
+
+		this.day=day;
+		this.month=month;
+		this.year=year;
+	}
+	public DayView()
+	{
+		dService=DataService.getInstance();
+		initialize();
+		showEvents();
 	}
 
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 563, 417);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		SpringLayout springLayout = new SpringLayout();
+		frame.getContentPane().setLayout(springLayout);
+		
+		JPanel panel_1 = new JPanel();
+		springLayout.putConstraint(SpringLayout.WEST, panel_1, 0, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, panel_1, 547, SpringLayout.WEST, frame.getContentPane());
+		frame.getContentPane().add(panel_1);
+		
+		JButton btnAddEvent = new JButton("Dodaj Wydarzenie");
+		btnAddEvent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Events events = new Events();
+				Events.main(null);
+			}
+		});
+		panel_1.add(btnAddEvent);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+						"ID", "Data", "Godzina roz.", "Godzina zak.", "Wydarzenie", "Opis"
+				}
+				));
+		table.getColumnModel().getColumn(0).setPreferredWidth(45);
+		table.getColumnModel().getColumn(1).setPreferredWidth(70);
+		table.getColumnModel().getColumn(2).setPreferredWidth(82);
+		table.getColumnModel().getColumn(3).setPreferredWidth(82);
+		table.getColumnModel().getColumn(4).setPreferredWidth(77);
+		table.getColumnModel().getColumn(5).setPreferredWidth(120);
+		table.setFillsViewportHeight(true);
+		springLayout.putConstraint(SpringLayout.NORTH, table, 10, SpringLayout.NORTH, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, table, -48, SpringLayout.SOUTH, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, panel_1, 6, SpringLayout.SOUTH, table);
+		springLayout.putConstraint(SpringLayout.SOUTH, panel_1, 39, SpringLayout.SOUTH, table);
+		springLayout.putConstraint(SpringLayout.WEST, table, 10, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, table, 537, SpringLayout.WEST, frame.getContentPane());
+		frame.getContentPane().add(table);
+	}
+	private void showEvents() {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		model.setRowCount(0);
+		String SDay = Integer.toString(DayView.day);
+		if (DayView.day>=1 && DayView.day<=9) SDay = "0"+SDay;
+		String SMonth = Integer.toString(DayView.month);
+		if (DayView.month>=1 && DayView.month<=9) SMonth = "0"+SMonth;
+		String query = SDay+"/"+SMonth+"/"+DayView.year;
+		System.out.println(query);
+//		dService.GetAllEventsForDate(Timestamp.valueOf(query));
+//		System.out.println(dService.toString());
+		for (Event event : dService.GetAllEventsForDate(dService.StringToTimestamp(query))) {
+			String data0 = String.valueOf(event.getId());
+			String data1 = new SimpleDateFormat("dd-MM-yyyy").format(event.getStartDate());
+			String data2 = new SimpleDateFormat("HH:mm").format(event.getStartDate());
+			String data3 = new SimpleDateFormat("HH:mm").format(event.getEndDate());
+			String data4 = event.getTitle();
+			String data5 = event.getDescription();
+			Object[] row = {data0, data1, data2, data3, data4, data5 };
+			model.addRow(row);
+		}
+	}
 }
