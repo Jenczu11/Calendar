@@ -20,9 +20,7 @@ public class Events {
     private DataService dService;
     private static JFrame frame;
     private static Timestamp date;
-    //	private DayView dayView = null;
     DefaultTableModel model = null;
-
 
     /**
      * Launch the application.
@@ -140,64 +138,49 @@ public class Events {
         frame.getContentPane().add(Title);
         //</editor-fold>
 
+        //<editor-fold desc="JTextArea Place">
         JTextArea Place = new JTextArea();
         Place.setBounds(94, 83, 196, 16);
         frame.getContentPane().add(Place);
+        //</editor-fold>
 
+        //<editor-fold desc="Choice startDateHours">
         Choice startDateHours = new Choice();
         startDateHours.setBounds(172, 117, 48, 22);
-        for (int i = 0; i < 24; i++)
-            if (i <= 9) {
-                startDateHours.add("0" + String.format("%d", i));
-            } else
-                startDateHours.add(String.format("%d", i));
-
+        addToChoiceNumbers(startDateHours,0,24);
         frame.getContentPane().add(startDateHours);
+        //</editor-fold>
 
+        //<editor-fold desc="Choice endDateHours">
         Choice endDateHours = new Choice();
         endDateHours.setBounds(172, 146, 48, 22);
+        addToChoiceNumbers(endDateHours,0,24);
+        frame.getContentPane().add(endDateHours);
+        //</editor-fold>
 
-        for (int i = 0; i < 24; i++)
-            if (i <= 9) {
-                endDateHours.add("0" + String.format("%d", i));
-            } else
-                endDateHours.add(String.format("%d", i));
-
-
+        //<editor-fold desc="Choice startDateMinutes">
         Choice startDateMinutes = new Choice();
         startDateMinutes.setBounds(242, 117, 48, 22);
-        for (int i = 0; i < 60; i++)
-            if (i <= 9) {
-                startDateMinutes.add("0" + String.format("%d", i));
-            } else
-                startDateMinutes.add(String.format("%d", i));
-//
+        addToChoiceNumbers(startDateMinutes,0,60);
         frame.getContentPane().add(startDateMinutes);
-        frame.getContentPane().add(endDateHours);
+        //</editor-fold>
 
+        //<editor-fold desc="Choice endDateMinutes">
         Choice endDateMinutes = new Choice();
         endDateMinutes.setBounds(242, 146, 48, 22);
-        for (int i = 0; i < 60; i++)
-            if (i <= 9) {
-                endDateMinutes.add("0" + String.format("%d", i));
-            } else
-                endDateMinutes.add(String.format("%d", i));
-
-//
+        addToChoiceNumbers(endDateMinutes,0,60);
         frame.getContentPane().add(endDateMinutes);
+        //</editor-fold>
 
+        /**
+         * Action listnery
+         */
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 EventBuilder builder = new EventBuilder();
                 builder.setId("");
                 builder.setTitle(Title.getText());
                 builder.setDescription(Place.getText());
-                //builder.setStartDate(dService.StringToTimestampWithTime(scanner.nextLine()));
-                //builder.setEndDate(dService.StringToTimestampWithTime(scanner.nextLine()));
-//				System.out.println(startDateHours.getSelectedItem());
-//				System.out.println(startDateMinutes.getSelectedItem());
-//				System.out.println(endDateHours.getSelectedItem());
-//				System.out.println(endDateMinutes.getSelectedItem());
                 String time = startDateHours.getSelectedItem() + ":" + startDateMinutes.getSelectedItem() + ":00";
                 builder.setStartDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
                 time = endDateHours.getSelectedItem() + ":" + endDateMinutes.getSelectedItem() + ":00";
@@ -212,40 +195,25 @@ public class Events {
                     System.err.println(ex.toString());
                     JOptionPane.showMessageDialog(null,ex.getMessage(),"Wystapil blad przy tworzeniu eventu",JOptionPane.ERROR_MESSAGE);
                 }
-//                dayView.showEvents();
-//                frame.dispose();
-
-
 
             }
         });
-
     }
 
-//    public void showEvents() {
-//        System.out.println("setRowcount");
-//        DefaultTableModel model = this.model;
-//        System.out.println("setRowcount");
-//        model.setRowCount(0);
-//        System.out.println("setRowcount");
-////		String SDay = Integer.toString(DayView.day);
-////		if (DayView.day>=1 && DayView.day<=9) SDay = "0"+SDay;
-////		String SMonth = Integer.toString(DayView.month);
-////		if (DayView.month>=1 && DayView.month<=9) SMonth = "0"+SMonth;
-////		String query = SDay+"/"+SMonth+"/"+DayView.year;
-////		System.out.println(query);
-//////		dService.GetAllEventsForDate(Timestamp.valueOf(query));
-//////		System.out.println(dService.toString());
-//
-//        for (Event event : dService.GetAllEventsForDate(date)) {
-//            String data0 = String.valueOf(event.getId());
-//            String data1 = new SimpleDateFormat("dd-MM-yyyy").format(event.getStartDate());
-//            String data2 = new SimpleDateFormat("HH:mm").format(event.getStartDate());
-//            String data3 = new SimpleDateFormat("HH:mm").format(event.getEndDate());
-//            String data4 = event.getTitle();
-//            String data5 = event.getPlace();
-//            Object[] row = {data0, data1, data2, data3, data4, data5};
-//            model.addRow(row);
-//        }
-//    }
+    /**
+     * Dodaje pokolei liczby do choice w formacie %dd
+     * Zakres od 00-99
+     * @param where
+     * @param start od jakiego numeru ma tworzyc
+     * @param end do jakiego numeru ma tworzyc
+     */
+    void addToChoiceNumbers(Choice where, int start, int end)
+    {
+        if(end>100) end=99;
+        for (int i = start; i < end; i++)
+            if (i <= 9) {
+                where.add("0" + String.format("%d", i));
+            } else
+                where.add(String.format("%d", i));
+    }
 }
