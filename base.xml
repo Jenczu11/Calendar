@@ -3,7 +3,7 @@
  <object class="java.util.ArrayList">
   <void method="add">
    <object class="data.Event">
-    <void property="description">
+    <void property="place">
      <string>Default Description</string>
     </void>
     <void property="endDate">
@@ -23,7 +23,7 @@
   </void>
   <void method="add">
    <object class="data.Event">
-    <void property="description">
+    <void property="place">
      <string>Default Description</string>
     </void>
     <void property="endDate">
@@ -46,7 +46,7 @@
   </void>
   <void method="add">
    <object class="data.Event">
-    <void property="description">
+    <void property="place">
      <string>Default Description</string>
     </void>
     <void property="endDate">

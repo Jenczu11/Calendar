@@ -63,7 +63,7 @@ public class SQLHandler implements IOHandler{
                     "(?,?,?,?,?,?)");
             insert.setInt(1,event.getId());
             insert.setString(2,event.getTitle());
-            insert.setString(3,event.getDescription());
+            insert.setString(3,event.getPlace());
             insert.setString(4,event.getStartDate().toString());
             insert.setString(5,event.getEndDate().toString());
             insert.setBoolean(6,event.isAlarm());

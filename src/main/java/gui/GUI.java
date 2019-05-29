@@ -4,11 +4,14 @@ import com.toedter.calendar.JCalendar;
 import data.Event;
 import service.DataService;
 import service.SQLHandler;
+import service.XMLHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -72,6 +75,97 @@ public class GUI {
 		frame.getContentPane().add(calendar, BorderLayout.CENTER);
 
 		        calendar.getDayChooser().setAlwaysFireDayProperty(true);
+		        
+		        JMenuBar menuBar = new JMenuBar();
+		        frame.setJMenuBar(menuBar);
+		        
+		        JMenu mnFile = new JMenu("File");
+		        menuBar.add(mnFile);
+		        
+		        JMenu mnXml = new JMenu("XML");
+		        mnFile.add(mnXml);
+		        
+		        JMenuItem mntmSaveToXml = new JMenuItem("Save to XML");
+		        mntmSaveToXml.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+						try {
+							dataService.saveRepository(new XMLHandler("XMLtest.xml"));
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+						System.out.println("Zapisano do XML");
+		        	}
+		        });
+
+		        
+		        mnXml.add(mntmSaveToXml);
+		        
+		        JMenuItem mntmLoadFromXml = new JMenuItem("Load from XML");
+		        mntmLoadFromXml.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+						try {
+							dataService.loadRepository(new XMLHandler("XMLtest.xml"));
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+						System.out.println("Zaladowane z XML");
+		        	}
+		        });
+		        mnXml.add(mntmLoadFromXml);
+
+		        JMenu mnSql = new JMenu("SQL");
+		        mnFile.add(mnSql);
+		        
+		        JMenuItem mntmSaveToSql = new JMenuItem("Save to SQL");
+		        mntmSaveToSql.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+						try {
+							dataService.saveRepository(new SQLHandler());
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+						System.out.println("Zapisano do SQL");
+		        	}
+		        });
+		        mnSql.add(mntmSaveToSql);
+
+		        
+		        JMenuItem mntmLoadFromSql = new JMenuItem("Load from SQL");
+		        mntmLoadFromSql.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+						try {
+							dataService.loadRepository(new SQLHandler());
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+						System.out.println("Zaladowano z SQL");
+		        	}
+		        });
+		        mnSql.add(mntmLoadFromSql);
+		        
+		        JMenu mnAboutus = new JMenu("About Us");
+		        mnAboutus.addMouseListener(new MouseAdapter() {
+		        	@Override
+		        	public void mouseClicked(MouseEvent e) {
+		        		AboutUs aboutUs = new AboutUs();
+		        		aboutUs.main(null);
+		        	}
+		        });
+		        menuBar.add(mnAboutus);
+		        
+		        JMenu mnSettings = new JMenu("Settings");
+		        mnSettings.addActionListener(new ActionListener() {
+		        	public void actionPerformed(ActionEvent e) {
+		        	}
+		        });
+		        menuBar.add(mnSettings);
+		mntmLoadFromSql.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+
+			}
+		});
 		        calendar.getDayChooser().addPropertyChangeListener("day",new PropertyChangeListener() {
 		                    public void propertyChange(PropertyChangeEvent evt) {
 								int day = (int) evt.getNewValue();

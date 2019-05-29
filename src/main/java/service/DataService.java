@@ -3,6 +3,7 @@ package service;
 import data.DataRepository;
 import data.Event;
 import data.EventBuilder;
+import exceptions.dataException;
 import exceptions.idException;
 
 import java.sql.Timestamp;
@@ -29,32 +30,32 @@ public class DataService {
      * Dodaje wydarzenie o podanych parametrach do repozytorium
      * @param id Id wydarzenia
      * @param title Tytul wydarzenia
-     * @param description Opis wydarzenia
+     * @param place Miejsce wydarzenia
      * @param startDate Data rozpoczecia wydarzenia
      * @param endDate Data zakonczenia wydarzenia
      * @throws Exception Jezeli juz istnieje zdarzenie o podanym id,
      *  lub jezli data zakonczenia zdarzenia jest wczesniejsza od daty rozpoczecia zdarzenia
      */
-    void addEvent(String id, String title, String description, Timestamp startDate, Timestamp endDate) throws Exception {
+    void addEvent(String id, String title, String place, Timestamp startDate, Timestamp endDate) throws idException,dataException {
         //TODO: Autonumeracja elementow czyli bez id
         for (Event event : repository.getAllEvents()) {
             if(event.getId()==Integer.parseInt(id))
                 throw new idException("Zdarzenie o takim id juz istnieje");
             if(startDate.getTime()>endDate.getTime())
-                throw new Exception("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
+                throw new dataException("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
         }
-        //repository.addEvent(new Event(Integer.parseInt(id),title,description,startDate,endDate));
-        repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setDescription(description).setStartDate(startDate).setEndDate(endDate).createEvent());
+        //repository.addEvent(new Event(Integer.parseInt(id),title,place,startDate,endDate));
+        repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setDescription(place).setStartDate(startDate).setEndDate(endDate).createEvent());
         refreshID();
     }
-    public void addEvent(Event e) throws Exception
+    public void addEvent(Event e) throws idException,dataException
     {
         for(Event event: repository.getAllEvents())
         {
             if(event.getId()==e.getId())
                 throw new idException("Zdarzenie o takim id juz istnieje");
             if(e.getStartDate().getTime()>e.getEndDate().getTime())
-                throw new Exception("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
+                throw new dataException("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
         }
         repository.addEvent(e);
         refreshID();
@@ -64,17 +65,17 @@ public class DataService {
      * Edytuje wydarzenie o podanych parametrach
      * @param id Id wydarzenia
      * @param title Tytul wydarzenia
-     * @param description Opis wydarzenia
+     * @param place Miejsce wydarzenia
      * @param startDate Data rozpoczecia wydarzenia
      * @param endDate Data zakonczenia wydarzenia
      * @throws Exception Kiedy wydarzenie o podanym id nie istnieje
      */
-    public void editEvent(String id, String title, String description, Timestamp startDate, Timestamp endDate) throws Exception {
+    public void editEvent(String id, String title, String place, Timestamp startDate, Timestamp endDate) throws Exception {
         int idInt=Integer.parseInt(id);
         ArrayList<Event> events= repository.getAllEvents();
         for (int i=0;i<events.size();i++) {
             if(events.get(i).getId()==idInt) {
-                repository.editEvent(i, new EventBuilder().setId(idInt).setTitle(title).setDescription(description).setStartDate(startDate).setEndDate(endDate).createEvent());
+                repository.editEvent(i, new EventBuilder().setId(idInt).setTitle(title).setDescription(place).setStartDate(startDate).setEndDate(endDate).createEvent());
                 refreshID();
                 return;
             }
@@ -86,7 +87,7 @@ public class DataService {
      * @param id Id wydarzenia
      * @throws Exception Kiedy nie istnieje wydarzenie o podanym id
      */
-    void removeEvent(String id) throws Exception {
+    void removeEvent(String id) throws idException {
         int idInt = Integer.parseInt(id);
         for (Event event : repository.getAllEvents()) {
             if (event.getId() == idInt) {
@@ -102,7 +103,7 @@ public class DataService {
          * @param id Id wydarzenia
          * @throws Exception Kiedy nie istnieje wydarzenie o podanym id
          */
-        void removeEvent(int id) throws Exception {
+        void removeEvent(int id) throws idException {
             for (Event event : repository.getAllEvents()) {
                 if (event.getId() == id) {
                     repository.removeEvent(event);

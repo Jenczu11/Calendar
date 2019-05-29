@@ -1,21 +1,13 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import data.Event;
-import java.awt.Toolkit;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import javax.swing.SpringLayout;
-import javax.swing.Timer;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextField;
 
 /**
  *
@@ -93,7 +85,7 @@ public class CloseEvent extends JDialog {
         sl_contentPanel.putConstraint(SpringLayout.NORTH, desciptionField, 5, SpringLayout.SOUTH, titleField);
         sl_contentPanel.putConstraint(SpringLayout.NORTH, lblDescription, 3, SpringLayout.NORTH, desciptionField);
         sl_contentPanel.putConstraint(SpringLayout.EAST, desciptionField, 0, SpringLayout.EAST, titleField);
-        desciptionField.setText(event.getDescription());
+        desciptionField.setText(event.getPlace());
         contentPanel.add(desciptionField);
         desciptionField.setColumns(10);
 

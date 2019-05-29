@@ -16,9 +16,9 @@ public class Event {
      */
     private String title;
     /**
-     * Opis wydarzenia
+     * Miejsce wydarzenia
      */
-    private String description;
+    private String place;
     /**
      * data rozpoczecia wydarzenia
      */
@@ -39,10 +39,10 @@ public class Event {
     public Event() {
     }
 
-    public Event(int id, String title, String description, Timestamp startDate, Timestamp endDate) {
+    public Event(int id, String title, String place, Timestamp startDate, Timestamp endDate) {
         this.id = id;
         this.title = title;
-        this.description = description;
+        this.place = place;
         this.startDate = startDate;
         this.endDate = endDate;
         alarm = false;
@@ -67,13 +67,13 @@ public class Event {
     public void setTitle(String title) {
         this.title = title;
     }
-    @XmlAttribute(name="description")
-    public String getDescription() {
-        return description;
+    @XmlAttribute(name="place")
+    public String getPlace() {
+        return place;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPlace(String place) {
+        this.place = place;
     }
     @XmlTransient
     public Timestamp getStartDate() {
@@ -112,7 +112,7 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
+                ", place='" + place + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", alarm=" + alarm +

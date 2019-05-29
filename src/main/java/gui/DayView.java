@@ -62,12 +62,12 @@ public class DayView {
 		initialize();
 		showEvents();
 		//Aktualnie timer mozna wylaczyc
-		timer = new Timer(TIMER_DELAY, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showEvents();
-			}
-		});
-		timer.start();
+//		timer = new Timer(TIMER_DELAY, new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				showEvents();
+//			}
+//		});
+//		timer.start();
 	}
 
 	/**
@@ -75,26 +75,33 @@ public class DayView {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+//		frame.addWindowListener(new WindowAdapter() {
+//			@Override
+//			public void windowClosed(WindowEvent e) {
+//				System.out.println("Zamkniete okno");
+//			}
+//		});
 		frame.setBounds(100, 100, 563, 417);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		SpringLayout springLayout = new SpringLayout();
 		frame.getContentPane().setLayout(springLayout);
 		
 		JPanel panel_1 = new JPanel();
+		springLayout.putConstraint(SpringLayout.NORTH, panel_1, 328, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, panel_1, 0, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, panel_1, -9, SpringLayout.SOUTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, panel_1, 547, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().add(panel_1);
 		
 		JButton btnAddEvent = new JButton("Dodaj Wydarzenie");
-		btnAddEvent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Events events = new Events(date);
-				Events.main(null);
-			}
-		});
+
 		panel_1.add(btnAddEvent);
 		
 		table = new JTable();
+		springLayout.putConstraint(SpringLayout.NORTH, table, 40, SpringLayout.NORTH, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, table, 10, SpringLayout.WEST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, table, -6, SpringLayout.NORTH, panel_1);
+		springLayout.putConstraint(SpringLayout.EAST, table, -8, SpringLayout.EAST, frame.getContentPane());
 		table.setModel(new DefaultTableModel(
 				new Object[][] {
 				},
@@ -102,22 +109,31 @@ public class DayView {
 						"ID", "Data", "Godzina roz.", "Godzina zak.", "Wydarzenie", "Opis"
 				}
 				));
-		table.getColumnModel().getColumn(0).setPreferredWidth(45);
-		table.getColumnModel().getColumn(1).setPreferredWidth(70);
-		table.getColumnModel().getColumn(2).setPreferredWidth(82);
+		table.getColumnModel().getColumn(0).setPreferredWidth(10);
+		table.getColumnModel().getColumn(1).setPreferredWidth(45);
+		table.getColumnModel().getColumn(2).setPreferredWidth(45);
 		table.getColumnModel().getColumn(3).setPreferredWidth(82);
 		table.getColumnModel().getColumn(4).setPreferredWidth(77);
 		table.getColumnModel().getColumn(5).setPreferredWidth(120);
 		table.setFillsViewportHeight(true);
-		springLayout.putConstraint(SpringLayout.NORTH, table, 10, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, table, -48, SpringLayout.SOUTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.NORTH, panel_1, 6, SpringLayout.SOUTH, table);
-		springLayout.putConstraint(SpringLayout.SOUTH, panel_1, 39, SpringLayout.SOUTH, table);
-		springLayout.putConstraint(SpringLayout.WEST, table, 10, SpringLayout.WEST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, table, 537, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().add(table);
+		
+		JLabel lblMain = new JLabel("Wydarzenia z dnia: " + date.toString().substring(0, 10));
+		springLayout.putConstraint(SpringLayout.NORTH, lblMain, 0, SpringLayout.NORTH, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, lblMain, 0, SpringLayout.WEST, table);
+		springLayout.putConstraint(SpringLayout.SOUTH, lblMain, -6, SpringLayout.NORTH, table);
+		springLayout.putConstraint(SpringLayout.EAST, lblMain, 472, SpringLayout.WEST, frame.getContentPane());
+		lblMain.setFont(new Font("Trebuchet MS", Font.PLAIN, 33));
+		frame.getContentPane().add(lblMain);
+
+		btnAddEvent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Events events = new Events(date,(DefaultTableModel) table.getModel(),DayView.this);
+				Events.main(null);
+			}
+		});
 	}
-	public static void showEvents() {
+	public void showEvents() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 //		String SDay = Integer.toString(DayView.day);
@@ -134,10 +150,9 @@ public class DayView {
 			String data2 = new SimpleDateFormat("HH:mm").format(event.getStartDate());
 			String data3 = new SimpleDateFormat("HH:mm").format(event.getEndDate());
 			String data4 = event.getTitle();
-			String data5 = event.getDescription();
+			String data5 = event.getPlace();
 			Object[] row = {data0, data1, data2, data3, data4, data5 };
 			model.addRow(row);
 		}
 	}
-
 }

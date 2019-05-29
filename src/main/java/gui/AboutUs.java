@@ -1,17 +1,9 @@
 package gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+import java.awt.event.ActionListener;
 
 public class AboutUs {
 
@@ -46,7 +38,7 @@ public class AboutUs {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 303, 149);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JButton bJencz = new JButton("Bart\u0142omiej Jencz");
 		bJencz.addActionListener(new ActionListener() {

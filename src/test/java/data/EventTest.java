@@ -5,10 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-
 import java.sql.Timestamp;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EventTest {
 
@@ -27,7 +26,7 @@ class EventTest {
     })
     void checkOtherOptions(int id, String title, String description, String expectedDescription){
         Event event = new EventBuilder().setId(id).setTitle(title).setDescription(description).setStartDate(Timestamp.valueOf("2019-05-15 18:48:00.000")).setEndDate(Timestamp.valueOf("2019-05-16 18:48:00.000")).createEvent();
-        assertEquals(event.getDescription(),expectedDescription);
+        assertEquals(event.getPlace(),expectedDescription);
 
     }
 
