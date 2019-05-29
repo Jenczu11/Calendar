@@ -12,9 +12,9 @@ import java.lang.reflect.Field;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SQLHandlerTest {
+public class SQLHandlerTest {
     @BeforeEach
-    void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Field instance = DataService.class.getDeclaredField("ourInstance");
         instance.setAccessible(true);
         instance.set(null, null);
@@ -23,16 +23,16 @@ class SQLHandlerTest {
     @CsvSource({
             "'', '', '','','','',''",
     })
-    void saveData(String id, String title, String description, String startDate, String endDate) {
+    public void saveData(String id, String title, String description, String startDate, String endDate) {
         DataService dataService = DataService.getInstance();
         int expected;
-        for(expected=0; expected<10;expected++) {
+        for (expected = 0; expected < 10; expected++) {
             EventBuilder builder = new EventBuilder();
             try {
                 dataService.refreshLastEventID();
                 builder.setId(id);
                 builder.setTitle(title);
-                builder.setDescription(description);
+                builder.setPlace(description);
                 builder.setStartDate(dataService.StringToTimestamp(startDate));
                 builder.setEndDate(dataService.StringToTimestamp(endDate));
                 dataService.addEvent(builder.createEvent());
@@ -40,22 +40,34 @@ class SQLHandlerTest {
                 e.printStackTrace();
             }
         }
-        assertEquals(expected,dataService.getRepositoryEvents().size());
-        SQLHandler sqlHandler = new SQLHandler();
+        assertEquals(expected, dataService.getRepositoryEvents().size());
+        SQLHandler sqlHandler = null;
+        try {
+            sqlHandler = new SQLHandler();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SQLHandler.setDbUrl("SQLTesting");
-        assertDoesNotThrow(() -> dataService.saveRepository(sqlHandler));
+        SQLHandler finalSqlHandler = sqlHandler;
+        assertDoesNotThrow(() -> dataService.saveRepository(finalSqlHandler));
     }
 
     @Test
     @DisplayName("Should load new instance of DataService and load database from SQL dataBase, expected 10 events if run with previous Test")
-    void loadData() {
+    public void loadData() {
         DataService dataService = DataService.getInstance();
         int expected=10;
-        SQLHandler sqlHandler = new SQLHandler();
+        SQLHandler sqlHandler = null;
+        try {
+            sqlHandler = new SQLHandler();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SQLHandler.setDbUrl("SQLTesting");
-        assertDoesNotThrow(()->dataService.loadRepository(sqlHandler));
+        SQLHandler finalSqlHandler = sqlHandler;
+        assertDoesNotThrow(()->dataService.loadRepository(finalSqlHandler));
         assertEquals(expected,dataService.getRepositoryEvents().size());
-        System.out.println(dataService.toString());
+//        System.out.println(dataService.toString());
 
     }
 

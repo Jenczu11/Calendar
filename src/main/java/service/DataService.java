@@ -45,7 +45,7 @@ public class DataService {
                 throw new dataException("Data zakonczenia zdarzenia nie moze byc wczesniejsza od rozpoczecia");
         }
         //repository.addEvent(new Event(Integer.parseInt(id),title,place,startDate,endDate));
-        repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setDescription(place).setStartDate(startDate).setEndDate(endDate).createEvent());
+        repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setPlace(place).setStartDate(startDate).setEndDate(endDate).createEvent());
         refreshID();
     }
     public void addEvent(Event e) throws idException,dataException
@@ -75,7 +75,7 @@ public class DataService {
         ArrayList<Event> events= repository.getAllEvents();
         for (int i=0;i<events.size();i++) {
             if(events.get(i).getId()==idInt) {
-                repository.editEvent(i, new EventBuilder().setId(idInt).setTitle(title).setDescription(place).setStartDate(startDate).setEndDate(endDate).createEvent());
+                repository.editEvent(i, new EventBuilder().setId(idInt).setTitle(title).setPlace(place).setStartDate(startDate).setEndDate(endDate).createEvent());
                 refreshID();
                 return;
             }

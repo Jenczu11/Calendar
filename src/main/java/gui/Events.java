@@ -180,7 +180,7 @@ public class Events {
                 EventBuilder builder = new EventBuilder();
                 builder.setId("");
                 builder.setTitle(Title.getText());
-                builder.setDescription(Place.getText());
+                builder.setPlace(Place.getText());
                 String time = startDateHours.getSelectedItem() + ":" + startDateMinutes.getSelectedItem() + ":00";
                 builder.setStartDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
                 time = endDateHours.getSelectedItem() + ":" + endDateMinutes.getSelectedItem() + ":00";

@@ -1,13 +1,10 @@
 //TODO: Nalezy zrobic wszelkie zabezpieczenia przed wpisaniem null, do eventu tak samo jak i glupich danych
 
-import data.DataRepository;
 import data.EventBuilder;
 import service.DataService;
 import service.SQLHandler;
 import service.XMLHandler;
 
-import javax.xml.crypto.Data;
-import java.sql.Timestamp;
 import java.util.Scanner;
 
 class program {
@@ -54,7 +51,7 @@ class program {
                     builder.setTitle(scanner.nextLine());
                     System.out.println("Podaj opis wydarzenia");
 //                        String description=scanner.nextLine();
-                    builder.setDescription(scanner.nextLine());
+                    builder.setPlace(scanner.nextLine());
                     System.out.println("Podaj date poczatkowa w formacie dd/MM/yyyy");
 //                        String startDateString = scanner.nextLine();
                     builder.setStartDate(dataService.StringToTimestampWithTime(scanner.nextLine()));
@@ -86,8 +83,8 @@ class program {
 //
 //                        }
                     XMLHandler xmlHandler = new XMLHandler("");
-                    SQLHandler sqlHandler1 = new SQLHandler();
                     try {
+                        SQLHandler sqlHandler1 = new SQLHandler();
                         dataService.saveRepository(sqlHandler1);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -102,8 +99,8 @@ class program {
 //                            e.printStackTrace();
 //                        }
                     XMLHandler xmlHandlerv21 = new XMLHandler("");
-                    SQLHandler sqlHandler = new SQLHandler();
                     try {
+                        SQLHandler sqlHandler = new SQLHandler();
                         dataService.loadRepository(sqlHandler);
                     } catch (Exception e) {
                         e.printStackTrace();

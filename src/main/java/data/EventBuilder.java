@@ -2,8 +2,6 @@ package data;
 
 import java.sql.Timestamp;
 
-import data.DataRepository;
-
 public class EventBuilder {
     //TODO: zmienić to po testach na private
     private int id;
@@ -42,10 +40,10 @@ public class EventBuilder {
         return this;
     }
 
-    public EventBuilder setDescription(String description) {
-        if(description.isEmpty())
-            description="Default Description";
-        this.description = description;
+    public EventBuilder setPlace(String place) {
+        if(place.isEmpty())
+            place ="Default Place";
+        this.description = place;
         return this;
     }
 

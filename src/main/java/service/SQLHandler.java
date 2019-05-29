@@ -13,6 +13,29 @@ public class SQLHandler implements IOHandler{
     private static String DB_URL = "jdbc:sqlite:test.db";
     private Connection conn;
 
+    //TODO: on object creation check if there is a database if not
+    // create db and table inside
+    public SQLHandler() throws Exception
+    {
+        Class.forName(SQLHandler.DRIVER);
+        conn = DriverManager.getConnection(DB_URL);
+
+//        String queryString="create database [IF NOT EXISTS] Eventsdb ";
+        // Komenda SQLlite tworzy baze danych jezeli nie istnieje razem z plikiem.
+        String queryString="create table IF NOT EXISTS Events " +
+                "( id int constraint Events_pk primary key," +
+                " title TEXT, " +
+                "description TEXT, " +
+                "startDate   TEXT, " +
+                "endDate     TEXT, " +
+                "alarmed     boolean" +
+                "); " +
+                "create unique index IF NOT EXISTS Events_id_uindex on Events (id);";
+        Statement stat = conn.createStatement();
+        stat.executeUpdate(queryString);
+        conn.close();
+    }
+
     public static void setDbUrl(String dbUrl) {
         DB_URL = "jdbc:sqlite:"+dbUrl;
     }
@@ -40,12 +63,12 @@ public class SQLHandler implements IOHandler{
 //            );
             builder.setId(rs.getInt(1));
             builder.setTitle(rs.getString(2));
-            builder.setDescription(rs.getString(3));
+            builder.setPlace(rs.getString(3));
             builder.setStartDate(Timestamp.valueOf(rs.getString(4)));
             builder.setEndDate(Timestamp.valueOf(rs.getString(5)));
             dataRepository.addEvent(builder.createEvent());
         }
-        System.out.println(dataRepository.toString());
+//        System.out.println(dataRepository.toString());
         conn.close();
         return dataRepository;
     }
@@ -67,7 +90,7 @@ public class SQLHandler implements IOHandler{
             insert.setString(4,event.getStartDate().toString());
             insert.setString(5,event.getEndDate().toString());
             insert.setBoolean(6,event.isAlarm());
-            System.out.println(event.getEndDate().toString());
+//            System.out.println(event.getEndDate().toString());
             insert.executeUpdate();
         }
         conn.close();

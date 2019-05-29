@@ -13,10 +13,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class DataServiceTest {
+public class DataServiceTest {
 
     @BeforeEach
-    void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Field instance = DataService.class.getDeclaredField("ourInstance");
         instance.setAccessible(true);
         instance.set(null, null);
@@ -24,7 +24,7 @@ class DataServiceTest {
 
 
 
-    void createTestData(DataService dataService)
+    public void createTestData(DataService dataService)
     {
         try {
             dataService.addEvent("1","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
@@ -36,41 +36,41 @@ class DataServiceTest {
         }
     }
     @Test
-    void addEvent() {
+    public void addEvent() {
         DataService dataService = DataService.getInstance();
         createTestData(dataService);
         assertEquals(4,dataService.size());
-        System.out.println(dataService.toString());
+//        System.out.println(dataService.toString());
 
     }
 
     @Test
-    void editEvent() {
+    public void editEvent() {
         DataService dataService = DataService.getInstance();
         try {
             dataService.addEvent("1","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(dataService.toString());
+//        System.out.println(dataService.toString());
     }
 
     @Test
     @DisplayName("Czy poprawnie usuwa elementy")
-    void removeEvent() throws Exception {
+    public void removeEvent() throws Exception {
         DataService dataService = DataService.getInstance();
         createTestData(dataService);
         assertEquals(4,dataService.size(),"Repository size equals 3");
         dataService.removeEvent("2");
-        System.out.println(dataService.toString());
+//        System.out.println(dataService.toString());
         assertEquals(3,dataService.size());
         dataService.removeEvent(4);
-        System.out.println(dataService.toString());
+//        System.out.println(dataService.toString());
         assertEquals(2,dataService.size());
     }
     @Test
     @DisplayName("Czy rzuca wyjatkiem o nie istnejacym zdarzeniu")
-    void isThrowingExceptionForNonExistingEvent()
+    public void isThrowingExceptionForNonExistingEvent()
     {
         DataService dataService = DataService.getInstance();
         createTestData(dataService);
@@ -83,18 +83,18 @@ class DataServiceTest {
 
     @Test
     @DisplayName("Dodaj 4 eventy i zwroc liste na date 2019-05-15")
-    void getAllEventsForDate() {
+    public void getAllEventsForDate() {
         DataService dataService = DataService.getInstance();
         createTestData(dataService);
         List<Event> today = dataService.GetAllEventsForDate(Timestamp.valueOf("2019-05-15 00:00:00"));
-        System.out.println(today.toString());
+//        System.out.println(today.toString());
         assertEquals(3,today.size());
 
     }
 
     @Test
     @DisplayName("Dodaj 4 eventy i usun wszystkie do daty 2019-05-15")
-    void removeEventsToDate() {
+    public void removeEventsToDate() {
         DataService dataService = DataService.getInstance();
         createTestData(dataService);
         try {
@@ -102,7 +102,7 @@ class DataServiceTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(dataService.toString());
+//        System.out.println(dataService.toString());
         assertEquals(3,dataService.getRepository().size());
 
     }
