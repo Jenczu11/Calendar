@@ -10,19 +10,17 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class GUI {
-
+public class GUI implements KeyListener {
+    boolean onPanel=false;
     private JFrame frame;
-
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     private Timer timer;
     /**
      * Liczba milisekund, po ktorych nastepuje sprawdzanie czy jakies zdarzenia wymagaja zaalarmowania
@@ -68,6 +66,7 @@ public class GUI {
             }
         });
         timer.start();
+
     }
 
     /**
@@ -76,9 +75,11 @@ public class GUI {
     private void initialize() {
         //<editor-fold desc="Init frame with calendar panel">
         frame = new JFrame();
+        frame.addKeyListener(this);
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JCalendar calendar = new JCalendar();
+
         frame.getContentPane().add(calendar, BorderLayout.CENTER);
         calendar.getDayChooser().setAlwaysFireDayProperty(true);
         //</editor-fold>
@@ -205,20 +206,57 @@ public class GUI {
         mnSettings.add(mntmColorpicker);
         //</editor-fold>
 
+
+
+        JPanel jPanel = calendar.getDayChooser().getDayPanel();
+        Component component[] = jPanel.getComponents();
+        for (int i=0;i<component.length;i++)
+        {
+                component[i].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent mouseEvent) {
+                        super.mouseEntered(mouseEvent);
+                        onPanel=true;
+                        System.out.println("onPanel = " + onPanel);
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent mouseEvent) {
+                        super.mouseExited(mouseEvent);
+                        onPanel=false;
+                        System.out.println("onPanel = " + onPanel);
+                    }
+                });
+        }
+
+
+
         //<editor-fold desc="When day pressed open DayView">
+//        calendar.getDayChooser()
         calendar.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
                 int day = (int) evt.getNewValue();
                 int month = calendar.getMonthChooser().getMonth() + 1;
                 int year = calendar.getYearChooser().getYear();
+                if (onPanel)
+                {
                 DayView window = new DayView(day, month, year);
                 DayView.main(null);
+	               }
 //				System.out.println(calendar.getMonthChooser().getMonth()+1);
 //				System.out.println(day);
 //				System.out.println(year);
             }
         });
+//        calendar.getDayChooser().setEnabled(false);
+
+
+
+
+
+
         //</editor-fold>
+
 
     }
 
@@ -246,4 +284,21 @@ public class GUI {
         }
     }
 
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+        char c = keyEvent.getKeyChar();
+        System.out.println(c);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        char c = keyEvent.getKeyChar();
+        System.out.println(c);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+        char c = keyEvent.getKeyChar();
+        System.out.println(c);
+    }
 }
