@@ -19,6 +19,10 @@ import java.util.Date;
 
 public class GUI implements KeyListener {
     boolean onPanel=false;
+    boolean pressedEnter=false;
+    int day;
+    int month;
+    int year;
     private JFrame frame;
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     private Timer timer;
@@ -214,7 +218,7 @@ public class GUI implements KeyListener {
         {
                 component[i].addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mouseEntered(MouseEvent mouseEvent) {
+                    public void mousePressed(MouseEvent mouseEvent) {
                         super.mouseEntered(mouseEvent);
                         onPanel=true;
                         System.out.println("onPanel = " + onPanel);
@@ -227,6 +231,36 @@ public class GUI implements KeyListener {
                         System.out.println("onPanel = " + onPanel);
                     }
                 });
+                component[i].addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyReleased(KeyEvent keyEvent) {
+                        System.out.println("keyEvent = " + keyEvent);
+                        super.keyReleased(keyEvent);
+
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent keyEvent) {
+                        if(keyEvent.getKeyCode()==10) {
+                            System.out.println("keyEvent = " + keyEvent);
+                            DayView window = new DayView(day, month, year);
+                            DayView.main(null);
+                        }
+                        super.keyPressed(keyEvent);
+
+                    }
+                    @Override
+                    public void keyTyped(KeyEvent keyEvent) {
+
+                        if(keyEvent.getKeyCode()==10) {
+                            System.out.println("keyEvent = " + keyEvent);
+                            DayView window = new DayView(day, month, year);
+                            DayView.main(null);
+                        }
+                        super.keyTyped(keyEvent);
+
+                    }
+                });
         }
 
 
@@ -235,14 +269,17 @@ public class GUI implements KeyListener {
 //        calendar.getDayChooser()
         calendar.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
-                int day = (int) evt.getNewValue();
-                int month = calendar.getMonthChooser().getMonth() + 1;
-                int year = calendar.getYearChooser().getYear();
+                day = (int) evt.getNewValue();
+                month = calendar.getMonthChooser().getMonth() + 1;
+                year = calendar.getYearChooser().getYear();
+                System.out.println(pressedEnter);
                 if (onPanel)
                 {
+                    onPanel=false;
                 DayView window = new DayView(day, month, year);
                 DayView.main(null);
 	               }
+
 //				System.out.println(calendar.getMonthChooser().getMonth()+1);
 //				System.out.println(day);
 //				System.out.println(year);
