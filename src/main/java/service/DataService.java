@@ -61,6 +61,18 @@ public class DataService {
         refreshID();
     }
 
+    public void editEvent(Event e) throws Exception {
+//        int idInt=Integer.parseInt(id);
+        ArrayList<Event> events= repository.getAllEvents();
+        for (int i=0;i<events.size();i++) {
+            if(events.get(i).getId()==e.getId()) {
+                repository.editEvent(i, e);
+                refreshID();
+                return;
+            }
+        }
+        throw new Exception("Zdarzenie nie istnieje");
+    }
     /**
      * Edytuje wydarzenie o podanych parametrach
      * @param id Id wydarzenia
