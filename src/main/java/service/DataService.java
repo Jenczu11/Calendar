@@ -122,7 +122,7 @@ public class DataService {
      * @param deleteTo data w formacie dd/mm/yyyy HH: (Timestamp.valueOf(""))
      * @throws Exception
      */
-        void removeEventsToDate(Timestamp deleteTo) throws Exception{
+    public void removeEventsToDate(Timestamp deleteTo) throws Exception{
             int startSize=repository.getAllEvents().size();
             if(startSize==0) throw new Exception("Pusta baza eventow");
             DataRepository temp = new DataRepository();

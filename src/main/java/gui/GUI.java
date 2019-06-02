@@ -208,6 +208,20 @@ public class GUI implements KeyListener {
             }
         });
         mnSettings.add(mntmColorpicker);
+        
+        JMenu mnDeleteEvents = new JMenu("Delete Events");
+        mnDeleteEvents.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		Thread t = new Thread(new DeleteEvents(calendar.getMonthChooser().getMonth(), calendar.getYearChooser().getYear()));
+        		t.start();
+//                DeleteEvents de = new DeleteEvents(calendar.getMonthChooser().getMonth(), calendar.getYearChooser().getYear());
+//                de.main(null);
+        
+        	}
+        });
+       
+        menuBar.add(mnDeleteEvents);
         //</editor-fold>
 
 

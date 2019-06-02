@@ -16,10 +16,12 @@ import java.sql.Timestamp;
 
 public class Events {
 
-    private DayView dayView;
-    private DataService dService;
-    private static JFrame frame;
+    private static DayView dayView;
+    private static DataService dService;
+    public static JFrame frame;
     private static Timestamp date;
+    public static Button button;
+    public static Label label;
     DefaultTableModel model = null;
 
     /**
@@ -30,7 +32,7 @@ public class Events {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-//					Events window = new Events();
+					Events window = new Events();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -43,7 +45,7 @@ public class Events {
      * Create the application.
      */
     @Deprecated
-    private Events() {
+    public Events() {
         dService = DataService.getInstance();
         initialize();
     }
@@ -63,7 +65,7 @@ public class Events {
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    public static void initialize() {
 
         //<editor-fold desc="JFrame init+setup">
         frame = new JFrame();
@@ -114,7 +116,8 @@ public class Events {
         //</editor-fold>
 
         //<editor-fold desc="Label wydarzenie">
-        Label label = new Label("Nowe wydarzenie:");
+
+        label = new Label("Nowe wydarzenie:");
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Dialog", Font.BOLD, 17));
         label.setBounds(65, 10, 155, 24);
@@ -122,7 +125,7 @@ public class Events {
         //</editor-fold>
 
         //<editor-fold desc="Button Dodaj">
-        Button button = new Button("DODAJ");
+        button = new Button("DODAJ");
 
         button.setFont(new Font("Dialog", Font.BOLD, 14));
         button.setActionCommand("DODAJ");
@@ -207,7 +210,7 @@ public class Events {
      * @param start od jakiego numeru ma tworzyc
      * @param end do jakiego numeru ma tworzyc
      */
-    void addToChoiceNumbers(Choice where, int start, int end)
+    static void addToChoiceNumbers(Choice where, int start, int end)
     {
         if(end>100) end=99;
         for (int i = start; i < end; i++)
