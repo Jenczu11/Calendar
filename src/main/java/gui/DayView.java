@@ -6,10 +6,7 @@ import service.DataService;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -136,6 +133,22 @@ public class DayView {
 		lblMain.setFont(new Font("Trebuchet MS", Font.PLAIN, 33));
 		frame.getContentPane().add(lblMain);
 		//</editor-fold>
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent mouseEvent) {
+				super.mousePressed(mouseEvent);
+				JTable target=(JTable)mouseEvent.getSource();
+				int row = target.getSelectedRow();
+				int column = target.getSelectedColumn();
+				System.out.println("row = " + row);
+				System.out.println("column = " + column);
+				System.out.println(target.getValueAt(row,0));
+//				EditEvent editEvent = new EditEvent(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
+//				editEvent.main(null);
+				EditEventsV2 editEventsV2 = new EditEventsV2(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
+				editEventsV2.main(null);
+			}
+		});
 
 		btnAddEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

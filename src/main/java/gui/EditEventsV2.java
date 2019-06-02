@@ -13,8 +13,11 @@ import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 
 //import net.miginfocom.swing.MigLayout;
-
-public class Events {
+/*
+Ta klasa powinna byc dziedziczna ale to kiedys sie popraw
+Ta klasa przekazuje sobie jeszcze odpowiednie parametry
+ */
+public class EditEventsV2 {
 
     private static DayView dayView;
     private static DataService dService;
@@ -22,6 +25,7 @@ public class Events {
     private static Timestamp date;
     public static Button button;
     public static Label label;
+    private static int targetID;
     DefaultTableModel model = null;
 
     /**
@@ -32,7 +36,7 @@ public class Events {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-					Events window = new Events();
+                    Events window = new Events();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -45,19 +49,20 @@ public class Events {
      * Create the application.
      */
     @Deprecated
-    public Events() {
+    public EditEventsV2() {
         dService = DataService.getInstance();
         initialize();
     }
 
 
-    public Events(Timestamp date, DefaultTableModel model, DayView dw) {
+    public EditEventsV2(int targetID, Timestamp date, DefaultTableModel model, DayView dw) {
 
-        Events.date = date;
+        EditEventsV2.date = date;
+        this.targetID=targetID;
         this.model = model;
         this.dayView=dw;
-
         dService = DataService.getInstance();
+
 
         initialize();
 //		this.frame.setVisible(true);
@@ -118,15 +123,15 @@ public class Events {
 
         //<editor-fold desc="Label wydarzenie">
 
-        label = new Label("Nowe wydarzenie:");
+        label = new Label("Edytuj wydarzenie:");
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Dialog", Font.BOLD, 17));
         label.setBounds(65, 10, 155, 24);
         frame.getContentPane().add(label);
         //</editor-fold>
 
-        //<editor-fold desc="Button Dodaj">
-        button = new Button("DODAJ");
+        //<editor-fold desc="Button edytuj">
+        button = new Button("Edytuj");
 
         button.setFont(new Font("Dialog", Font.BOLD, 14));
         button.setActionCommand("DODAJ");
@@ -139,12 +144,14 @@ public class Events {
         //<editor-fold desc="JTextArea Tytul">
         JTextArea Title = new JTextArea();
         Title.setBounds(94, 53, 196, 16);
+        Title.append(dService.getRepository().getEvent(targetID-1).getTitle());
         frame.getContentPane().add(Title);
         //</editor-fold>
 
         //<editor-fold desc="JTextArea Place">
         JTextArea Place = new JTextArea();
         Place.setBounds(94, 83, 196, 16);
+        Place.append(dService.getRepository().getEvent(targetID-1).getPlace());
         frame.getContentPane().add(Place);
         //</editor-fold>
 
@@ -152,6 +159,7 @@ public class Events {
         Choice startDateHours = new Choice();
         startDateHours.setBounds(172, 117, 48, 22);
         addToChoiceNumbers(startDateHours,0,24);
+        startDateHours.select(dService.getRepository().getEvent(targetID-1).getStartDate().getHours());
         frame.getContentPane().add(startDateHours);
         //</editor-fold>
 
@@ -159,6 +167,7 @@ public class Events {
         Choice endDateHours = new Choice();
         endDateHours.setBounds(172, 146, 48, 22);
         addToChoiceNumbers(endDateHours,0,24);
+        endDateHours.select(dService.getRepository().getEvent(targetID-1).getEndDate().getHours());
         frame.getContentPane().add(endDateHours);
         //</editor-fold>
 
@@ -166,6 +175,7 @@ public class Events {
         Choice startDateMinutes = new Choice();
         startDateMinutes.setBounds(242, 117, 48, 22);
         addToChoiceNumbers(startDateMinutes,0,60);
+        startDateMinutes.select(dService.getRepository().getEvent(targetID-1).getStartDate().getMinutes());
         frame.getContentPane().add(startDateMinutes);
         //</editor-fold>
 
@@ -173,6 +183,7 @@ public class Events {
         Choice endDateMinutes = new Choice();
         endDateMinutes.setBounds(242, 146, 48, 22);
         addToChoiceNumbers(endDateMinutes,0,60);
+        endDateMinutes.select(dService.getRepository().getEvent(targetID-1).getEndDate().getMinutes());
         frame.getContentPane().add(endDateMinutes);
         //</editor-fold>
 
@@ -182,7 +193,7 @@ public class Events {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 EventBuilder builder = new EventBuilder();
-                builder.setId("");
+                builder.setId(targetID);
                 builder.setTitle(Title.getText());
                 builder.setPlace(Place.getText());
                 String time = startDateHours.getSelectedItem() + ":" + startDateMinutes.getSelectedItem() + ":00";
@@ -190,14 +201,16 @@ public class Events {
                 time = endDateHours.getSelectedItem() + ":" + endDateMinutes.getSelectedItem() + ":00";
                 builder.setEndDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
                 try {
-                    dService.addEvent(builder.createEvent());
+                    dService.editEvent(builder.createEvent());
                     dayView.showEvents();
                     frame.dispose();
-                    System.out.println("Dodano wydarzenie: "+builder.toString());
+                    System.out.println("Edytowano wydarzenie: "+builder.toString());
                 } catch (idException | dataException ex) {
 
                     System.err.println(ex.toString());
                     JOptionPane.showMessageDialog(null,ex.getMessage(),"Wystapil blad przy tworzeniu eventu",JOptionPane.ERROR_MESSAGE);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
 
             }
