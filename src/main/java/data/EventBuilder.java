@@ -9,10 +9,7 @@ public class EventBuilder {
     private String description;
     private Timestamp startDate;
     private Timestamp endDate;
-
-
-
-    private Timestamp alarm;
+    private boolean alarm;
 
 
     public EventBuilder setId(int id) {
@@ -58,7 +55,7 @@ public class EventBuilder {
         this.endDate = endDate;
         return this;
     }
-    public EventBuilder setAlarm(Timestamp alarm) {
+    public EventBuilder setAlarm(boolean alarm) {
         this.alarm = alarm;
         return this;
     }
