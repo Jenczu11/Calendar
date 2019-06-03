@@ -4,6 +4,7 @@ import com.toedter.calendar.JCalendar;
 import data.Event;
 import service.DataService;
 import service.SQLHandler;
+import service.Utils;
 import service.XMLHandler;
 
 import javax.swing.*;
@@ -109,7 +110,7 @@ public class GUI {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                System.out.println("Zapisano do XML");
+                Utils.pInfo("Zapisano do XML");
             }
         });
         mnXml.add(mntmSaveToXml);
@@ -124,7 +125,7 @@ public class GUI {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                System.out.println("Zaladowane z XML");
+                Utils.pInfo("Zaladowane z XML");
             }
         });
         mnXml.add(mntmLoadFromXml);
@@ -139,7 +140,7 @@ public class GUI {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                System.out.println("Zapisano do SQL");
+                Utils.pInfo("Zapisano do SQL");
             }
         });
         mnSql.add(mntmSaveToSql);
@@ -154,7 +155,7 @@ public class GUI {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                System.out.println("Zaladowano z SQL");
+                Utils.pInfo("Zaladowano z SQL");
             }
         });
         mnSql.add(mntmLoadFromSql);

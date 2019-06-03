@@ -3,6 +3,7 @@ package gui;
 import com.toedter.calendar.JDayChooser;
 import service.DataService;
 import service.TimestampUtil;
+import service.Utils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -24,6 +25,7 @@ public class DeleteEvents extends JFrame implements Runnable {
 		// TODO Auto-generated method stub
 //		DeleteEvents frame = new DeleteEvents(month,year);
 //		frame.setVisible(true);
+		Utils.pInfo("Otwarto okno DeleteEvents");
 		this.setVisible(true);
 	}
 //	public static void main(String[] args) {
@@ -67,17 +69,22 @@ public class DeleteEvents extends JFrame implements Runnable {
 		btnUsunWydarzenia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				dService.removeEventsToDate()
-				System.out.println(dayChooser.getDay());
+//			Utils.pDebug(String.valueOf(dayChooser.getDay()));
 
 				try {
 					// Plus 1 bo Jcalendar numeruje od zera
 					dService.removeEventsToDate(TimestampUtil.intsToTimestamp(dayChooser.getDay(),month+1,year));
-					System.out.println(TimestampUtil.intsToTimestamp(dayChooser.getDay(),month+1,year));
+//					Utils.pDebug(TimestampUtil.intsToTimestamp(dayChooser.getDay(),month+1,year).toString());
 					JOptionPane.showMessageDialog(contentPane, new StringBuilder("Pomyslnie usunieto wszystkie wydarzenia do daty" +dayChooser.getDay()+"/"+(month+1)+"/"+year));
 					dispose();
+					Utils.pInfo("Pomyslnie usunieto wydarzenia");
+					Utils.pInfo("Zamknieto okno DeleteEvents");
 				} catch (Exception ex) {
 //					ex.printStackTrace();
+					JOptionPane.showMessageDialog(contentPane, new StringBuilder("Brak eventow do usuniecia"));
 					System.err.println(ex.getMessage());
+					dispose();
+					Utils.pInfo("Zamknieto okno DeleteEvents");
 
 				}
 

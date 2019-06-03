@@ -7,11 +7,15 @@ import service.Utils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
-public class DayView {
+public class SearchEvents {
 
 	private Timer timer;
 	private static final int TIMER_DELAY = 1000;
@@ -22,6 +26,8 @@ public class DayView {
 	private static int month;
 	private static int year;
 	private static Timestamp date;
+	private JTextField searchField;
+	private ArrayList<Event> searched = new ArrayList<Event>();
 	/**
 	 * Launch the application.
 	 */
@@ -30,8 +36,8 @@ public class DayView {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DayView window = new DayView();
-					Utils.pInfo("DayView: "+day+" "+month+" "+year);
+					SearchEvents window = new SearchEvents();
+//					System.out.println("DayView:"+day+" "+month+" "+year);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,31 +49,18 @@ public class DayView {
 	/**
 	 * Create the application.
 	 */
-	public DayView(int day, int month, int year) {
+	public SearchEvents(int day, int month, int year) {
 
 		this.day=day;
 		this.month=month;
 		this.year=year;
 
 	}
-	public DayView()
+	public SearchEvents()
 	{
 		dService=DataService.getInstance();
-		String SDay = Integer.toString(DayView.day);
-		if (DayView.day>=1 && DayView.day<=9) SDay = "0"+SDay;
-		String SMonth = Integer.toString(DayView.month);
-		if (DayView.month>=1 && DayView.month<=9) SMonth = "0"+SMonth;
-		String query = SDay+"/"+SMonth+"/"+DayView.year;
-		DayView.date=dService.StringToTimestamp(query);
 		initialize();
 		showEvents();
-		//Aktualnie timer mozna wylaczyc
-//		timer = new Timer(TIMER_DELAY, new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				showEvents();
-//			}
-//		});
-//		timer.start();
 	}
 
 	/**
@@ -79,7 +72,7 @@ public class DayView {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				Utils.pInfo("Okno DayView zamkniete");
+				Utils.pInfo("SearchEvents zamkniete");
 			}
 		});
 		frame.setBounds(100, 100, 563, 417);
@@ -95,10 +88,44 @@ public class DayView {
 		springLayout.putConstraint(SpringLayout.SOUTH, panel_1, -9, SpringLayout.SOUTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, panel_1, 547, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().add(panel_1);
-		//</editor-fold>
 		
-		JButton btnAddEvent = new JButton("Dodaj Wydarzenie");
-		panel_1.add(btnAddEvent);
+		searchField = new JTextField();
+		searchField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+				if(searchField.getText().isEmpty()) {
+//					System.out.println(searchField.getText().isEmpty());
+					searched.removeAll(searched);
+					showEvents();
+				}
+				if(!searchField.getText().isEmpty())
+				{
+
+				searched = (ArrayList) dService.search(searchField.getText());
+				showEvents();
+				}
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+				if(searchField.getText().isEmpty()) {
+//					System.out.println(searchField.getText().isEmpty());
+					searched.removeAll(searched);
+					showEvents();
+				}
+				if(!searchField.getText().isEmpty())
+				{
+					Utils.pInfo("Szukam wedlug wzorca: "+searchField.getText());
+//					System.out.println("szukam");
+					searched = (ArrayList) dService.search(searchField.getText());
+					showEvents();
+				}
+			}
+		});
+
+		panel_1.add(searchField);
+		searchField.setColumns(40);
 
 		//<editor-fold desc="Table init">
 		table = new JTable();
@@ -123,10 +150,12 @@ public class DayView {
 		table.getColumnModel().getColumn(5).setPreferredWidth(120);
 		//</editor-fold>
 		table.setFillsViewportHeight(true);
+		table.setCellSelectionEnabled(false);
 		frame.getContentPane().add(table);
 
+
 		//<editor-fold desc="lblMain: Wydarzenia z dnia rrrr-mm-dd">
-		JLabel lblMain = new JLabel("Wydarzenia z dnia: " + date.toString().substring(0, 10));
+		JLabel lblMain = new JLabel("Szukaj wydarzen");
 		springLayout.putConstraint(SpringLayout.NORTH, lblMain, 0, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, lblMain, 0, SpringLayout.WEST, table);
 		springLayout.putConstraint(SpringLayout.SOUTH, lblMain, -6, SpringLayout.NORTH, table);
@@ -134,29 +163,24 @@ public class DayView {
 		lblMain.setFont(new Font("Trebuchet MS", Font.PLAIN, 33));
 		frame.getContentPane().add(lblMain);
 		//</editor-fold>
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent mouseEvent) {
-				super.mousePressed(mouseEvent);
-				JTable target=(JTable)mouseEvent.getSource();
-				int row = target.getSelectedRow();
-				int column = target.getSelectedColumn();
+//		table.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mousePressed(MouseEvent mouseEvent) {
+//				super.mousePressed(mouseEvent);
+//				JTable target=(JTable)mouseEvent.getSource();
+//				int row = target.getSelectedRow();
+//				int column = target.getSelectedColumn();
 //				System.out.println("row = " + row);
 //				System.out.println("column = " + column);
 //				System.out.println(target.getValueAt(row,0));
-//				EditEvent editEvent = new EditEvent(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
-//				editEvent.main(null);
-				EditEventsV2 editEventsV2 = new EditEventsV2(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
-				editEventsV2.main(null);
-			}
-		});
+////				EditEvent editEvent = new EditEvent(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
+////				editEvent.main(null);
+//				EditEventsV2 editEventsV2 = new EditEventsV2(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),SearchEvents.this);
+//				editEventsV2.main(null);
+//			}
+//		});
 
-		btnAddEvent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Events events = new Events(date,(DefaultTableModel) table.getModel(),DayView.this);
-				Events.main(null);
-			}
-		});
+	
 	}
 	public void showEvents() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -169,7 +193,7 @@ public class DayView {
 //		System.out.println(query);
 ////		dService.GetAllEventsForDate(Timestamp.valueOf(query));
 ////		System.out.println(dService.toString());
-		for (Event event : dService.GetAllEventsForDate(date)) {
+		for (Event event : searched) {
 			String data0 = String.valueOf(event.getId());
 			String data1 = new SimpleDateFormat("dd-MM-yyyy").format(event.getStartDate());
 			String data2 = new SimpleDateFormat("HH:mm").format(event.getStartDate());
