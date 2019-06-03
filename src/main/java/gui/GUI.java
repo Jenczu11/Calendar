@@ -17,9 +17,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class GUI implements KeyListener {
-    boolean onPanel=false;
-    boolean pressedEnter=false;
+public class GUI {
+    boolean onPanel = false;
+    boolean pressedEnter = false;
     int day;
     int month;
     int year;
@@ -80,7 +80,7 @@ public class GUI implements KeyListener {
     private void initialize() {
         //<editor-fold desc="Init frame with calendar panel">
         frame = new JFrame();
-        frame.addKeyListener(this);
+//        frame.addKeyListener(this);
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JCalendar calendar = new JCalendar();
@@ -209,75 +209,94 @@ public class GUI implements KeyListener {
             }
         });
         mnSettings.add(mntmColorpicker);
-        
+
         JMenu mnDeleteEvents = new JMenu("Delete Events");
         mnDeleteEvents.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		Thread t = new Thread(new DeleteEvents(calendar.getMonthChooser().getMonth(), calendar.getYearChooser().getYear()));
-        		t.start();
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Thread t = new Thread(new DeleteEvents(calendar.getMonthChooser().getMonth(), calendar.getYearChooser().getYear()));
+                t.start();
 //                DeleteEvents de = new DeleteEvents(calendar.getMonthChooser().getMonth(), calendar.getYearChooser().getYear());
 //                de.main(null);
-        
-        	}
-        });
-       
-        menuBar.add(mnDeleteEvents);
-        //</editor-fold>
 
+            }
+        });
+
+        menuBar.add(mnDeleteEvents);
+
+        JMenu mnSearchEvents = new JMenu("Search Events");
+        mnSearchEvents.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                SearchEvents searchEvents = new SearchEvents();
+                searchEvents.main(null);
+            }
+        });
+        menuBar.add(mnSearchEvents);
+        //</editor-fold>
 
 
         JPanel jPanel = calendar.getDayChooser().getDayPanel();
         Component component[] = jPanel.getComponents();
-        for (int i=0;i<component.length;i++)
-        {
-                component[i].addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent mouseEvent) {
-                        super.mouseEntered(mouseEvent);
-                        onPanel=true;
-                        System.out.println("onPanel = " + onPanel);
+        for (int i = 0; i < component.length; i++) {
+            component[i].addMouseListener(new MouseAdapter() {
+                //<editor-fold desc="MouseListener zabezpieczenie przed zlym wyborem (do klawiatury)">
+                @Override
+                public void mousePressed(MouseEvent mouseEvent) {
+                    super.mouseEntered(mouseEvent);
+                    onPanel = true;
+//                        System.out.println("onPanel = " + onPanel);
+                }
+
+                @Override
+                public void mouseExited(MouseEvent mouseEvent) {
+                    super.mouseExited(mouseEvent);
+                    onPanel = false;
+//                        System.out.println("onPanel = " + onPanel);
+                }
+                //</editor-fold>
+            });
+            component[i].addKeyListener(new KeyAdapter() {
+                //<editor-fold desc="KeyHandler ENTER aby otworzyc DayView">
+                @Override
+                public void keyReleased(KeyEvent keyEvent) {
+//                        System.out.println("keyEvent = " + keyEvent);
+                    super.keyReleased(keyEvent);
+                    if (keyEvent.getKeyCode() == 10) {
+//                            System.out.println("keyEvent = " + keyEvent);
+                        DayView window = new DayView(day, month, year);
+                        DayView.main(null);
                     }
+                    super.keyPressed(keyEvent);
 
-                    @Override
-                    public void mouseExited(MouseEvent mouseEvent) {
-                        super.mouseExited(mouseEvent);
-                        onPanel=false;
-                        System.out.println("onPanel = " + onPanel);
+                }
+
+                @Override
+                public void keyPressed(KeyEvent keyEvent) {
+                    if (keyEvent.getKeyCode() == 10) {
+//                            System.out.println("keyEvent = " + keyEvent);
+                        DayView window = new DayView(day, month, year);
+                        DayView.main(null);
                     }
-                });
-                component[i].addKeyListener(new KeyAdapter() {
-                    @Override
-                    public void keyReleased(KeyEvent keyEvent) {
-                        System.out.println("keyEvent = " + keyEvent);
-                        super.keyReleased(keyEvent);
+                    super.keyPressed(keyEvent);
 
+                }
+
+                @Override
+                public void keyTyped(KeyEvent keyEvent) {
+
+                    //Jezeli Enter otworz DayView
+                    if (keyEvent.getKeyCode() == 10) {
+//                            System.out.println("keyEvent = " + keyEvent);
+                        DayView window = new DayView(day, month, year);
+                        DayView.main(null);
                     }
+                    super.keyTyped(keyEvent);
 
-                    @Override
-                    public void keyPressed(KeyEvent keyEvent) {
-                        if(keyEvent.getKeyCode()==10) {
-                            System.out.println("keyEvent = " + keyEvent);
-                            DayView window = new DayView(day, month, year);
-                            DayView.main(null);
-                        }
-                        super.keyPressed(keyEvent);
-
-                    }
-                    @Override
-                    public void keyTyped(KeyEvent keyEvent) {
-
-                        if(keyEvent.getKeyCode()==10) {
-                            System.out.println("keyEvent = " + keyEvent);
-                            DayView window = new DayView(day, month, year);
-                            DayView.main(null);
-                        }
-                        super.keyTyped(keyEvent);
-
-                    }
-                });
+                }
+                //</editor-fold>
+            });
         }
-
 
 
         //<editor-fold desc="When day pressed open DayView">
@@ -287,13 +306,12 @@ public class GUI implements KeyListener {
                 day = (int) evt.getNewValue();
                 month = calendar.getMonthChooser().getMonth() + 1;
                 year = calendar.getYearChooser().getYear();
-                System.out.println(pressedEnter);
-                if (onPanel)
-                {
-                    onPanel=false;
-                DayView window = new DayView(day, month, year);
-                DayView.main(null);
-	               }
+//                System.out.println(pressedEnter);
+                if (onPanel) {
+                    onPanel = false;
+                    DayView window = new DayView(day, month, year);
+                    DayView.main(null);
+                }
 
 //				System.out.println(calendar.getMonthChooser().getMonth()+1);
 //				System.out.println(day);
@@ -301,10 +319,6 @@ public class GUI implements KeyListener {
             }
         });
 //        calendar.getDayChooser().setEnabled(false);
-
-
-
-
 
 
         //</editor-fold>
@@ -335,22 +349,7 @@ public class GUI implements KeyListener {
             }
         }
     }
-
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {
-        char c = keyEvent.getKeyChar();
-        System.out.println(c);
-    }
-
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
-        char c = keyEvent.getKeyChar();
-        System.out.println(c);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {
-        char c = keyEvent.getKeyChar();
-        System.out.println(c);
-    }
 }
+
+
+

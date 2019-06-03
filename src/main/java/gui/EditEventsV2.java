@@ -21,6 +21,7 @@ public class EditEventsV2 {
 
     private static DayView dayView;
     private static DataService dService;
+    private static SearchEvents searchEvents;
     public static JFrame frame;
     private static Timestamp date;
     public static Button button;
@@ -54,7 +55,18 @@ public class EditEventsV2 {
         initialize();
     }
 
+    public EditEventsV2(int targetID, Timestamp date, DefaultTableModel model, SearchEvents se) {
 
+        EditEventsV2.date = date;
+        this.targetID=targetID;
+        this.model = model;
+        this.searchEvents=se;
+        dService = DataService.getInstance();
+
+
+        initialize();
+//		this.frame.setVisible(true);
+    }
     public EditEventsV2(int targetID, Timestamp date, DefaultTableModel model, DayView dw) {
 
         EditEventsV2.date = date;
@@ -202,7 +214,7 @@ public class EditEventsV2 {
                 builder.setEndDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
                 try {
                     dService.editEvent(builder.createEvent());
-                    dayView.showEvents();
+                 dayView.showEvents();
                     frame.dispose();
                     System.out.println("Edytowano wydarzenie: "+builder.toString());
                 } catch (idException | dataException ex) {

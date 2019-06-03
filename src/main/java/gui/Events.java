@@ -4,6 +4,7 @@ import data.EventBuilder;
 import exceptions.dataException;
 import exceptions.idException;
 import service.DataService;
+import service.Utils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -189,11 +190,12 @@ public class Events {
                 builder.setStartDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
                 time = endDateHours.getSelectedItem() + ":" + endDateMinutes.getSelectedItem() + ":00";
                 builder.setEndDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
+                builder.setAlarm(checkbox.getState());
                 try {
                     dService.addEvent(builder.createEvent());
                     dayView.showEvents();
                     frame.dispose();
-                    System.out.println("Dodano wydarzenie: "+builder.toString());
+                    Utils.pInfo("Dodano " + builder.toString());
                 } catch (idException | dataException ex) {
 
                     System.err.println(ex.toString());

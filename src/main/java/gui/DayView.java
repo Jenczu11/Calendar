@@ -2,6 +2,7 @@ package gui;
 
 import data.Event;
 import service.DataService;
+import service.Utils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +31,7 @@ public class DayView {
 			public void run() {
 				try {
 					DayView window = new DayView();
-					System.out.println("DayView:"+day+" "+month+" "+year);
+					Utils.pInfo("DayView: "+day+" "+month+" "+year);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -78,7 +79,7 @@ public class DayView {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				System.out.println("Okno DayView zamkniete");
+				Utils.pInfo("Okno DayView zamkniete");
 			}
 		});
 		frame.setBounds(100, 100, 563, 417);
