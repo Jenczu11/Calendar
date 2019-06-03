@@ -109,11 +109,12 @@ public class DataServiceTest {
     }
 
     @Test
+    @DisplayName("Wyszukiwanie z default")
     void search() {
         DataService dataService = DataService.getInstance();
         createTestData(dataService);
         List<Event> searched=dataService.search("default");
-        assertEquals(2,dataService.getRepository().size());
+        assertEquals(2,searched.size());
 //        System.out.println(searched);
 
     }
