@@ -5,6 +5,7 @@ import data.Event;
 import data.EventBuilder;
 import exceptions.dataException;
 import exceptions.idException;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -240,6 +241,25 @@ public class DataService {
         refreshID();
     }
 
+    public List<Event> search(String whatToSearch)
+    {
+        List<Event> find = new ArrayList<>();
+        for(int i=0;i<repository.size();i++) {
+//            long timestamp = repository.getAllEvents().get(i).getStartDate().getTime();
+//            Calendar oneFromAll = Calendar.getInstance();
+//            oneFromAll.setTimeInMillis(timestamp);
+//
+//            Calendar selected= Calendar.getInstance();
+//            selected.setTime(stamp);
+            System.out.println(StringUtils.containsIgnoreCase(repository.getEvent(i).getTitle(),whatToSearch));
+            if(StringUtils.containsIgnoreCase(repository.getEvent(i).getTitle(),whatToSearch))
+            {
+                find.add(repository.getAllEvents().get(i));
+            }
+        }
+        return find;
+
+    }
     /**
     Ładuje repozytorium za pomocą napisanego handlera (XML,SQL)
      */

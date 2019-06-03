@@ -24,11 +24,12 @@ public class DataServiceTest {
 
 
 
+    //DO NOT EDIT
     public void createTestData(DataService dataService)
     {
         try {
-            dataService.addEvent("1","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
-            dataService.addEvent("2","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
+            dataService.addEvent("1","default","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
+            dataService.addEvent("2","default","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
             dataService.addEvent("3","Title1","Title2", Timestamp.valueOf("2019-05-15 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
             dataService.addEvent("4","Title1","Title2", Timestamp.valueOf("2019-05-13 18:48:00"),Timestamp.valueOf("2019-05-16 18:48:00"));
         } catch (Exception e) {
@@ -104,6 +105,16 @@ public class DataServiceTest {
         }
 //        System.out.println(dataService.toString());
         assertEquals(3,dataService.getRepository().size());
+
+    }
+
+    @Test
+    void search() {
+        DataService dataService = DataService.getInstance();
+        createTestData(dataService);
+        List<Event> searched=dataService.search("default");
+        assertEquals(2,dataService.getRepository().size());
+//        System.out.println(searched);
 
     }
 }

@@ -28,6 +28,7 @@ public class GUI implements KeyListener {
     private Timer timer;
     /**
      * Liczba milisekund, po ktorych nastepuje sprawdzanie czy jakies zdarzenia wymagaja zaalarmowania
+     * Wartosc 60000 sprawdza co minute
      */
     private static final int TIMER_DELAY = 60000;
     /**
