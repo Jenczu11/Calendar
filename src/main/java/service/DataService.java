@@ -49,6 +49,12 @@ public class DataService {
         repository.addEvent(new EventBuilder().setId(Integer.parseInt(id)).setTitle(title).setPlace(place).setStartDate(startDate).setEndDate(endDate).createEvent());
         refreshID();
     }
+    /**
+     * 
+     * @param e - obiekt klasy Event 
+     * @throws idException - wyrzuca wyjatek w momencie, kiedy wydarzenie o takim id juz istnieje
+     * @throws dataException - wyrzuca wyjatek w momencie, kiedy data zakonczenia jest wczesniejsza niz data rozpoczecia
+     */
     public void addEvent(Event e) throws idException,dataException
     {
         for(Event event: repository.getAllEvents())
@@ -61,7 +67,11 @@ public class DataService {
         repository.addEvent(e);
         refreshID();
     }
-
+    /**
+     * 
+     * @param e - obiekt klasy Event 
+     * @throws Exception - wyjatek kiedy zdarzenie nie istnieje
+     */
     public void editEvent(Event e) throws Exception {
 //        int idInt=Integer.parseInt(id);
         ArrayList<Event> events= repository.getAllEvents();
@@ -190,10 +200,18 @@ public class DataService {
      public Timestamp StringToTimestampWithTime(String time) {
          return TimestampUtil.StringToTimestampWithTime(time);
      }
+     /**
+      * 
+      * @return zwraca rozmiar repozytorium - ilosc wydarzen
+      */
     public int size()
     {
         return repository.size();
     }
+    /**
+     * 
+     * @return zwraca liste wydarzen 
+     */
 
     List<Event> getRepositoryEvents() {
         return repository.getAllEvents();
@@ -227,6 +245,10 @@ public class DataService {
 
         }
     }
+    /**
+     * 
+     * @return zwraca arrayliste ze wszystkimi dodanymi wydarzeniami
+     */
 
     public ArrayList<Event> getAllEvents()
     {
@@ -240,6 +262,11 @@ public class DataService {
         this.repository = repository;
         refreshID();
     }
+    /**
+     * 
+     * @param whatToSearch - wydarzenie, ktorego poszukujemy w kalendarzu
+     * @return zwraca arraylist z poszukiwanym wydarzeniem (jesli zostalo znalezione)
+     */
 
     public List<Event> search(String whatToSearch)
     {
@@ -268,6 +295,9 @@ public class DataService {
         setRepository(handler.LoadData());
         refreshID();
     }
+    /**
+    Zapisuje repozytorium za pomocą napisanego handlera (XML,SQL)
+     */
     public void saveRepository(IOHandler handler) throws Exception
     {
        handler.SaveData(getRepository());
