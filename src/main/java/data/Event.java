@@ -5,7 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.sql.Timestamp;
 
-@XmlRootElement(name="event")
+/**
+ * Klasa reprezentująca pojedyncze wydarzenie
+ */
+@XmlRootElement(name = "event")
 public class Event {
     /**
      * Id wydarzenia
@@ -20,15 +23,15 @@ public class Event {
      */
     private String place;
     /**
-     * data rozpoczecia wydarzenia
+     * Data rozpoczecia wydarzenia
      */
     private Timestamp startDate;
     /**
-     * data zakonczenia wydarzenia
+     * Data zakonczenia wydarzenia
      */
     private Timestamp endDate;
     /**
-     * Zmienna informujaca, czy wystapi� ju� alarm przypisany do danego wydarzenia
+     * Zmienna informujaca, czy wystapil juz alarm przypisany do danego wydarzenia
      */
     private boolean alarm;
 
@@ -36,9 +39,23 @@ public class Event {
         this.alarm = alarm;
     }
 
+    /**
+     * Tworzenie nowej instancji klasy event
+     * wymagane do obsługi JAXB
+     */
     public Event() {
+        alarm = false;
     }
 
+    /**
+     * Tworzenie nowej instancji klasy event (tworzenie wydarzenia)
+     *
+     * @param id        Id wydarzenia
+     * @param title     Tytul wydarzenia
+     * @param place     Miejsce wydarzenia
+     * @param startDate Data rozpoczecia wydarzenia
+     * @param endDate   Data zakonczenia wydarzenia
+     */
     public Event(int id, String title, String place, Timestamp startDate, Timestamp endDate) {
         this.id = id;
         this.title = title;
@@ -48,65 +65,143 @@ public class Event {
         alarm = false;
     }
 
-    /**
-    Gettery i settery
+    /*
+      Gettery i settery
      */
-    @XmlAttribute(name="id")
+
+    /**
+     * Zwraca id wydarzenia
+     *
+     * @return id wydarzenia
+     */
+    @XmlAttribute(name = "id")
     public int getId() {
         return id;
     }
 
+    /**
+     * Ustawia id wydarzenia
+     *
+     * @param id numer wydarzenia do przypisania
+     */
     public void setId(int id) {
         this.id = id;
     }
-    @XmlAttribute(name="title")
+
+    /**
+     * Zwraca tytul wydarzenia
+     *
+     * @return tytul wydarzenia
+     */
+    @XmlAttribute(name = "title")
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Ustawia tytul wydarzenia
+     *
+     * @param title Tytul wydarzenia do przypisania
+     */
     public void setTitle(String title) {
         this.title = title;
     }
-    @XmlAttribute(name="place")
+
+    /**
+     * Zwraca miejsce wydarzenia
+     *
+     * @return miejsce wydarzenia
+     */
+    @XmlAttribute(name = "place")
     public String getPlace() {
         return place;
     }
 
+    /**
+     * Ustawia miejsce wydarzenia
+     *
+     * @param place Miejsce wydarzenia do przypisania
+     */
     public void setPlace(String place) {
         this.place = place;
     }
+
+    /**
+     * Zwraca date rozpoczecia wydarzenia
+     *
+     * @return zwraca date w formacie Timestamp [ms]
+     */
     @XmlTransient
     public Timestamp getStartDate() {
         return startDate;
     }
 
-    @XmlAttribute(name="startDate")
-    public String getStartDateToXml() {return startDate.toString();}
-    public void setStartDateToXml(String startDate) {this.startDate=Timestamp.valueOf(startDate);}
+    /**
+     * Pozwala na zwrocenie daty wydarzenia w postaci stringa
+     * Potrzebne do JAXB
+     *
+     * @return Data rozpoczecia wydarzenia w postaci stringa
+     */
+    @XmlAttribute(name = "startDate")
+    public String getStartDateToXml() {
+        return startDate.toString();
+    }
 
+    /**
+     * Ustawia date poczatkowa wydarzenia
+     *
+     * @param startDate data poczatkowa wydarzenia do ustawienia
+     */
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
+
+    /**
+     * Zwraca date zakonczenia wydarzenia
+     *
+     * @return data zakonczenia wydarzenia
+     */
     @XmlTransient
     public Timestamp getEndDate() {
         return endDate;
     }
 
-    @XmlAttribute(name="endDate")
-    public String getEndDateToXml() {return endDate.toString();}
-    public void setEndDateToXml(String endDate) {this.endDate=Timestamp.valueOf(endDate);}
+    /**
+     * Pozwala na zwrocenie daty wydarzenia zakoczenia w postaci stringa
+     * Potrzebne do JAXB
+     *
+     * @return Data zakonczenia wydarzenia w postaci stringa
+     */
+    @XmlAttribute(name = "endDate")
+    public String getEndDateToXml() {
+        return endDate.toString();
+    }
 
-
+    /**
+     * Ustawia date zakonczenia wydarzenia
+     *
+     * @param endDate Data zakonczenia wydarzenia
+     */
     public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 
-    @XmlAttribute(name="alarm")
+    /**
+     * Zwraca zmienna informujaca o alarmie
+     *
+     * @return zwraca flage czy zmienna juz sie przypomniala
+     */
+    @XmlAttribute(name = "alarm")
     public boolean isAlarm() {
         return alarm;
     }
 
 
+    /**
+     * toString zwracajacy opis wydarzenia
+     *
+     * @return Zwraca opis wydarzenia
+     */
     @Override
     public String toString() {
         return "Event{" +

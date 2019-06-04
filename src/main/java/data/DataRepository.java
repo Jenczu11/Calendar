@@ -27,6 +27,11 @@ public class DataRepository {
 
         getAllEvents().remove(e);
     }
+
+    /**
+     * 
+     * @param index
+     */
     public void removeEvent(int index) {
         getAllEvents().remove(index);
     }
@@ -37,7 +42,7 @@ public class DataRepository {
         getAllEvents().set(index, event);
     }
     /**
-     * Zwraca wszystkie wydarzenia
+     * Ustawia zmienna lastEventID na ostatni event w bazie danych
      */
     public void refreshLastEventId() {
         if (events.isEmpty()) lastEventID = 0;
