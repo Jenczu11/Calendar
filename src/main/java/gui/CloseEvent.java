@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 
 /**
  *
- * Klasa reprezentujaca wydarzenia, kt�re musza zosta� zaalarmowane
+ * Klasa reprezentujaca wydarzenia, ktore musza zostac zaalarmowane
  */
 public class CloseEvent extends JDialog {
 

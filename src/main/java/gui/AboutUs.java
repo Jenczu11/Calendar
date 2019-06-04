@@ -5,6 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * Klasa wyswietlajaca informacje o autorach (po kliknieciu przycisku z nazwiskiem pojawiaja sie
+ * infomacje o nr indeksu i adresie mailowym)
+ *
+ */
+
 public class AboutUs {
 
 	private JFrame frame;
@@ -34,6 +41,9 @@ public class AboutUs {
 
 	/**
 	 * Initialize the contents of the frame.
+	 */
+	/**
+	 * Utworzenie okna z dwoma przyciskami, po ktorych kliknieciu ukazuja sie okna z dodatkowymi infomacjami
 	 */
 	private void initialize() {
 		frame = new JFrame();

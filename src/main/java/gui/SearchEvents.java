@@ -15,6 +15,13 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+
+/**
+ * 
+ * Klasa umozliwiajaca wyszukanie danego wydarzenia sposrod listy wydarzen
+ *
+ */
+
 public class SearchEvents {
 
 	private Timer timer;

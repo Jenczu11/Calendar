@@ -10,6 +10,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * 
+ * Klasa pozwalajaca na usuniecie wydarzenia z danej daty 
+ *
+ */
 public class DeleteEvents extends JFrame implements Runnable {
 
 	int month;

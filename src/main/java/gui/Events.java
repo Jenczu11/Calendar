@@ -15,6 +15,12 @@ import java.sql.Timestamp;
 
 //import net.miginfocom.swing.MigLayout;
 
+
+/**
+ * 
+ * Klasa umozliwiajaca dodanie wydarzenia
+ *
+ */
 public class Events {
 
     private static DayView dayView;
