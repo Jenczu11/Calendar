@@ -261,7 +261,7 @@ public class DataService {
 
     }
     /**
-    Ładuje repozytorium za pomocą napisanego handlera (XML,SQL)
+    Laduje repozytorium za pomocą napisanego handlera (XML,SQL)
      */
     public void loadRepository(IOHandler handler) throws Exception
     {
