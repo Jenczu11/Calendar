@@ -71,7 +71,7 @@ public class Events {
 
         //<editor-fold desc="JFrame init+setup">
         frame = new JFrame();
-        frame.getContentPane().setBackground(Color.DARK_GRAY);
+        frame.getContentPane().setBackground(new Color(192, 192, 192));
         frame.setBounds(100, 100, 347, 275);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().setLayout(null);
@@ -120,9 +120,9 @@ public class Events {
         //<editor-fold desc="Label wydarzenie">
 
         label = new Label("Nowe wydarzenie:");
-        label.setForeground(Color.WHITE);
+        label.setForeground(new Color(25, 25, 112));
         label.setFont(new Font("Dialog", Font.BOLD, 17));
-        label.setBounds(65, 10, 155, 24);
+        label.setBounds(65, 10, 196, 24);
         frame.getContentPane().add(label);
         //</editor-fold>
 
@@ -131,8 +131,8 @@ public class Events {
 
         button.setFont(new Font("Dialog", Font.BOLD, 14));
         button.setActionCommand("DODAJ");
-        button.setBackground(new Color(178, 34, 34));
-        button.setForeground(Color.BLACK);
+        button.setBackground(new Color(25, 25, 112));
+        button.setForeground(new Color(255, 215, 0));
         button.setBounds(170, 184, 120, 24);
         frame.getContentPane().add(button);
         //</editor-fold>

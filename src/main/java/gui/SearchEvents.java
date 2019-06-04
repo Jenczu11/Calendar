@@ -83,6 +83,7 @@ public class SearchEvents {
 
 		//<editor-fold desc="JPanel ktory zawiera btnAddEvent">
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(192, 192, 192));
 		springLayout.putConstraint(SpringLayout.NORTH, panel_1, 328, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, panel_1, 0, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, panel_1, -9, SpringLayout.SOUTH, frame.getContentPane());
@@ -155,12 +156,14 @@ public class SearchEvents {
 
 
 		//<editor-fold desc="lblMain: Wydarzenia z dnia rrrr-mm-dd">
-		JLabel lblMain = new JLabel("Szukaj wydarzen");
+		JLabel lblMain = new JLabel("Szukaj wydarzeń:");
+		lblMain.setForeground(new Color(25, 25, 112));
+		lblMain.setHorizontalAlignment(SwingConstants.CENTER);
 		springLayout.putConstraint(SpringLayout.NORTH, lblMain, 0, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, lblMain, 0, SpringLayout.WEST, table);
 		springLayout.putConstraint(SpringLayout.SOUTH, lblMain, -6, SpringLayout.NORTH, table);
-		springLayout.putConstraint(SpringLayout.EAST, lblMain, 472, SpringLayout.WEST, frame.getContentPane());
-		lblMain.setFont(new Font("Trebuchet MS", Font.PLAIN, 33));
+		springLayout.putConstraint(SpringLayout.EAST, lblMain, 539, SpringLayout.WEST, frame.getContentPane());
+		lblMain.setFont(new Font("Tahoma", Font.BOLD, 33));
 		frame.getContentPane().add(lblMain);
 		//</editor-fold>
 //		table.addMouseListener(new MouseAdapter() {

@@ -55,13 +55,19 @@ public class DeleteEvents extends JFrame implements Runnable {
 		setContentPane(contentPane);
 
 		JButton btnUsunWydarzenia = new JButton("Usun wydarzenia do tej daty");
+		btnUsunWydarzenia.setForeground(new Color(255, 215, 0));
+		btnUsunWydarzenia.setBackground(new Color(25, 25, 112));
 
 		contentPane.add(btnUsunWydarzenia, BorderLayout.SOUTH);
 		
 		JLabel lblUsunWydarzeniaDo = new JLabel("Usun wydarzenia do tej daty");
+		lblUsunWydarzeniaDo.setForeground(new Color(139, 0, 0));
+		lblUsunWydarzeniaDo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsunWydarzeniaDo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(lblUsunWydarzeniaDo, BorderLayout.NORTH);
 		
 		JDayChooser dayChooser = new JDayChooser();
+		dayChooser.getDayPanel().setBackground(new Color(255, 255, 255));
 		dayChooser.setMonth(month);
 		dayChooser.setYear(year);
 		contentPane.add(dayChooser, BorderLayout.CENTER);

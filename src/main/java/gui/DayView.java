@@ -90,6 +90,7 @@ public class DayView {
 
 		//<editor-fold desc="JPanel ktory zawiera btnAddEvent">
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(169, 169, 169));
 		springLayout.putConstraint(SpringLayout.NORTH, panel_1, 328, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, panel_1, 0, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, panel_1, -9, SpringLayout.SOUTH, frame.getContentPane());
@@ -98,6 +99,8 @@ public class DayView {
 		//</editor-fold>
 		
 		JButton btnAddEvent = new JButton("Dodaj Wydarzenie");
+		btnAddEvent.setForeground(new Color(255, 215, 0));
+		btnAddEvent.setBackground(new Color(25, 25, 112));
 		panel_1.add(btnAddEvent);
 
 		//<editor-fold desc="Table init">
@@ -127,11 +130,12 @@ public class DayView {
 
 		//<editor-fold desc="lblMain: Wydarzenia z dnia rrrr-mm-dd">
 		JLabel lblMain = new JLabel("Wydarzenia z dnia: " + date.toString().substring(0, 10));
+		springLayout.putConstraint(SpringLayout.SOUTH, lblMain, -6, SpringLayout.NORTH, table);
+		springLayout.putConstraint(SpringLayout.EAST, lblMain, 527, SpringLayout.WEST, frame.getContentPane());
+		lblMain.setForeground(new Color(25, 25, 112));
 		springLayout.putConstraint(SpringLayout.NORTH, lblMain, 0, SpringLayout.NORTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, lblMain, 0, SpringLayout.WEST, table);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblMain, -6, SpringLayout.NORTH, table);
-		springLayout.putConstraint(SpringLayout.EAST, lblMain, 472, SpringLayout.WEST, frame.getContentPane());
-		lblMain.setFont(new Font("Trebuchet MS", Font.PLAIN, 33));
+		lblMain.setFont(new Font("Tahoma", Font.BOLD, 32));
 		frame.getContentPane().add(lblMain);
 		//</editor-fold>
 		table.addMouseListener(new MouseAdapter() {
