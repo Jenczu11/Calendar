@@ -215,7 +215,7 @@ public class EditEvent {
 	/**
 	 * Dodaje pokolei liczby do choice w formacie %dd
 	 * Zakres od 00-99
-	 * @param where
+	 * @param where do jakiego componentu dodac
 	 * @param start od jakiego numeru ma tworzyc
 	 * @param end do jakiego numeru ma tworzyc
 	 */

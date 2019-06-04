@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
  */
 public class CloseEvent extends JDialog {
 
-    private static final long serialVersionUID = -2327877112256512582L;
     private final JPanel contentPanel = new JPanel();
     private JButton okButton;
     private JTextField titleField;

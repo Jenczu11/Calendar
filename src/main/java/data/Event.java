@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.sql.Timestamp;
 
 /**
- * Klasa reprezentująca pojedyncze wydarzenie
+ * Klasa reprezentujaca pojedyncze wydarzenie
  */
 @XmlRootElement(name = "event")
 public class Event {

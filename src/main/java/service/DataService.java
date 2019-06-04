@@ -34,8 +34,8 @@ public class DataService {
      * @param place Miejsce wydarzenia
      * @param startDate Data rozpoczecia wydarzenia
      * @param endDate Data zakonczenia wydarzenia
-     * @throws Exception Jezeli juz istnieje zdarzenie o podanym id,
-     *  lub jezli data zakonczenia zdarzenia jest wczesniejsza od daty rozpoczecia zdarzenia
+     * @throws idException Jezeli juz istnieje zdarzenie o podanym id,
+     *  @throws dataException Jezeli data zakonczenia zdarzenia jest wczesniejsza od daty rozpoczecia zdarzenia
      */
     void addEvent(String id, String title, String place, Timestamp startDate, Timestamp endDate) throws idException,dataException {
         //TODO: Autonumeracja elementow czyli bez id
@@ -108,7 +108,7 @@ public class DataService {
     /**
      * Usuwa wydarzenie o podanym id z repozytorium
      * @param id Id wydarzenia
-     * @throws Exception Kiedy nie istnieje wydarzenie o podanym id
+     * @throws idException Kiedy nie istnieje wydarzenie o podanym id
      */
     void removeEvent(String id) throws idException {
         int idInt = Integer.parseInt(id);
@@ -124,7 +124,7 @@ public class DataService {
         /**
          * Usuwa wydarzenie o podanym id z repozytorium
          * @param id Id wydarzenia
-         * @throws Exception Kiedy nie istnieje wydarzenie o podanym id
+         * @throws idException Kiedy nie istnieje wydarzenie o podanym id
          */
         void removeEvent(int id) throws idException {
             for (Event event : repository.getAllEvents()) {
