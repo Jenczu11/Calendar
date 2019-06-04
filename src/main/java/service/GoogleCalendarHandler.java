@@ -8,6 +8,9 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+/**
+ * Klasa odpowiedzialna za zapis do formatu .csv (obslugiwanego przez Gcal)
+ */
 public class GoogleCalendarHandler implements IOHandler  {
     /**
      * Nazwa pliku, do ktorego zostaja zapisane dane

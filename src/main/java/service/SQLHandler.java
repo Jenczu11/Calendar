@@ -7,14 +7,28 @@ import data.EventBuilder;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Klasa odpowiedzialna za zapis i odczyt do bazy danych
+ */
 public class SQLHandler implements IOHandler{
 
+    /**
+     * Okresla sterownik do polaczenia z baza danych
+     */
     private static final String DRIVER = "org.sqlite.JDBC";
+    /**
+     * Okresla nazwe bazy danych
+     */
     private static String DB_URL = "jdbc:sqlite:test.db";
     private Connection conn;
 
     //TODO: on object creation check if there is a database if not
     // create db and table inside
+
+    /**
+     * Konstruktor klasy SQLHandler tworzy baze danych jezeli nie istnieje
+     * @throws Exception
+     */
     public SQLHandler() throws Exception
     {
         Class.forName(SQLHandler.DRIVER);
@@ -36,10 +50,19 @@ public class SQLHandler implements IOHandler{
         conn.close();
     }
 
+    /**
+     * Ustawia nazwe bazy danych
+     * @param dbUrl nazwa bazy danych
+     */
     public static void setDbUrl(String dbUrl) {
-        DB_URL = "jdbc:sqlite:"+dbUrl;
+        DB_URL = "jdbc:sqlite:"+dbUrl+".db";
     }
 
+    /**
+     * Laduje dane z bazy danych
+     * @return DataRepository
+     * @throws Exception
+     */
     @Override
     public DataRepository LoadData() throws Exception {
         EventBuilder builder = new EventBuilder();
@@ -72,7 +95,11 @@ public class SQLHandler implements IOHandler{
         conn.close();
         return dataRepository;
     }
-
+    /**
+     * Zapisuje dane do bazy danych
+     * @param data , zawierajace liste wydarzen
+     * @throws Exception
+     */
     @Override
     public void SaveData(DataRepository data) throws Exception {
         ArrayList<Event> events = data.getAllEvents();

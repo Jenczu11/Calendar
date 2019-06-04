@@ -25,14 +25,20 @@ public class XMLHandler implements IOHandler {
         this.filename=filename;
     }
 
+    /**
+     * Konstruktor XMLHandlera
+     * @param filename nazwa pliku z ktorego bedziemy czytac zapisywac/xml
+     */
     public XMLHandler(String filename) {
         if(filename.isEmpty())
-            filename="XMLtest.xml";
+            filename="XMLtest";
+        filename+=".xml";
         this.filename = filename;
     }
 
     /**
      * Laduje dane zapisane w formacie XML do programu
+     * @return obiekt DataRepository
      */
     @Override
     public DataRepository LoadData() throws Exception {

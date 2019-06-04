@@ -45,7 +45,20 @@ public class TimestampUtil {
         assert parsedDate != null: "Parsed date is null";
         return new Timestamp(parsedDate.getTime());
     }
-
+    /**
+     * Funkcja pomocnicza, parsuje string w formacie dd/MM/yyyy HH:mm na Timestamp
+     * @param time String do parsownia
+     * @return Zparsowany string na timestamp
+     */
+    /**
+     * Funkcja pomocnicza, parsuje inty Timestamp
+     * @param day dzien
+     * @param month miesiac
+     * @param year rok
+     * @param hour godzina
+     * @param minutes minuta
+     * @return Sprasowany timestamp
+     */
     public static Timestamp intsToTimestamp(int day,int month,int year,int hour,int minutes)
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -55,10 +68,19 @@ public class TimestampUtil {
             parsedDate = dateFormat.parse(time);
         } catch (ParseException e) {
             e.printStackTrace();
+            System.err.println("Blad w parsowaniu");
         }
         assert parsedDate != null: "Parsed date is null";
         return new Timestamp(parsedDate.getTime());
     }
+
+    /**
+     * Funkcja pomocnicza parsuje 3 inty i defaultowa godzina 00:00 na timeStamp
+     * @param day dzien
+     * @param month miesiac
+     * @param year rok
+     * @return timestamp o okreslonej dacie z godzina na 00:00
+     */
     public static Timestamp intsToTimestamp(int day,int month,int year)
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -68,6 +90,7 @@ public class TimestampUtil {
             parsedDate = dateFormat.parse(time);
         } catch (ParseException e) {
             e.printStackTrace();
+            System.err.println("Blad w parsowaniu");
         }
         assert parsedDate != null: "Parsed date is null";
         return new Timestamp(parsedDate.getTime());
