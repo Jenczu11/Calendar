@@ -86,6 +86,9 @@ public class GUI {
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JCalendar calendar = new JCalendar();
+        calendar.getYearChooser().getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 13));
+        calendar.getMonthChooser().getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 13));
+        calendar.getDayChooser().getDayPanel().setBackground(new Color(255, 255, 255));
 
         frame.getContentPane().add(calendar, BorderLayout.CENTER);
         calendar.getDayChooser().setAlwaysFireDayProperty(true);
@@ -93,8 +96,11 @@ public class GUI {
 
         //<editor-fold desc="Add MenuBar">
         JMenuBar menuBar = new JMenuBar();
+        menuBar.setBackground(new Color(25, 25, 112));
         frame.setJMenuBar(menuBar);
         JMenu mnFile = new JMenu("File");
+        mnFile.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        mnFile.setForeground(new Color(255, 215, 0));
         menuBar.add(mnFile);
         JMenu mnXml = new JMenu("XML");
         mnFile.add(mnXml);
@@ -164,6 +170,8 @@ public class GUI {
 
         //<editor-fold desc="AboutUs Button">
         JMenu mnAboutus = new JMenu("About Us");
+        mnAboutus.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        mnAboutus.setForeground(new Color(255, 215, 0));
         mnAboutus.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -177,6 +185,8 @@ public class GUI {
 
         //<editor-fold desc="Settings button">
         JMenu mnSettings = new JMenu("Settings");
+        mnSettings.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        mnSettings.setForeground(new Color(255, 215, 0));
         mnSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -213,6 +223,8 @@ public class GUI {
         mnSettings.add(mntmColorpicker);
 
         JMenu mnDeleteEvents = new JMenu("Delete Events");
+        mnDeleteEvents.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        mnDeleteEvents.setForeground(new Color(255, 215, 0));
         mnDeleteEvents.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -227,6 +239,8 @@ public class GUI {
         menuBar.add(mnDeleteEvents);
 
         JMenu mnSearchEvents = new JMenu("Search Events");
+        mnSearchEvents.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        mnSearchEvents.setForeground(new Color(255, 215, 0));
         mnSearchEvents.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

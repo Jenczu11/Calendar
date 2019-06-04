@@ -45,13 +45,14 @@ public class AboutUs {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 303, 149);
+		frame.getContentPane().setBackground(new Color(255, 255, 255));
+		frame.setBounds(100, 100, 323, 184);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JButton bJencz = new JButton("Bart\u0142omiej Jencz");
+		bJencz.setBounds(10, 38, 138, 59);
 		bJencz.setForeground(new Color(255, 215, 0));
 		bJencz.setBackground(new Color(25, 25, 112));
-		bJencz.setBounds(0, 38, 138, 59);
 		bJencz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 JOptionPane.showMessageDialog(frame, "NR INDEKSU: 216783\nADRES EMAIL: 216783@edu.p.lodz.pl");
@@ -61,9 +62,9 @@ public class AboutUs {
 		frame.getContentPane().add(bJencz);
 		
 		JButton jWlodarczyk = new JButton("Julita W\u0142odarczyk");
+		jWlodarczyk.setBounds(157, 38, 141, 59);
 		jWlodarczyk.setForeground(new Color(255, 215, 0));
 		jWlodarczyk.setBackground(new Color(25, 25, 112));
-		jWlodarczyk.setBounds(148, 38, 141, 59);
 		jWlodarczyk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(frame, "NR INDEKSU: 216921 \nADRES EMAIL: 216921@edu.p.lodz.pl");
@@ -71,12 +72,23 @@ public class AboutUs {
 		});
 		frame.getContentPane().add(jWlodarczyk);
 		
-		JLabel lblNewLabel = new JLabel("O nas!");
-		lblNewLabel.setForeground(new Color(105, 105, 105));
-		lblNewLabel.setBounds(0, 5, 289, 23);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 23));
+		JLabel lblNewLabel = new JLabel("O autorach i programie!");
+		lblNewLabel.setBounds(9, 10, 289, 23);
+		lblNewLabel.setForeground(new Color(0, 0, 0));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Informacje o programie");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frame, "WERSJA PROGRAMU: 1.0");
+			}
+		});
+		btnNewButton.setForeground(new Color(25, 25, 112));
+		btnNewButton.setBackground(new Color(255, 215, 0));
+		btnNewButton.setBounds(65, 116, 164, 21);
+		frame.getContentPane().add(btnNewButton);
+		
 	}
-
 }
