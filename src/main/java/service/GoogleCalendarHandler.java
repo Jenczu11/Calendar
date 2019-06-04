@@ -33,8 +33,8 @@ public class GoogleCalendarHandler implements IOHandler  {
 
     /**
      * Laduje dane z plikow csv, nie zaimplementowane i nie wymagane
-     * @return
-     * @throws Exception
+     * @return nothing
+     * @throws Exception not implemented yet
      */
     @Override
     public DataRepository LoadData() throws Exception {
@@ -44,7 +44,7 @@ public class GoogleCalendarHandler implements IOHandler  {
     /**
      * Zapisuje pliki do pliku csv okreslonego konstruktorem/lub setterem
      * @param data , zawierajace liste wydarzen
-     * @throws Exception
+     * @throws Exception ?
      */
     @Override
     public void SaveData(DataRepository data) throws Exception {

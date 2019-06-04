@@ -39,6 +39,7 @@ public class GUI {
 
     /**
      * Launch the application.
+     * @param args set to null
      */
     public static void main(String[] args) {
 

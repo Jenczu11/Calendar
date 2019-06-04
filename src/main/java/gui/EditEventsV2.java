@@ -32,6 +32,7 @@ public class EditEventsV2 {
     /**
      * Launch the application.
      * Nalezy odkomentowac konstruktor aby moc uruchomic okienko bezposrednio
+     * @param args set to null
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {

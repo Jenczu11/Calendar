@@ -44,6 +44,7 @@ public class DayView {
 	private static Timestamp date;
 	/**
 	 * Launch the application.
+	 * @param args set to null
 	 */
 	public static void main(String[] args) {
 
@@ -61,7 +62,10 @@ public class DayView {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the application
+	 * @param day day of the Calendar to pass
+	 * @param month month of the Calendar to pass
+	 * @param year year of the Calendar to pass
 	 */
 	public DayView(int day, int month, int year) {
 

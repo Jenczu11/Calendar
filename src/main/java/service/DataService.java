@@ -143,7 +143,7 @@ public class DataService {
      * dodac event do chwilowej bazy ktory potem przypisujemy
      * Troche za bardzo mem-hungry ale cóż
      * @param deleteTo data w formacie dd/mm/yyyy HH: (Timestamp.valueOf(""))
-     * @throws Exception
+     * @throws Exception Kiedy pusta baza eventow
      */
     public void removeEventsToDate(Timestamp deleteTo) throws Exception{
             int startSize=repository.getAllEvents().size();
@@ -289,6 +289,8 @@ public class DataService {
     }
     /**
     Laduje repozytorium za pomocą napisanego handlera (XML,SQL)
+     @param handler Wybrany handler do obslugi odczytu
+     @throws Exception wyjatek zwiazany z odczytem
      */
     public void loadRepository(IOHandler handler) throws Exception
     {
@@ -297,6 +299,8 @@ public class DataService {
     }
     /**
     Zapisuje repozytorium za pomocą napisanego handlera (XML,SQL)
+     @param handler Wybrany handler do obslugi zapisu
+     @throws Exception wyjatek zwiazany z zapisem
      */
     public void saveRepository(IOHandler handler) throws Exception
     {

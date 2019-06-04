@@ -27,7 +27,7 @@ public class SQLHandler implements IOHandler{
 
     /**
      * Konstruktor klasy SQLHandler tworzy baze danych jezeli nie istnieje
-     * @throws Exception
+     * @throws Exception Wyjatek zwiazany z baza danych
      */
     public SQLHandler() throws Exception
     {
@@ -61,7 +61,7 @@ public class SQLHandler implements IOHandler{
     /**
      * Laduje dane z bazy danych
      * @return DataRepository
-     * @throws Exception
+     * @throws Exception wyjatek zwiazany z baza danych
      */
     @Override
     public DataRepository LoadData() throws Exception {
@@ -98,7 +98,7 @@ public class SQLHandler implements IOHandler{
     /**
      * Zapisuje dane do bazy danych
      * @param data , zawierajace liste wydarzen
-     * @throws Exception
+     * @throws Exception wyjatek zwiazany z baza danych
      */
     @Override
     public void SaveData(DataRepository data) throws Exception {

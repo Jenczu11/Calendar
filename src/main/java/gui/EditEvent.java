@@ -1,3 +1,4 @@
+
 package gui;
 
 import data.EventBuilder;
@@ -16,6 +17,7 @@ import java.sql.Timestamp;
 /*
 Ta klasa powinna byc dziediczna ale to kiedys sie poprawi
  */
+@Deprecated
 public class EditEvent {
 
 	private static DayView dayView;
@@ -30,6 +32,7 @@ public class EditEvent {
 	/**
 	 * Launch the application.
 	 * Nalezy odkomentowac konstruktor aby moc uruchomic okienko bezposrednio
+	 * @param args set to null
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
