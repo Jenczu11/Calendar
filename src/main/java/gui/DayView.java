@@ -111,12 +111,23 @@ public class DayView {
 		springLayout.putConstraint(SpringLayout.EAST, table, -8, SpringLayout.EAST, frame.getContentPane());
 		//</editor-fold>
 		table.setModel(new DefaultTableModel(
+
 				new Object[][] {
 				},
 				new String[] {
 						"ID", "Data", "Godzina roz.", "Godzina zak.", "Wydarzenie", "Opis"
 				}
-				));
+
+				)
+		{
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		}
+		);
 		//<editor-fold desc="Table setWidthForColumns">
 		table.getColumnModel().getColumn(0).setPreferredWidth(10);
 		table.getColumnModel().getColumn(1).setPreferredWidth(45);
@@ -150,8 +161,11 @@ public class DayView {
 //				System.out.println(target.getValueAt(row,0));
 //				EditEvent editEvent = new EditEvent(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
 //				editEvent.main(null);
-				EditEventsV2 editEventsV2 = new EditEventsV2(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
-				editEventsV2.main(null);
+				EditEventsV2 editEventsV2;
+				if(row>=0 && column >=0) {
+					editEventsV2 = new EditEventsV2(Integer.parseInt(target.getValueAt(row, 0).toString()), date, (DefaultTableModel) table.getModel(), DayView.this);
+					editEventsV2.main(null);
+				}
 			}
 		});
 

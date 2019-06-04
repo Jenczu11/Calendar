@@ -141,7 +141,16 @@ public class SearchEvents {
 				new String[] {
 						"ID", "Data", "Godzina roz.", "Godzina zak.", "Wydarzenie", "Opis"
 				}
-				));
+				)
+					   {
+
+						   @Override
+						   public boolean isCellEditable(int row, int column) {
+							   //all cells false
+							   return false;
+						   }
+					   }
+		);
 		//<editor-fold desc="Table setWidthForColumns">
 		table.getColumnModel().getColumn(0).setPreferredWidth(10);
 		table.getColumnModel().getColumn(1).setPreferredWidth(45);
