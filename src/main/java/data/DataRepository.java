@@ -21,32 +21,55 @@ public class DataRepository {
      */
     @XmlTransient
     private static int lastEventID=0;
+
+    /**
+     * Konstruktor tworzacy repozytorium z danymi
+     */
     public DataRepository()
     {
         setEvents(new ArrayList<>());
     }
+
+    /**
+     * Dodanie eventu do repozytorium
+     * @param e event do dodania
+     */
     public void addEvent(Event e)
     {
         getAllEvents().add(e);
     }
+
+    /**
+     * Zwraca wydarzenie o podanym indeksie
+     * @param index index wydarzenia ktore chcemy pobrac
+     * @return Event o podanym indeksie
+     */
     public Event getEvent(int index) {
         return getAllEvents().get(index);
     }
+
+    /**
+     * Usuwa event z bazy
+     * @param e Event do usuniecia o danych parametrach
+     */
     public void removeEvent(Event e) {
 
         getAllEvents().remove(e);
     }
 
     /**
-     * 
-     * @param index
+     * Usuwa event z bazy o danym ID
+     * @param index Indeks wydarzenia do usuniecia
      */
     public void removeEvent(int index) {
         getAllEvents().remove(index);
     }
-    public void set(int index, Event e) {
-        getAllEvents().set(index, e);
-    }
+
+    /**
+     * Ustawia event na danym miejscu w indeksie (nadpisuje)
+     * @param index indeks eventu (gdzie ma wstawic)
+     * @param event Event do wstawienia
+     */
     public void editEvent(int index, Event event) {
         getAllEvents().set(index, event);
     }
@@ -61,21 +84,43 @@ public class DataRepository {
         }
     }
 
+    /**
+     * Zwraca ID ostatniego eventu
+     * @return ID ostatniego eventu
+     */
     static int getLastEventID() {
         return lastEventID;
     }
 
+    /**
+     * Ustawia id ostatniego eventu
+     * @param lastEventID ID ostatniego eventu
+     */
     public static void setLastEventID(int lastEventID) {
         DataRepository.lastEventID = lastEventID;
     }
 
+    /**
+     * Zwraca ArrayListe eventow
+     * @return Zwraca ArrayListe Eventow
+     */
     public ArrayList<Event> getAllEvents(){
         return events;
     }
+
+    /**
+     * Zwraca rozmiar repozytorium
+     * @return rozmiar
+     */
     public int size()
     {
         return getAllEvents().size();
     }
+
+    /**
+     * Ustawia repozytorium na dana liste
+     * @param events ArrayLista eventow
+     */
     private void setEvents(ArrayList<Event> events) {
         this.events = events;
     }
