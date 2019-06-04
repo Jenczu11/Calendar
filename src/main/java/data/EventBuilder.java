@@ -51,8 +51,10 @@ public class EventBuilder {
      */
     public EventBuilder setId(String idValue) {
         //TODO: nad tym trzeba popracowac bo funkcja zle zadziala kiedy posortujemy dane i bedziemy chcieli wziac ostatnie ID
+        // Mozna tez szukac Maxa w tablicy i zwiekszac o 1 bylo by najlepiej
         //
         //Bezpieczniej moze byc poprostu branie tablicy ale to do zmiany po konsultacjach
+        //
 
         if (idValue.isEmpty()) {
             //            idValue=Integer.toString((int)Math.random()*100);

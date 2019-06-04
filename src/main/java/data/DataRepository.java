@@ -6,10 +6,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 
+/**
+ * Klasa reprezentujaca repozytorium wydarzen
+ */
 @XmlRootElement(name="events")
 public class DataRepository {
+    /**
+     * ArrayList zawierajacy wydarzenia
+     */
     @XmlElements(@XmlElement(name="event"))
     private ArrayList<Event> events;
+    /**
+     * ID ostatniego eventu w bazie
+     */
     @XmlTransient
     private static int lastEventID=0;
     public DataRepository()
