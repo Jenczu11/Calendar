@@ -44,6 +44,11 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Ustawia id Wydazrenia (dziala jako autonumeracja)
+     * @param idValue Id wydarzenia w postaci stringa ktore jest odpowiednio konwertowane
+     * @return EventBuilder
+     */
     public EventBuilder setId(String idValue) {
         //TODO: nad tym trzeba popracowac bo funkcja zle zadziala kiedy posortujemy dane i bedziemy chcieli wziac ostatnie ID
         //
@@ -56,6 +61,11 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Ustawia tytul wydarzeenia
+     * @param title Tytul wydarzenia w stringu
+     * @return EventBuilder
+     */
     public EventBuilder setTitle(String title) {
         if (title.isEmpty())
             title = "Default Title";

@@ -155,7 +155,17 @@ public class Event {
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
-    public void setStartDateToXml(String startDate) {this.startDate=Timestamp.valueOf(startDate);}
+
+    /**
+     * Ustawia date rozpoczecia wydarzenia
+     * Potrzebne do wczytywanie danych z XMLA
+     *
+     * @param startDate data w formacie "dd/mm/yyyy"
+     */
+    public void setStartDateToXml(String startDate) {
+        this.startDate = Timestamp.valueOf(startDate);
+    }
+
     /**
      * Zwraca date zakonczenia wydarzenia
      *
@@ -176,8 +186,16 @@ public class Event {
     public String getEndDateToXml() {
         return endDate.toString();
     }
-    public void setEndDateToXml(String endDate) {this.endDate=Timestamp.valueOf(endDate);}
 
+    /**
+     * Ustawia date zakoczenia wydarzenia
+     * Potrzebne do wczytywanie danych z XMLA
+     *
+     * @param endDate data w formacie "dd/mm/yyyy"
+     */
+    public void setEndDateToXml(String endDate) {
+        this.endDate = Timestamp.valueOf(endDate);
+    }
 
 
     /**
