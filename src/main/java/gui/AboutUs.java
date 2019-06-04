@@ -18,7 +18,7 @@ public class AboutUs {
 
 	/**
 	 * Launch the application.
-	 *
+	 * @param args set to null
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -40,9 +40,6 @@ public class AboutUs {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	/**
 	 * Utworzenie okna z dwoma przyciskami, po ktorych kliknieciu ukazuja sie okna z dodatkowymi infomacjami
 	 */

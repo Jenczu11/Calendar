@@ -34,8 +34,8 @@ public class DataService {
      * @param place Miejsce wydarzenia
      * @param startDate Data rozpoczecia wydarzenia
      * @param endDate Data zakonczenia wydarzenia
-     * @throws Exception Jezeli juz istnieje zdarzenie o podanym id,
-     *  lub jezli data zakonczenia zdarzenia jest wczesniejsza od daty rozpoczecia zdarzenia
+     * @throws idException Jezeli juz istnieje zdarzenie o podanym id,
+     *  @throws dataException Jezeli data zakonczenia zdarzenia jest wczesniejsza od daty rozpoczecia zdarzenia
      */
     void addEvent(String id, String title, String place, Timestamp startDate, Timestamp endDate) throws idException,dataException {
         //TODO: Autonumeracja elementow czyli bez id
@@ -108,7 +108,7 @@ public class DataService {
     /**
      * Usuwa wydarzenie o podanym id z repozytorium
      * @param id Id wydarzenia
-     * @throws Exception Kiedy nie istnieje wydarzenie o podanym id
+     * @throws idException Kiedy nie istnieje wydarzenie o podanym id
      */
     void removeEvent(String id) throws idException {
         int idInt = Integer.parseInt(id);
@@ -124,7 +124,7 @@ public class DataService {
         /**
          * Usuwa wydarzenie o podanym id z repozytorium
          * @param id Id wydarzenia
-         * @throws Exception Kiedy nie istnieje wydarzenie o podanym id
+         * @throws idException Kiedy nie istnieje wydarzenie o podanym id
          */
         void removeEvent(int id) throws idException {
             for (Event event : repository.getAllEvents()) {
@@ -143,7 +143,7 @@ public class DataService {
      * dodac event do chwilowej bazy ktory potem przypisujemy
      * Troche za bardzo mem-hungry ale cóż
      * @param deleteTo data w formacie dd/mm/yyyy HH: (Timestamp.valueOf(""))
-     * @throws Exception
+     * @throws Exception Kiedy pusta baza eventow
      */
     public void removeEventsToDate(Timestamp deleteTo) throws Exception{
             int startSize=repository.getAllEvents().size();
@@ -289,6 +289,8 @@ public class DataService {
     }
     /**
     Laduje repozytorium za pomocą napisanego handlera (XML,SQL)
+     @param handler Wybrany handler do obslugi odczytu
+     @throws Exception wyjatek zwiazany z odczytem
      */
     public void loadRepository(IOHandler handler) throws Exception
     {
@@ -297,6 +299,8 @@ public class DataService {
     }
     /**
     Zapisuje repozytorium za pomocą napisanego handlera (XML,SQL)
+     @param handler Wybrany handler do obslugi zapisu
+     @throws Exception wyjatek zwiazany z zapisem
      */
     public void saveRepository(IOHandler handler) throws Exception
     {

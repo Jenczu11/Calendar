@@ -37,6 +37,7 @@ public class SearchEvents {
 	private ArrayList<Event> searched = new ArrayList<Event>();
 	/**
 	 * Launch the application.
+	 * @param args set to null
 	 */
 	public static void main(String[] args) {
 
@@ -56,13 +57,6 @@ public class SearchEvents {
 	/**
 	 * Create the application.
 	 */
-	public SearchEvents(int day, int month, int year) {
-
-		this.day=day;
-		this.month=month;
-		this.year=year;
-
-	}
 	public SearchEvents()
 	{
 		dService=DataService.getInstance();

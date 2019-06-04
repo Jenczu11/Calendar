@@ -48,6 +48,8 @@ public class DeleteEvents extends JFrame implements Runnable {
 
 	/**
 	 * Create the frame.
+	 * @param monthPassed month to pass from JCalendar
+	 * @param yearPassed year to pass from JCalendar
 	 */
 	public DeleteEvents(int monthPassed,int yearPassed) {
 		dService = DataService.getInstance();
