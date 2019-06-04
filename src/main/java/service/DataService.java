@@ -302,7 +302,9 @@ public class DataService {
     {
        handler.SaveData(getRepository());
     }
-
+/**
+ * funkcja wystwietlajaca 
+ */
     @Override
     //TODO: naprawic to String zeby jakos lepiej wyswietlal co nie ? albo jakies inne formaty toString
     public String toString() {
