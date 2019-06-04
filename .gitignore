@@ -29,3 +29,7 @@ target/test-classes/META-INF/Calendar\.kotlin_module
 \.settings/org\.eclipse\.m2e\.core\.prefs
 
 \.idea/
+
+\.settings/
+
+test\.db
