@@ -5,7 +5,6 @@ import data.Event;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 
@@ -15,13 +14,8 @@ import java.text.SimpleDateFormat;
  */
 public class CloseEvent extends JDialog {
 
-    private final JPanel contentPanel = new JPanel();
-    private JButton okButton;
-    private JTextField titleField;
-    private JTextField desciptionField;
-    private JTextField startTimeField;
-    private JTextField endTimeField;
-    public Timer timer;
+    private final JButton okButton;
+    public final Timer timer;
     /**
      * Zmienna odpowiadajaca za czas po jakim ma wystapi� sygna� dzwi�kowy
      */
@@ -35,14 +29,11 @@ public class CloseEvent extends JDialog {
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 
         Toolkit.getDefaultToolkit().beep();
-        timer = new Timer(TIMER_DELAY, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Toolkit.getDefaultToolkit().beep();
-            }
-        });
+        timer = new Timer(TIMER_DELAY, e -> Toolkit.getDefaultToolkit().beep());
         timer.start();
         setBounds(100, 100, 450, 300);
         getContentPane().setLayout(new BorderLayout());
+        JPanel contentPanel = new JPanel();
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         SpringLayout sl_contentPanel = new SpringLayout();
@@ -71,7 +62,7 @@ public class CloseEvent extends JDialog {
         sl_contentPanel.putConstraint(SpringLayout.WEST, lblEndTime, 0, SpringLayout.WEST, lblTitle);
         contentPanel.add(lblEndTime);
 
-        titleField = new JTextField();
+        JTextField titleField = new JTextField();
         titleField.setEditable(false);
         sl_contentPanel.putConstraint(SpringLayout.SOUTH, titleField, 0, SpringLayout.SOUTH, lblTitle);
         sl_contentPanel.putConstraint(SpringLayout.EAST, titleField, -117, SpringLayout.EAST, contentPanel);
@@ -79,7 +70,7 @@ public class CloseEvent extends JDialog {
         contentPanel.add(titleField);
         titleField.setColumns(10);
 
-        desciptionField = new JTextField();
+        JTextField desciptionField = new JTextField();
         desciptionField.setEditable(false);
         sl_contentPanel.putConstraint(SpringLayout.NORTH, desciptionField, 5, SpringLayout.SOUTH, titleField);
         sl_contentPanel.putConstraint(SpringLayout.NORTH, lblDescription, 3, SpringLayout.NORTH, desciptionField);
@@ -88,7 +79,7 @@ public class CloseEvent extends JDialog {
         contentPanel.add(desciptionField);
         desciptionField.setColumns(10);
 
-        startTimeField = new JTextField();
+        JTextField startTimeField = new JTextField();
         startTimeField.setEditable(false);
         sl_contentPanel.putConstraint(SpringLayout.NORTH, lblStartTime, 3, SpringLayout.NORTH, startTimeField);
         sl_contentPanel.putConstraint(SpringLayout.NORTH, startTimeField, 6, SpringLayout.SOUTH, desciptionField);
@@ -97,7 +88,7 @@ public class CloseEvent extends JDialog {
         contentPanel.add(startTimeField);
         startTimeField.setColumns(10);
 
-        endTimeField = new JTextField();
+        JTextField endTimeField = new JTextField();
         sl_contentPanel.putConstraint(SpringLayout.NORTH, endTimeField, 13, SpringLayout.SOUTH, startTimeField);
         sl_contentPanel.putConstraint(SpringLayout.NORTH, lblEndTime, 3, SpringLayout.NORTH, endTimeField);
         endTimeField.setEditable(false);
@@ -125,7 +116,7 @@ public class CloseEvent extends JDialog {
         });
     }
 
-    public void addConfirmListener(ActionListener actionListener) {
+    void addConfirmListener(ActionListener actionListener) {
         okButton.addActionListener(actionListener);
     }
 }

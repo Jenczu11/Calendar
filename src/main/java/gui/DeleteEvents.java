@@ -18,10 +18,10 @@ import java.awt.event.ActionListener;
  */
 public class DeleteEvents extends JFrame implements Runnable {
 
-	int month;
-	int year;
-	private JPanel contentPane;
-	private DataService dService;
+	private static int month;
+	private static int year;
+	private final JPanel contentPane;
+	private final DataService dService;
 
 	/**
 	 * Launch the application.
@@ -34,17 +34,17 @@ public class DeleteEvents extends JFrame implements Runnable {
 		Utils.pInfo("Otwarto okno DeleteEvents");
 		this.setVisible(true);
 	}
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DeleteEvents de = new DeleteEvents(month,year);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -53,8 +53,8 @@ public class DeleteEvents extends JFrame implements Runnable {
 	 */
 	public DeleteEvents(int monthPassed,int yearPassed) {
 		dService = DataService.getInstance();
-		this.month=monthPassed;
-		this.year=yearPassed;
+		month=monthPassed;
+		year=yearPassed;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

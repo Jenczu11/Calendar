@@ -60,6 +60,7 @@ public class SQLHandlerTest {
         SQLHandler sqlHandler = null;
         try {
             sqlHandler = new SQLHandler();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

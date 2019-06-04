@@ -19,14 +19,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class GUI {
-    boolean onPanel = false;
+    private boolean onPanel = false;
     boolean pressedEnter = false;
-    int day;
-    int month;
-    int year;
+    private int day;
+    private int month;
+    private int year;
     private JFrame frame;
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-    private Timer timer;
     /**
      * Liczba milisekund, po ktorych nastepuje sprawdzanie czy jakies zdarzenia wymagaja zaalarmowania
      * Wartosc 60000 sprawdza co minute
@@ -35,7 +34,7 @@ public class GUI {
     /**
      * Glowny DataService
      */
-    public DataService dataService;
+    private final DataService dataService;
 
     /**
      * Launch the application.
@@ -59,15 +58,16 @@ public class GUI {
     /**
      * Create the application.
      */
-    public GUI() {
+    private GUI() {
         initialize();
+//        frame.setVisible(true);
         dataService = DataService.getInstance();
         try {
             dataService.loadRepository(new SQLHandler());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        timer = new Timer(TIMER_DELAY, new ActionListener() {
+        Timer timer = new Timer(TIMER_DELAY, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 checkEvents();
             }
@@ -169,7 +169,7 @@ public class GUI {
             public void mouseClicked(MouseEvent e) {
                 AboutUs aboutUs = new AboutUs();
                 //TODO: mozna zmienic konstruktor zeby odpalal
-                aboutUs.main(null);
+                AboutUs.main(null);
             }
         });
         menuBar.add(mnAboutus);
@@ -231,7 +231,7 @@ public class GUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SearchEvents searchEvents = new SearchEvents();
-                searchEvents.main(null);
+                SearchEvents.main(null);
             }
         });
         menuBar.add(mnSearchEvents);
@@ -239,7 +239,7 @@ public class GUI {
 
 
         JPanel jPanel = calendar.getDayChooser().getDayPanel();
-        Component component[] = jPanel.getComponents();
+        Component[] component = jPanel.getComponents();
         for (int i = 0; i < component.length; i++) {
             component[i].addMouseListener(new MouseAdapter() {
                 //<editor-fold desc="MouseListener zabezpieczenie przed zlym wyborem (do klawiatury)">
@@ -332,7 +332,7 @@ public class GUI {
         ArrayList<Event> events = dataService.getAllEvents();
         for (Event event : events) {
             long dif = event.getStartDate().getTime() - new Date().getTime();
-            if (dif < 1800000 && dif > 0 && event.isAlarm() == false) {
+            if (dif < 1800000 && dif > 0 && !event.isAlarm()) {
                 event.setAlarm(true);
                 try {
                     CloseEvent dialog = new CloseEvent(event);

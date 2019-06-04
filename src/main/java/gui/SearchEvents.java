@@ -41,15 +41,13 @@ public class SearchEvents {
 	 */
 	public static void main(String[] args) {
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SearchEvents window = new SearchEvents();
+		EventQueue.invokeLater(() -> {
+			try {
+				SearchEvents window = new SearchEvents();
 //					System.out.println("DayView:"+day+" "+month+" "+year);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				window.frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -93,6 +91,7 @@ public class SearchEvents {
 		
 		searchField = new JTextField();
 		searchField.addKeyListener(new KeyAdapter() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void keyTyped(KeyEvent e) {
 
@@ -108,6 +107,7 @@ public class SearchEvents {
 				showEvents();
 				}
 			}
+			@SuppressWarnings("unchecked")
 			@Override
 			public void keyReleased(KeyEvent e) {
 
@@ -195,7 +195,7 @@ public class SearchEvents {
 
 	
 	}
-	public void showEvents() {
+	private void showEvents() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 //		String SDay = Integer.toString(DayView.day);

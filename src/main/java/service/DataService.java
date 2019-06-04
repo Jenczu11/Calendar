@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Klasa odpowiedzialna za warstwe logiki w programie
+ */
 public class DataService {
     private static DataService ourInstance;
 
@@ -234,7 +237,7 @@ public class DataService {
      * Odswieza pole LastEventID w dataRepository
      * Metoda szuka maksymalnej wartości ID w bazie danych i zwiększa go o 1
      */
-    public void refreshID()
+    private void refreshID()
     {
         if (repository.getAllEvents().isEmpty()) DataRepository.setLastEventID(0);
         if (repository.getAllEvents().size()==1) DataRepository.setLastEventID(1);
@@ -258,7 +261,7 @@ public class DataService {
         return repository;
     }
 
-    public void setRepository(DataRepository repository) {
+    private void setRepository(DataRepository repository) {
         this.repository = repository;
         refreshID();
     }

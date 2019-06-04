@@ -17,17 +17,14 @@ import java.sql.Timestamp;
 Ta klasa powinna byc dziedziczna ale to kiedys sie popraw
 Ta klasa przekazuje sobie jeszcze odpowiednie parametry
  */
-public class EditEventsV2 {
+public class EditEvents {
 
     private static DayView dayView;
     private static DataService dService;
-    private static SearchEvents searchEvents;
-    public static JFrame frame;
+    private static JFrame frame;
     private static Timestamp date;
-    public static Button button;
-    public static Label label;
     private static int targetID;
-    DefaultTableModel model = null;
+    private static DefaultTableModel model = null;
 
     /**
      * Launch the application.
@@ -38,7 +35,7 @@ public class EditEventsV2 {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Events window = new Events();
+                    EditEvents ee = new EditEvents(targetID,date,model,dayView);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -51,29 +48,17 @@ public class EditEventsV2 {
      * Create the application.
      */
     @Deprecated
-    public EditEventsV2() {
+    public EditEvents() {
         dService = DataService.getInstance();
         initialize();
     }
 
-    public EditEventsV2(int targetID, Timestamp date, DefaultTableModel model, SearchEvents se) {
+    public EditEvents(int targetID, Timestamp date, DefaultTableModel model, DayView dw) {
 
-        EditEventsV2.date = date;
-        this.targetID=targetID;
+        EditEvents.date = date;
+        EditEvents.targetID =targetID;
         this.model = model;
-        this.searchEvents=se;
-        dService = DataService.getInstance();
-
-
-        initialize();
-//		this.frame.setVisible(true);
-    }
-    public EditEventsV2(int targetID, Timestamp date, DefaultTableModel model, DayView dw) {
-
-        EditEventsV2.date = date;
-        this.targetID=targetID;
-        this.model = model;
-        this.dayView=dw;
+        dayView=dw;
         dService = DataService.getInstance();
 
 
@@ -84,7 +69,7 @@ public class EditEventsV2 {
     /**
      * Initialize the contents of the frame.
      */
-    public static void initialize() {
+    private static void initialize() {
 
         //<editor-fold desc="JFrame init+setup">
         frame = new JFrame();
@@ -136,7 +121,7 @@ public class EditEventsV2 {
 
         //<editor-fold desc="Label wydarzenie">
 
-        label = new Label("Edytuj wydarzenie:");
+        Label label = new Label("Edytuj wydarzenie:");
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Dialog", Font.BOLD, 17));
         label.setBounds(65, 10, 155, 24);
@@ -144,7 +129,7 @@ public class EditEventsV2 {
         //</editor-fold>
 
         //<editor-fold desc="Button edytuj">
-        button = new Button("Edytuj");
+        Button button = new Button("Edytuj");
 
         button.setFont(new Font("Dialog", Font.BOLD, 14));
         button.setActionCommand("DODAJ");
@@ -200,8 +185,8 @@ public class EditEventsV2 {
         frame.getContentPane().add(endDateMinutes);
         //</editor-fold>
 
-        /**
-         * Action listnery
+        /*
+          Action listnery
          */
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -237,7 +222,7 @@ public class EditEventsV2 {
      * @param start od jakiego numeru ma tworzyc
      * @param end do jakiego numeru ma tworzyc
      */
-    static void addToChoiceNumbers(Choice where, int start, int end)
+    private static void addToChoiceNumbers(Choice where, int start, int end)
     {
         if(end>100) end=99;
         for (int i = start; i < end; i++)

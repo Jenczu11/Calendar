@@ -76,7 +76,7 @@ public class DataRepository {
     /**
      * Ustawia zmienna lastEventID na ostatni event w bazie danych
      */
-    public void refreshLastEventId() {
+    private void refreshLastEventId() {
         if (events.isEmpty()) lastEventID = 0;
         else {
             Event e = events.get(events.size() - 1);

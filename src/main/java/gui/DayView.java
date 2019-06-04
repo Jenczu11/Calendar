@@ -1,29 +1,18 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import data.Event;
+import service.DataService;
+import service.Utils;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.SpringLayout;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
-
-import data.Event;
-import service.DataService;
-import service.Utils;
 
 /**
  * 
@@ -48,15 +37,13 @@ public class DayView {
 	 */
 	public static void main(String[] args) {
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DayView window = new DayView();
-					Utils.pInfo("DayView: "+day+" "+month+" "+year);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				DayView window = new DayView();
+				Utils.pInfo("DayView: "+day+" "+month+" "+year);
+				window.frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -69,12 +56,12 @@ public class DayView {
 	 */
 	public DayView(int day, int month, int year) {
 
-		this.day=day;
-		this.month=month;
-		this.year=year;
+		DayView.day =day;
+		DayView.month =month;
+		DayView.year =year;
 
 	}
-	public DayView()
+	private DayView()
 	{
 		dService=DataService.getInstance();
 		String SDay = Integer.toString(DayView.day);
@@ -185,22 +172,20 @@ public class DayView {
 //				System.out.println(target.getValueAt(row,0));
 //				EditEvent editEvent = new EditEvent(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
 //				editEvent.main(null);
-				EditEventsV2 editEventsV2;
-				if(row>=0 && column >=0) {
-					editEventsV2 = new EditEventsV2(Integer.parseInt(target.getValueAt(row, 0).toString()), date, (DefaultTableModel) table.getModel(), DayView.this);
-					editEventsV2.main(null);
+				EditEvents editEvents;
+				if(target.getSelectedRow()>=0 && target.getSelectedColumn() >=0) {
+					editEvents = new EditEvents(Integer.parseInt(target.getValueAt(row, 0).toString()), date, (DefaultTableModel) table.getModel(), DayView.this);
+					EditEvents.main(null);
 				}
 			}
 		});
 
-		btnAddEvent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Events events = new Events(date,(DefaultTableModel) table.getModel(),DayView.this);
-				Events.main(null);
-			}
+		btnAddEvent.addActionListener(e -> {
+			Events events = new Events(date,(DefaultTableModel) table.getModel(),DayView.this);
+			Events.main(null);
 		});
 	}
-	public void showEvents() {
+	void showEvents() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
 //		String SDay = Integer.toString(DayView.day);

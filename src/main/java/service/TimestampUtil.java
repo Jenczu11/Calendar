@@ -45,11 +45,7 @@ public class TimestampUtil {
         assert parsedDate != null: "Parsed date is null";
         return new Timestamp(parsedDate.getTime());
     }
-    /**
-     * Funkcja pomocnicza, parsuje string w formacie dd/MM/yyyy HH:mm na Timestamp
-     * @param time String do parsownia
-     * @return Zparsowany string na timestamp
-     */
+
     /**
      * Funkcja pomocnicza, parsuje inty Timestamp
      * @param day dzien

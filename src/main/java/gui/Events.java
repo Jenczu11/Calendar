@@ -9,8 +9,6 @@ import service.Utils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 
 //import net.miginfocom.swing.MigLayout;
@@ -25,11 +23,11 @@ public class Events {
 
     private static DayView dayView;
     private static DataService dService;
-    public static JFrame frame;
+    private static JFrame frame;
     private static Timestamp date;
-    public static Button button;
-    public static Label label;
-    DefaultTableModel model = null;
+    private static Button button;
+    private static Label label;
+    private static DefaultTableModel model = null;
 
     /**
      * Launch the application.
@@ -37,25 +35,14 @@ public class Events {
      * @param args set to null
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-					Events window = new Events();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                Events window = new Events(date,model,dayView);
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
-    }
-
-    /**
-     * Create the application.
-     */
-    @Deprecated
-    public Events() {
-        dService = DataService.getInstance();
-        initialize();
     }
 
 
@@ -63,10 +50,8 @@ public class Events {
 
         Events.date = date;
         this.model = model;
-        this.dayView=dw;
-
+        dayView=dw;
         dService = DataService.getInstance();
-
         initialize();
 //		this.frame.setVisible(true);
     }
@@ -74,7 +59,7 @@ public class Events {
     /**
      * Initialize the contents of the frame.
      */
-    public static void initialize() {
+    private static void initialize() {
 
         //<editor-fold desc="JFrame init+setup">
         frame = new JFrame();
@@ -184,32 +169,30 @@ public class Events {
         frame.getContentPane().add(endDateMinutes);
         //</editor-fold>
 
-        /**
-         * Action listnery
+        /*
+          Action listnery
          */
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                EventBuilder builder = new EventBuilder();
-                builder.setId("");
-                builder.setTitle(Title.getText());
-                builder.setPlace(Place.getText());
-                String time = startDateHours.getSelectedItem() + ":" + startDateMinutes.getSelectedItem() + ":00";
-                builder.setStartDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
-                time = endDateHours.getSelectedItem() + ":" + endDateMinutes.getSelectedItem() + ":00";
-                builder.setEndDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
-                builder.setAlarm(checkbox.getState());
-                try {
-                    dService.addEvent(builder.createEvent());
-                    dayView.showEvents();
-                    frame.dispose();
-                    Utils.pInfo("Dodano " + builder.toString());
-                } catch (idException | dataException ex) {
+        button.addActionListener(e -> {
+            EventBuilder builder = new EventBuilder();
+            builder.setId("");
+            builder.setTitle(Title.getText());
+            builder.setPlace(Place.getText());
+            String time = startDateHours.getSelectedItem() + ":" + startDateMinutes.getSelectedItem() + ":00";
+            builder.setStartDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
+            time = endDateHours.getSelectedItem() + ":" + endDateMinutes.getSelectedItem() + ":00";
+            builder.setEndDate(Timestamp.valueOf(date.toString().substring(0, 10) + " " + time));
+            builder.setAlarm(checkbox.getState());
+            try {
+                dService.addEvent(builder.createEvent());
+                dayView.showEvents();
+                frame.dispose();
+                Utils.pInfo("Dodano " + builder.toString());
+            } catch (idException | dataException ex) {
 
-                    System.err.println(ex.toString());
-                    JOptionPane.showMessageDialog(null,ex.getMessage(),"Wystapil blad przy tworzeniu eventu",JOptionPane.ERROR_MESSAGE);
-                }
-
+                System.err.println(ex.toString());
+                JOptionPane.showMessageDialog(null,ex.getMessage(),"Wystapil blad przy tworzeniu eventu",JOptionPane.ERROR_MESSAGE);
             }
+
         });
     }
 
@@ -220,7 +203,7 @@ public class Events {
      * @param start od jakiego numeru ma tworzyc
      * @param end do jakiego numeru ma tworzyc
      */
-    static void addToChoiceNumbers(Choice where, int start, int end)
+    private static void addToChoiceNumbers(Choice where, int start, int end)
     {
         if(end>100) end=99;
         for (int i = start; i < end; i++)
