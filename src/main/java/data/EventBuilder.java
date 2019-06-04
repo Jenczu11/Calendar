@@ -73,6 +73,11 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Ustawia miejsce wydarzenia
+     * @param place Ustaw miejsce wydarzenia
+     * @return EventBuilder
+     */
     public EventBuilder setPlace(String place) {
         if (place.isEmpty())
             place = "Default Place";
@@ -80,30 +85,53 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Ustawia date rozpoczecia wydarzenia
+     * @param startDate Data rozpoczecia wydarzenia jako timeStamp
+     * @return EventBuilder
+     */
     public EventBuilder setStartDate(Timestamp startDate) {
 
         this.startDate = startDate;
         return this;
     }
 
+    /**
+     * Ustawia date zakonczenia wydarzenia
+     * @param endDate Data zakonczenia wydarzenia jako TimeStamp
+     * @return EventBuilder
+     */
     public EventBuilder setEndDate(Timestamp endDate) {
 
         this.endDate = endDate;
         return this;
     }
 
+    /**
+     * Ustawia flage czy nalezy zaalarmowac o wydarzeniu
+     * @param alarm Czy nalezy zaalarmowac o wydarzeniu
+     * @return EventBuilder
+     */
     public EventBuilder setAlarm(boolean alarm) {
         this.alarm = alarm;
         return this;
     }
 
+    /**
+     * Tworzy nowe instancje obiektu Event
+     * @return nowa instacje obiektu Event z jego parametrami
+     */
     public Event createEvent() {
         return new Event(id, title, place, startDate, endDate);
     }
 
+    /**
+     * Zwraca dane zapisana w eventBuilderze
+     * @return zwraca opis wydarzenia
+     */
     @Override
     public String toString() {
-        return "Wydarzenie{" +
+        return "Event|Builder{" +
                 "id=" + id +
                 ", Tyt='" + title + '\'' +
                 ", Des='" + place + '\'' +
