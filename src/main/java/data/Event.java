@@ -155,7 +155,7 @@ public class Event {
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
-
+    public void setStartDateToXml(String startDate) {this.startDate=Timestamp.valueOf(startDate);}
     /**
      * Zwraca date zakonczenia wydarzenia
      *
@@ -176,6 +176,9 @@ public class Event {
     public String getEndDateToXml() {
         return endDate.toString();
     }
+    public void setEndDateToXml(String endDate) {this.endDate=Timestamp.valueOf(endDate);}
+
+
 
     /**
      * Ustawia date zakonczenia wydarzenia

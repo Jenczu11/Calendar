@@ -43,6 +43,7 @@ public class XMLHandlerTest {
             }
         }
         assertEquals(expected,dataService.getRepositoryEvents().size());
+        System.out.println(dataService.toString());
         XMLHandler xmlHandler = new XMLHandler("XMLHandlerTest.xml");
         assertDoesNotThrow(() -> dataService.saveRepository(xmlHandler));
 //
@@ -59,7 +60,7 @@ public class XMLHandlerTest {
         XMLHandler xmlHandler = new XMLHandler("XMLHandlerTest.xml");
         assertDoesNotThrow(()->dataService.loadRepository(xmlHandler));
         assertEquals(expected,dataService.getRepositoryEvents().size());
-//        System.out.println(dataService.toString());
+      System.out.println(dataService.toString());
 
     }
 }
