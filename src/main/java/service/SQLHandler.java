@@ -39,7 +39,7 @@ public class SQLHandler implements IOHandler{
         String queryString="create table IF NOT EXISTS Events " +
                 "( id int constraint Events_pk primary key," +
                 " title TEXT, " +
-                "description TEXT, " +
+                " place TEXT, " +
                 "startDate   TEXT, " +
                 "endDate     TEXT, " +
                 "alarmed     boolean" +
@@ -70,7 +70,7 @@ public class SQLHandler implements IOHandler{
         Class.forName(SQLHandler.DRIVER);
         conn = DriverManager.getConnection(DB_URL);
         Statement stat = conn.createStatement();
-        String queryString = "select id, title, description, startDate, endDate from Events";
+        String queryString = "select id, title, place, startDate, endDate from Events";
         ResultSet rs = stat.executeQuery(queryString);
         while (rs.next()) {
 //            SimpleDateFormat formatter;

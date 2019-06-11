@@ -142,7 +142,7 @@ public class DayView {
 
 		table = new JTable();
 		final String[] column_names = {
-				"ID", "Data", "Rozpoczecie", "Zakonczenie", "Wydarzenie", "Opis"
+				"ID", "Data", "Rozpoczecie", "Zakonczenie", "Wydarzenie", "Miejsce"
 		};
 		model = new DefaultTableModel(column_names ,0)
 		{

@@ -52,11 +52,11 @@ class program {
                     System.out.println("Podaj opis wydarzenia");
 //                        String description=scanner.nextLine();
                     builder.setPlace(scanner.nextLine());
-                    System.out.println("Podaj date poczatkowa w formacie dd/MM/yyyy");
+                    System.out.println("Podaj date poczatkowa w formacie dd/MM/yyyy hh:mm");
 //                        String startDateString = scanner.nextLine();
                     builder.setStartDate(dataService.StringToTimestampWithTime(scanner.nextLine()));
 //                        Timestamp startDate = dataService.StringToTimestamp(startDateString);
-                    System.out.println("Podaj date koncowa w formacie dd/MM/yyyy");
+                    System.out.println("Podaj date koncowa w formacie dd/MM/yyyy hh:mm");
 //                        String EndDateString = scanner.nextLine();
                     builder.setEndDate(dataService.StringToTimestampWithTime(scanner.nextLine()));
 //                        Timestamp endDate = dataService.StringToTimestamp(EndDateString);

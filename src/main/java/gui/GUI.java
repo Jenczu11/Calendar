@@ -98,7 +98,7 @@ public class GUI {
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBackground(new Color(25, 25, 112));
         frame.setJMenuBar(menuBar);
-        JMenu mnFile = new JMenu("File");
+        JMenu mnFile = new JMenu("Plik");
         mnFile.setFont(new Font("Tahoma", Font.PLAIN, 13));
         mnFile.setForeground(new Color(255, 215, 0));
         menuBar.add(mnFile);
@@ -109,7 +109,7 @@ public class GUI {
         //</editor-fold>
 
         //<editor-fold desc="SaveToXML button">
-        JMenuItem mntmSaveToXml = new JMenuItem("Save to XML");
+        JMenuItem mntmSaveToXml = new JMenuItem("Zapisz do XML");
         mntmSaveToXml.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -124,7 +124,7 @@ public class GUI {
         //</editor-fold>
 
         //<editor-fold desc="LoadToXML button">
-        JMenuItem mntmLoadFromXml = new JMenuItem("Load from XML");
+        JMenuItem mntmLoadFromXml = new JMenuItem("Zaladuj z XML");
         mntmLoadFromXml.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -139,9 +139,9 @@ public class GUI {
         //</editor-fold>
 
         //<editor-fold desc="SaveToSQL button">
-        JMenuItem mntmSaveToSql = new JMenuItem("Save to SQL");
+        JMenuItem mntmSaveToSql = new JMenuItem("Zapisz do SQL");
 
-        Action saveAction = new AbstractAction("Save") {
+        Action saveAction = new AbstractAction("Zapisz") {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -163,9 +163,9 @@ public class GUI {
         //</editor-fold>
 
         //<editor-fold desc="LoadFromSQL button">
-        JMenuItem mntmLoadFromSql = new JMenuItem("Load from SQL");
+        JMenuItem mntmLoadFromSql = new JMenuItem("Laduj z SQL");
 
-        Action loadAction = new AbstractAction("Load") {
+        Action loadAction = new AbstractAction("Zaladuj") {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -204,7 +204,7 @@ public class GUI {
         //</editor-fold>
 
         //<editor-fold desc="AboutUs Button">
-        JMenu mnAboutus = new JMenu("About Us");
+        JMenu mnAboutus = new JMenu("O programie");
         mnAboutus.setFont(new Font("Tahoma", Font.PLAIN, 13));
         mnAboutus.setForeground(new Color(255, 215, 0));
         mnAboutus.addMouseListener(new MouseAdapter() {
@@ -215,7 +215,7 @@ public class GUI {
                 AboutUs.main(null);
             }
         });
-        Action aboutUsAction = new AbstractAction("About Us") {
+        Action aboutUsAction = new AbstractAction("O programie") {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -235,7 +235,7 @@ public class GUI {
         //</editor-fold>
 
         //<editor-fold desc="Settings button">
-        JMenu mnSettings = new JMenu("Settings");
+        JMenu mnSettings = new JMenu("Ustawienia");
         mnSettings.setFont(new Font("Tahoma", Font.PLAIN, 13));
         mnSettings.setForeground(new Color(255, 215, 0));
         mnSettings.addMouseListener(new MouseAdapter() {
@@ -273,7 +273,7 @@ public class GUI {
         });
         mnSettings.add(mntmColorpicker);
         //<editor-fold>
-        JMenu mnDeleteEvents = new JMenu("Delete Events");
+        JMenu mnDeleteEvents = new JMenu("Usun Wydarzenia");
         mnDeleteEvents.setFont(new Font("Tahoma", Font.PLAIN, 13));
         mnDeleteEvents.setForeground(new Color(255, 215, 0));
         mnDeleteEvents.addMouseListener(new MouseAdapter() {
@@ -290,7 +290,7 @@ public class GUI {
         menuBar.add(mnDeleteEvents);
 
         //<editor-fold desc="SearchEvents">
-        JMenu mnSearchEvents = new JMenu("Search Events");
+        JMenu mnSearchEvents = new JMenu("Szukaj");
         mnSearchEvents.setFont(new Font("Tahoma", Font.PLAIN, 13));
         mnSearchEvents.setForeground(new Color(255, 215, 0));
         mnSearchEvents.addMouseListener(new MouseAdapter() {
@@ -301,7 +301,7 @@ public class GUI {
             }
         });
 
-        Action searchAction = new AbstractAction("Search") {
+        Action searchAction = new AbstractAction("Szukaj") {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
