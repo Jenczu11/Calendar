@@ -204,20 +204,12 @@ public class DataService {
          return TimestampUtil.StringToTimestampWithTime(time);
      }
      /**
-      * 
+      * Zwraca rozmiar repozytorium
       * @return zwraca rozmiar repozytorium - ilosc wydarzen
       */
     public int size()
     {
         return repository.size();
-    }
-    /**
-     * 
-     * @return zwraca liste wydarzen 
-     */
-
-    List<Event> getRepositoryEvents() {
-        return repository.getAllEvents();
     }
 
     /**
@@ -248,25 +240,35 @@ public class DataService {
 
         }
     }
+
     /**
-     * 
+     * Zwraca liste eventow
      * @return zwraca arrayliste ze wszystkimi dodanymi wydarzeniami
      */
-
     public ArrayList<Event> getAllEvents()
     {
         return repository.getAllEvents();
     }
+
+    /**
+     * Zwraca repozytorium
+     * @return Zwraca repozytorium
+     */
     public DataRepository getRepository() {
         return repository;
     }
 
+    /**
+     * Pozwala ustawic nowe repozytorium danych
+     * @usage w removeEventsToDate i loadRepository
+     * @param repository repozytorium ktore chcemy ustawic
+     */
     private void setRepository(DataRepository repository) {
         this.repository = repository;
         refreshID();
     }
     /**
-     * 
+     * Funkcja wyszukujaca eventy wg wzorca
      * @param whatToSearch - wydarzenie, ktorego poszukujemy w kalendarzu
      * @return zwraca arraylist z poszukiwanym wydarzeniem (jesli zostalo znalezione)
      */
