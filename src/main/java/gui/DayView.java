@@ -38,7 +38,7 @@ public class DayView {
 	private JTable table;
 	/**
 	 * Launch the application.
-	 *
+	 * @param args set to null
 	 */
 	public static void main(String[] args) {
 

@@ -260,7 +260,7 @@ public class DataService {
 
     /**
      * Pozwala ustawic nowe repozytorium danych
-     * @usage w removeEventsToDate i loadRepository
+     * @use w removeEventsToDate i loadRepository
      * @param repository repozytorium ktore chcemy ustawic
      */
     private void setRepository(DataRepository repository) {

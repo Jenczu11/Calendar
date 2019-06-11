@@ -35,13 +35,17 @@ public class Event {
      */
     private boolean alarm;
 
+    /**
+     * Ustawia czy event byl juz przypominany
+     * @param alarm czy event byl juz przypominany
+     */
     public void setAlarm(boolean alarm) {
         this.alarm = alarm;
     }
 
     /**
      * Tworzenie nowej instancji klasy event
-     * wymagane do obsługi JAXB
+     * wymagane do obslugi JAXB
      */
     public Event() {
         alarm = false;

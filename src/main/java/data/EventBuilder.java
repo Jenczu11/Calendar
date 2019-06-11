@@ -33,7 +33,10 @@ public class EventBuilder {
      */
     private boolean alarm;
 
-
+    /**
+     * Konstruktor klasy eventBuilder
+     */
+    public EventBuilder(){};
     /**
      * Ustawia id wydarzenia
      * @param id Id wydarzenia

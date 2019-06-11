@@ -40,7 +40,7 @@ public class SQLHandlerTest {
                 e.printStackTrace();
             }
         }
-        assertEquals(expected, dataService.getRepositoryEvents().size());
+        assertEquals(expected, dataService.size());
         SQLHandler sqlHandler = null;
         try {
             sqlHandler = new SQLHandler();
@@ -67,7 +67,7 @@ public class SQLHandlerTest {
         SQLHandler.setDbUrl("SQLTesting");
         SQLHandler finalSqlHandler = sqlHandler;
         assertDoesNotThrow(()->dataService.loadRepository(finalSqlHandler));
-        assertEquals(expected,dataService.getRepositoryEvents().size());
+        assertEquals(expected,dataService.size());
 //        System.out.println(dataService.toString());
 
     }

@@ -19,6 +19,10 @@ import java.sql.Timestamp;
 Ta klasa powinna byc dziedziczna ale to kiedys sie popraw
 Ta klasa przekazuje sobie jeszcze odpowiednie parametry
  */
+
+/**
+ * Klasa wyswietlajaca okienko edytowania wydarzenia
+ */
 public class EditEvents {
 
     private static DayView dayView;

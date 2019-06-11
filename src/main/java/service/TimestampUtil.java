@@ -9,7 +9,7 @@ import java.util.Date;
  * Klasa pomocnicza do formatowania TimeStampow
  *
  */
-public class TimestampUtil {
+public final class TimestampUtil {
     /**
      * Funkcja pomocnicza, parsuje string w formacie dd/MM/yyyy na Timestamp
      * @param ddMMyyyy String do parsownia

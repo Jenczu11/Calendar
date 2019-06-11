@@ -2,10 +2,7 @@ package gui;
 
 import com.toedter.calendar.JCalendar;
 import data.Event;
-import service.DataService;
-import service.SQLHandler;
-import service.Utils;
-import service.XMLHandler;
+import service.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -18,6 +15,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Klasa wejscia programu, wyswietla glowne okienko GUI
+ */
 public class GUI {
     private boolean onPanel = false;
     boolean pressedEnter = false;
@@ -184,6 +184,23 @@ public class GUI {
         mntmLoadFromSql.addActionListener(loadAction);
         mntmLoadFromSql.setAction(loadAction);
         mnSql.add(mntmLoadFromSql);
+        
+       
+        
+        JMenuItem mntmCsv = new JMenuItem("CSV");
+        mntmCsv.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+        		   try {
+                       dataService.saveRepository(new GoogleCalendarHandler(""));
+                   } catch (Exception ex) {
+                       ex.printStackTrace();
+                   }
+                   Utils.pInfo("Zapisano do CSV");
+               }
+        
+        });
+        mnFile.add(mntmCsv);
         //</editor-fold>
 
         //<editor-fold desc="AboutUs Button">

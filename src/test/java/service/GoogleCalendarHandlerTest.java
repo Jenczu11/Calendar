@@ -40,7 +40,7 @@ class GoogleCalendarHandlerTest {
                 e.printStackTrace();
             }
         }
-        assertEquals(expected, dataService.getRepositoryEvents().size());
+        assertEquals(expected, dataService.size());
         GoogleCalendarHandler gcalh = new GoogleCalendarHandler("GcalTest");
         assertDoesNotThrow(() -> dataService.saveRepository(gcalh));
 
