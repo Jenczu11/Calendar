@@ -9,6 +9,8 @@ import service.Utils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
 
 //import net.miginfocom.swing.MigLayout;
@@ -19,7 +21,7 @@ import java.sql.Timestamp;
  * Klasa umozliwiajaca dodanie wydarzenia
  *
  */
-public class Events {
+public class addEvent {
 
     private static DayView dayView;
     private static DataService dService;
@@ -37,7 +39,7 @@ public class Events {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                Events window = new Events(date,model,dayView);
+                addEvent window = new addEvent(date,model,dayView);
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -46,9 +48,9 @@ public class Events {
     }
 
 
-    public Events(Timestamp date, DefaultTableModel model, DayView dw) {
+    public addEvent(Timestamp date, DefaultTableModel model, DayView dw) {
 
-        Events.date = date;
+        addEvent.date = date;
         this.model = model;
         dayView=dw;
         dService = DataService.getInstance();
@@ -193,6 +195,14 @@ public class Events {
                 JOptionPane.showMessageDialog(null,ex.getMessage(),"Wystapil blad przy tworzeniu eventu",JOptionPane.ERROR_MESSAGE);
             }
 
+        });
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                System.out.println("EVENTSWINDOWCLOSING");
+                System.out.println(e);
+            }
         });
     }
 

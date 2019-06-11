@@ -140,7 +140,10 @@ public class GUI {
 
         //<editor-fold desc="SaveToSQL button">
         JMenuItem mntmSaveToSql = new JMenuItem("Save to SQL");
-        mntmSaveToSql.addActionListener(new ActionListener() {
+
+        Action saveAction = new AbstractAction("Save") {
+
+            @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     dataService.saveRepository(new SQLHandler());
@@ -149,13 +152,22 @@ public class GUI {
                 }
                 Utils.pInfo("Zapisano do SQL");
             }
-        });
+        };
+
+        saveAction.putValue(Action.ACCELERATOR_KEY,
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
+
+        mntmSaveToSql.addActionListener(saveAction);
+        mntmSaveToSql.setAction(saveAction);
         mnSql.add(mntmSaveToSql);
         //</editor-fold>
 
         //<editor-fold desc="LoadFromSQL button">
         JMenuItem mntmLoadFromSql = new JMenuItem("Load from SQL");
-        mntmLoadFromSql.addActionListener(new ActionListener() {
+
+        Action loadAction = new AbstractAction("Load") {
+
+            @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     dataService.loadRepository(new SQLHandler());
@@ -164,7 +176,13 @@ public class GUI {
                 }
                 Utils.pInfo("Zaladowano z SQL");
             }
-        });
+        };
+
+        loadAction.putValue(Action.ACCELERATOR_KEY,
+                KeyStroke.getKeyStroke(KeyEvent.VK_L, KeyEvent.CTRL_DOWN_MASK));
+
+        mntmLoadFromSql.addActionListener(loadAction);
+        mntmLoadFromSql.setAction(loadAction);
         mnSql.add(mntmLoadFromSql);
         //</editor-fold>
 
@@ -221,7 +239,7 @@ public class GUI {
             }
         });
         mnSettings.add(mntmColorpicker);
-
+        //<editor-fold>
         JMenu mnDeleteEvents = new JMenu("Delete Events");
         mnDeleteEvents.setFont(new Font("Tahoma", Font.PLAIN, 13));
         mnDeleteEvents.setForeground(new Color(255, 215, 0));
@@ -238,6 +256,7 @@ public class GUI {
 
         menuBar.add(mnDeleteEvents);
 
+        //<editor-fold desc="SearchEvents">
         JMenu mnSearchEvents = new JMenu("Search Events");
         mnSearchEvents.setFont(new Font("Tahoma", Font.PLAIN, 13));
         mnSearchEvents.setForeground(new Color(255, 215, 0));
@@ -248,6 +267,23 @@ public class GUI {
                 SearchEvents.main(null);
             }
         });
+
+        Action buttonAction = new AbstractAction("Search") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                Utils.pInfo("SearchEvents otwarte");
+                SearchEvents searchEvents = new SearchEvents();
+                SearchEvents.main(null);
+            }
+        };
+
+        mnSearchEvents.setAction(buttonAction);
+        buttonAction.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_R);
+        mnSearchEvents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK),"Search");
+        mnSearchEvents.getActionMap().put("Search", buttonAction);
+
         menuBar.add(mnSearchEvents);
         //</editor-fold>
 

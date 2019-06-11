@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<events>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="1" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="2" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="3" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="4" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="5" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="6" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="7" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="8" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="9" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+    <event alarm="false" endDate="2019-05-24 00:00:00.0" id="10" place="Default Place" startDate="2019-05-24 00:00:00.0" title="Default Title"/>
+</events>

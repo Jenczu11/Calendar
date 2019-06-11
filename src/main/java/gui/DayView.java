@@ -92,6 +92,12 @@ public class DayView {
 			public void windowClosed(WindowEvent e) {
 				Utils.pInfo("Okno DayView zamkniete");
 			}
+
+			@Override
+			public void windowActivated(WindowEvent e) {
+				super.windowActivated(e);
+				Utils.pDebug(e.toString());
+			}
 		});
 		frame.setBounds(100, 100, 563, 417);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -176,15 +182,26 @@ public class DayView {
 				if(target.getSelectedRow()>=0 && target.getSelectedColumn() >=0) {
 					editEvents = new EditEvents(Integer.parseInt(target.getValueAt(row, 0).toString()), date, (DefaultTableModel) table.getModel(), DayView.this);
 					EditEvents.main(null);
+					showEvents();
 				}
 			}
 		});
 
 		btnAddEvent.addActionListener(e -> {
-			Events events = new Events(date,(DefaultTableModel) table.getModel(),DayView.this);
-			Events.main(null);
+			addEvent addEvent = new addEvent(date,(DefaultTableModel) table.getModel(),DayView.this);
+			addEvent.main(null);
+			showEvents();
 		});
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				super.windowClosing(e);
+				System.out.println(e);
+			}
+		});
+
 	}
+
 	void showEvents() {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);
