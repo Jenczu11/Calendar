@@ -1,4 +1,4 @@
-package gui;
+package GUITest;
 
 import data.Event;
 import service.DataService;
@@ -7,24 +7,18 @@ import service.Utils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 /**
- *
- * Okno wyswietlajace tabelke, w ktorej zawarte sa informacje o wydarzeniach,
+ * 
+ * Okno wyswietlajace tabelke, w ktorej zawarte sa informacje o wydarzeniach, 
  * ktore sa zaplanowane na dany dzien
  *
  */
 public class DayView {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private Timer timer;
 	private static final int TIMER_DELAY = 1000;
@@ -139,13 +133,25 @@ public class DayView {
 		lblMain.setForeground(new Color(25, 25, 112));
 		lblMain.setFont(new Font("Tahoma", Font.BOLD, 32));
 		frame.getContentPane().add(lblMain);
-
+		
 		table = new JTable();
-		final String[] column_names = {
-				"ID", "Data", "Rozpoczecie", "Zakonczenie", "Wydarzenie", "Opis"
-		};
-		model = new DefaultTableModel(column_names ,0)
+		model = new DefaultTableModel(
+
+				
+				new String[] {
+						"ID", "Data", "Rozp.", "Zakonczenie", "Wydarzenie", "Opis"
+				},
+				0
+			
+
+				)
 		{
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				//all cells false
@@ -153,51 +159,30 @@ public class DayView {
 			}
 		};
 		table.setModel(model);
-
-
+		
+		
 		//<editor-fold desc="Table setWidthForColumns">
-		table.getColumnModel().getColumn(0).setPreferredWidth(11);
+		table.getColumnModel().getColumn(0).setPreferredWidth(10);
 		table.getColumnModel().getColumn(1).setPreferredWidth(45);
-		table.getColumnModel().getColumn(2).setPreferredWidth(25);
-		table.getColumnModel().getColumn(3).setPreferredWidth(25);
+		table.getColumnModel().getColumn(2).setPreferredWidth(45);
+		table.getColumnModel().getColumn(3).setPreferredWidth(82);
 		table.getColumnModel().getColumn(4).setPreferredWidth(77);
 		table.getColumnModel().getColumn(5).setPreferredWidth(120);
 		//</editor-fold>
 		table.setFillsViewportHeight(true);
-
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent mouseEvent) {
-				super.mousePressed(mouseEvent);
-				JTable target=(JTable)mouseEvent.getSource();
-				int row = target.getSelectedRow();
-				int column = target.getSelectedColumn();
-//				System.out.println("row = " + row);
-//				System.out.println("column = " + column);
-//				System.out.println(target.getValueAt(row,0));
-//				EditEvent editEvent = new EditEvent(Integer.parseInt(target.getValueAt(row,0).toString()),date,(DefaultTableModel) table.getModel(),DayView.this);
-//				editEvent.main(null);
-				EditEvents editEvents;
-				if(target.getSelectedRow()>=0 && target.getSelectedColumn() >=0) {
-					editEvents = new EditEvents(Integer.parseInt(target.getValueAt(row, 0).toString()), date, (DefaultTableModel) table.getModel(), DayView.this);
-					EditEvents.main(null);
-					showEvents();
-				}
-			}
-		});
-
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		springLayout.putConstraint(SpringLayout.NORTH, scrollPane, 6, SpringLayout.SOUTH, lblMain);
 		springLayout.putConstraint(SpringLayout.WEST, scrollPane, 10, SpringLayout.WEST, lblMain);
 		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -18, SpringLayout.NORTH, panel_1);
 		springLayout.putConstraint(SpringLayout.EAST, scrollPane, -21, SpringLayout.EAST, frame.getContentPane());
 		frame.getContentPane().add(scrollPane);
-
-
+		
+		
 
 		btnAddEvent.addActionListener(e -> {
-			addEvent addEvent = new addEvent(date,(DefaultTableModel) table.getModel(), DayView.this);
-			addEvent.main(null);
+//			addEvent addEvent = new addEvent(date,(DefaultTableModel) table.getModel(), DayView.this);
+//			addEvent.main(null);
 			showEvents();
 		});
 		frame.addWindowListener(new WindowAdapter() {
@@ -232,4 +217,3 @@ public class DayView {
 		}
 	}
 }
-

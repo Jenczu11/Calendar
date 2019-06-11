@@ -165,6 +165,12 @@ public class SearchEvents {
 		frame.getContentPane().add(table);
 
 
+		frame.addWindowListener( new WindowAdapter() {
+			public void windowOpened( WindowEvent e ){
+				searchField.requestFocus();
+			}
+		} );
+
 		//<editor-fold desc="lblMain: Wydarzenia z dnia rrrr-mm-dd">
 		JLabel lblMain = new JLabel("Szukaj wydarzeń:");
 		lblMain.setForeground(new Color(25, 25, 112));

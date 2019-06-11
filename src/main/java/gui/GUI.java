@@ -198,6 +198,22 @@ public class GUI {
                 AboutUs.main(null);
             }
         });
+        Action aboutUsAction = new AbstractAction("About Us") {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AboutUs aboutUs = new AboutUs();
+                //TODO: mozna zmienic konstruktor zeby odpalal
+                AboutUs.main(null);
+            }
+
+        };
+        mnAboutus.setAction(aboutUsAction);
+//        buttonAction.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_R);
+        mnAboutus.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(KeyEvent.VK_I, KeyEvent.CTRL_DOWN_MASK),"About Us");
+        mnAboutus.getActionMap().put("About Us", aboutUsAction);
+
         menuBar.add(mnAboutus);
         //</editor-fold>
 
@@ -268,7 +284,7 @@ public class GUI {
             }
         });
 
-        Action buttonAction = new AbstractAction("Search") {
+        Action searchAction = new AbstractAction("Search") {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -278,11 +294,11 @@ public class GUI {
             }
         };
 
-        mnSearchEvents.setAction(buttonAction);
-        buttonAction.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_R);
+        mnSearchEvents.setAction(searchAction);
+//        searchAction.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_R);
         mnSearchEvents.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
                 KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK),"Search");
-        mnSearchEvents.getActionMap().put("Search", buttonAction);
+        mnSearchEvents.getActionMap().put("Search", searchAction);
 
         menuBar.add(mnSearchEvents);
         //</editor-fold>
