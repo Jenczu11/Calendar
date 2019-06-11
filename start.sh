@@ -1,0 +1,1 @@
+java -cp target/Calendar-1.0SNAPSHOT-jar-with-dependencies.jar gui.GUI
