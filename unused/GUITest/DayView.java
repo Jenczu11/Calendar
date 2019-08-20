@@ -2,7 +2,7 @@ package GUITest;
 
 import data.Event;
 import service.DataService;
-import data.Utils;
+import service.Utils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

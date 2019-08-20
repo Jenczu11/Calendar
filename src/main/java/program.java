@@ -2,8 +2,8 @@
 
 import data.EventBuilder;
 import service.DataService;
-import service.SQLHandler;
-import service.XMLHandler;
+import data.SQLHandler;
+import data.XMLHandler;
 
 import java.util.Scanner;
 

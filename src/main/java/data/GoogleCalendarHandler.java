@@ -1,7 +1,8 @@
-package service;
+package data;
 
 import data.DataRepository;
 import data.Event;
+import data.IOHandler;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -11,7 +12,7 @@ import java.util.Locale;
 /**
  * Klasa odpowiedzialna za zapis do formatu .csv (obslugiwanego przez Gcal)
  */
-public class GoogleCalendarHandler implements IOHandler  {
+public class GoogleCalendarHandler implements IOHandler {
     /**
      * Nazwa pliku, do ktorego zostaja zapisane dane
      */

@@ -1,4 +1,4 @@
-package service;
+package data;
 
 /**
  * Klasa statyczna dodajaca wlasne wysylanie danych na konsole

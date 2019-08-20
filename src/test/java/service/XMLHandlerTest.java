@@ -1,6 +1,7 @@
 package service;
 
 import data.EventBuilder;
+import data.XMLHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

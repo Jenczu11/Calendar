@@ -1,8 +1,4 @@
-package service;
-
-import data.DataRepository;
-import data.Event;
-import data.EventBuilder;
+package data;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Klasa odpowiedzialna za zapis i odczyt do bazy danych
  */
-public class SQLHandler implements IOHandler{
+public class SQLHandler implements IOHandler {
 
     /**
      * Okresla sterownik do polaczenia z baza danych

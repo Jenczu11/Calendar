@@ -1,13 +1,14 @@
 package gui;
 
 import com.toedter.calendar.JCalendar;
+import data.*;
 import data.Event;
 import service.*;
 
-import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import java.awt.*;
+import javax.swing.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -290,7 +291,8 @@ public class GUI {
         menuBar.add(mnDeleteEvents);
 
         //<editor-fold desc="SearchEvents">
-        JMenu mnSearchEvents = new JMenu("Szukaj");
+        JMenu mnSearchEvents = new JMenu(
+                "Szukaj");
         mnSearchEvents.setFont(new Font("Tahoma", Font.PLAIN, 13));
         mnSearchEvents.setForeground(new Color(255, 215, 0));
         mnSearchEvents.addMouseListener(new MouseAdapter() {

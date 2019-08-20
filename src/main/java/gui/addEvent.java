@@ -4,7 +4,7 @@ import data.EventBuilder;
 import exceptions.dataException;
 import exceptions.idException;
 import service.DataService;
-import service.Utils;
+import data.Utils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

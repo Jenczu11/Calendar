@@ -2,8 +2,8 @@ package gui;
 
 import com.toedter.calendar.JDayChooser;
 import service.DataService;
-import service.TimestampUtil;
-import service.Utils;
+import data.TimestampUtil;
+import data.Utils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -91,7 +91,7 @@ public class DeleteEvents extends JFrame implements Runnable {
 					// Plus 1 bo Jcalendar numeruje od zera
 					dService.removeEventsToDate(TimestampUtil.intsToTimestamp(dayChooser.getDay(),month+1,year));
 //					Utils.pDebug(TimestampUtil.intsToTimestamp(dayChooser.getDay(),month+1,year).toString());
-					JOptionPane.showMessageDialog(contentPane, new StringBuilder("Pomyslnie usunieto wszystkie wydarzenia do daty" +dayChooser.getDay()+"/"+(month+1)+"/"+year));
+					JOptionPane.showMessageDialog(contentPane, new StringBuilder("Pomyslnie usunieto wszystkie wydarzenia do daty " +dayChooser.getDay()+"/"+(month+1)+"/"+year));
 					dispose();
 					Utils.pInfo("Pomyslnie usunieto wydarzenia");
 					Utils.pInfo("Zamknieto okno DeleteEvents");
