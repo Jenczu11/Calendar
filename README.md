@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Jenczu11/Calendar.svg?branch=master)](https://travis-ci.org/Jenczu11/Calendar)
 # Calendar @ PROKOM.TUL2019
 
 Calendar app for 2019 Component Programming classes at Lodz University of Technology.
